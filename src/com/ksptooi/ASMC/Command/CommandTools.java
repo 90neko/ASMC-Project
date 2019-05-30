@@ -1,6 +1,7 @@
 package com.ksptooi.ASMC.Command;
 
 import java.lang.reflect.Method;
+import java.util.HashMap;
 
 import com.ksptooi.ASMC.Main.ASMC;
 
@@ -26,9 +27,32 @@ public class CommandTools {
 			return CT;
 			
 		} catch (Exception e) {	
+			
+			//获取插件的命令类型
+			
+			Command_cmd PCT=getTypeOfPlugin(TypeName);
+			
+			
+			if(getTypeOfPlugin(TypeName) != null){
+				return PCT;
+			}
+			
+			
 			ASMC.getMessageManager().sendWarningMessage("没有找到此CommandType:"+TypeName);
 			return null;
 		}
+		
+	}
+	
+	
+	//从插件获取类型
+	private static Command_cmd getTypeOfPlugin(String TypeName){
+		
+		
+		HashMap<String, Command_cmd> pluginList=ASMC.getPluginManager().getInstallPlugin();
+		
+			
+		return pluginList.get(TypeName);
 		
 	}
 	

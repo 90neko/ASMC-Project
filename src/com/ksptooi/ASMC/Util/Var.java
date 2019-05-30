@@ -7,7 +7,7 @@ import java.awt.datatransfer.Transferable;
 
 public class Var {
 	
-	public static final String ASMC_Version = "V3.12-PR";
+	public static final String ASMC_Version = "V3.15-RE";
 	
 	
 	

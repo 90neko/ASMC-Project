@@ -39,7 +39,6 @@ public class ASMC {
 	private static PluginsManager pluginManager=new PluginsManager();
 	
 	
-	//入口点
 	public static void main(String rk[]) throws IOException, InterruptedException{
 		
 		MessageManager msg=new MessageManager();
@@ -75,8 +74,12 @@ public class ASMC {
 		msg.sendSysMessage("等待数据库..");
 		msg.sendWarningMessage("数据库状态:在线");
 		
-		//加载ASMC插件
-		ASMC.getPluginManager().LoadingPlugins();
+		//查找ASMC插件
+		ASMC.getPluginManager().SearchPlugins();
+		
+		//加载
+		ASMC.getPluginManager().LoadAllPlugins();
+		
 		
 		msg.sendWarningMessage("ASMC启动耗时:"+APC.StopTimer());
 		
@@ -88,26 +91,10 @@ public class ASMC {
 		
 		
 		
-//		Var.SFAC_SQL.ConnectToSQLServer();
-//		
-//		if(Var.SQLConn==null){
-//			Var.MessageManager.SendErrorMessage("未能连接到数据库");
-//			Var.SI.readLine();
-//			System.exit(0);
-//		}
-//		
-//		
-//		IM.SendSysMessage("SFAC已经可以使用.");
-//		
-//		IM.SendSysMessage("SFAC启动耗时:"+Var.SST.StopTimer()+"秒");
-//		
-//		
-//		IM.SendWarningMessage("SFAC - p");
 		
 		
-
-	
-//		Var.CH.ExecuteCommand();
+		
+		
 		
 		
 	}

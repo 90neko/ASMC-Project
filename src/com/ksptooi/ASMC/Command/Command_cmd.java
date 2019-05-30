@@ -22,6 +22,8 @@ public interface Command_cmd {
 	
 	//·µ»Ø×ÔÉí
 	public Command_cmd getThis();
+	
+	
 
 	
 	
