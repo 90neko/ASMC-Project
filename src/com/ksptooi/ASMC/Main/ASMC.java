@@ -2,6 +2,7 @@ package com.ksptooi.ASMC.Main;
 
 import java.io.File;
 import java.io.IOException;
+
 import com.ksptooi.ASMC.Config.ConfigManager;
 import com.ksptooi.ASMC.Data.CommandManager;
 import com.ksptooi.ASMC.Data.SqlManager;
@@ -11,7 +12,6 @@ import com.ksptooi.ASMC.Plugins.PluginsManager;
 import com.ksptooi.ASMC.Util.ASMC_PerformanceCount;
 import com.ksptooi.ASMC.Util.Var;
 import com.ksptooi.ASMC.auth.AuthManager;
-import com.ksptooi.ASMC.eventManager.EventManager;
 import com.ksptooi.gdc.FileAPI.IOController_V5;
 
 
@@ -37,11 +37,6 @@ public class ASMC {
 	private static AuthManager authManager=null;
 
 	private static PluginsManager pluginManager=new PluginsManager();
-	
-	
-	private final static EventManager eventManager=new EventManager();
-	
-
 	
 	
 	public static void main(String rk[]) throws IOException, InterruptedException{
@@ -165,13 +160,6 @@ public class ASMC {
 
 	public static void setPluginManager(PluginsManager pluginManager) {
 		ASMC.pluginManager = pluginManager;
-	}
-
-
-
-
-	public static EventManager getEventmanager() {
-		return eventManager;
 	}
 
 	

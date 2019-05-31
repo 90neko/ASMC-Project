@@ -9,7 +9,6 @@ import com.ksptooi.ASMC.Command.Command_cmd;
 import com.ksptooi.ASMC.Data.CommandManager;
 import com.ksptooi.ASMC.Entity.CommandEntity;
 import com.ksptooi.ASMC.Message.MessageManager;
-import com.ksptooi.ASMC.event.CommandEvent;
 
 public class CommandHandler{
 	
@@ -67,17 +66,8 @@ public class CommandHandler{
 
 			ce.setPreCommand(PreCommand);
 			
-//			//根据命令类型执行命令
-//			CT.ExecuteOfType(ce);
-			
-			//创建事件
-			
-			CommandEvent cee=new CommandEvent();
-			
-			cee.setCommandType(CT);
-			cee.setCommandEntity(ce);
-			
-			ASMC.getEventmanager().startCommandEvent(cee);
+			//根据命令类型执行命令
+			CT.ExecuteOfType(ce);
 
 			
 		}

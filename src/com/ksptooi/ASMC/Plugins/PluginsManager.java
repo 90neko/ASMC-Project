@@ -20,8 +20,7 @@ public class PluginsManager {
 	//已注册的插件列表
 	HashMap<String,Command_cmd> installPlugin=new HashMap<String,Command_cmd>();
 	
-	//插件主类实例&命令类型列表
-	HashMap<Command_cmd,String> installCommandType =new HashMap<Command_cmd,String>();
+	
 	
 	//插件文件列表
 	ArrayList<File> pluginList=new ArrayList<File>();
@@ -78,6 +77,7 @@ public class PluginsManager {
 				}
 				
 				
+				
 				msg.sendSysMessage("加载:"+pluginFile.getName());
 				
 				
@@ -93,6 +93,8 @@ public class PluginsManager {
 						
 				
 				
+				msg.sendSysMessage("注册命令类型:"+pluginRegCommandTypeName);
+				
 				
 				//注册插件
 				installPlugin.put(pluginRegCommandTypeName, pluginCommandType);
@@ -100,21 +102,10 @@ public class PluginsManager {
 				//添加插件命令类型到列表
 				RegCommandTypeList.add(pluginRegCommandTypeName);
 				
-				//添加插件主类实例到列表
-				installCommandType.put(pluginCommandType, pluginRegCommandTypeName);
 				
 				//关闭ClassLoader
 				ClassLoaderUtil.releaseLoader((URLClassLoader)loader);
 			}
-			
-			
-			//显示已注册的命令类型
-			for(String str:RegCommandTypeList){
-				
-				msg.sendSysMessage("注册命令类型:"+str);
-				
-			}
-			
 			
 			
 			//执行插件的onEnable
@@ -217,31 +208,6 @@ public class PluginsManager {
 	public HashMap<String, Command_cmd> getInstallPlugin() {
 		return installPlugin;
 	}
-
-
-
-
-
-
-	public HashMap<Command_cmd, String> getInstallCommandType() {
-		return installCommandType;
-	}
-
-
-
-
-
-
-	public ArrayList<String> getRegCommandTypeList() {
-		return RegCommandTypeList;
-	}
-
-
-
-
-
-
-
 
 
 

@@ -6,7 +6,6 @@ import com.ksptooi.ASMC.Entity.CommandEntity;
 public class ASMCPlugin implements Command_cmd{
 
 	
-	
 	@Override
 	public void ExecuteOfType(CommandEntity ce) {
 		
@@ -26,6 +25,7 @@ public class ASMCPlugin implements Command_cmd{
 	public void onEnable(){
 		
 	}
+	
 	
 	
 	
