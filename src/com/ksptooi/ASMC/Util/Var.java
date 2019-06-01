@@ -7,7 +7,11 @@ import java.awt.datatransfer.Transferable;
 
 public class Var {
 	
+<<<<<<< HEAD
 	public static final String ASMC_Version = "V3.29-G";
+=======
+	public static final String ASMC_Version = "V3.29-D";
+>>>>>>> parent of 9c1ccf3... Version 3.29-E "事件" 升级
 	
 	
 	

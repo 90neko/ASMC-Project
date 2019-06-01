@@ -89,12 +89,12 @@ public class PluginsManager {
 	 * 
 	
 	//注册命令
-	public void regCommandType(ASMCPlugin plugin,String CommandTypeName,String CommandTypeEntityAddress) {
+	public void regCommandType(String CommandTypeName,Command_cmd CommandTypeEntity) {
 		
-		
-		Command_cmd CE=null;
-		
-		File pluginFile=pluginFileMap.get(plugin.getPluginName());
+		if(CommandTypeEntity == null) {
+			msg.sendErrorMessage("注册命令失败");
+			return;
+		}	
 		
 		//判断是否冲突
 		for(String str:regCommandNameList) {
@@ -105,38 +105,13 @@ public class PluginsManager {
 			}
 			
 		}
-			
-		
-		try {
-			
-			URL url=pluginFile.toURI().toURL();
-			ClassLoader loader=new URLClassLoader(new URL[]{url});//创建ClassLoader
-							
-			msg.sendSysMessage("注册命令:"+CommandTypeName);
-			
-			
-			Class<?> cls=loader.loadClass(CommandTypeEntityAddress);
-			
-			Method m1 = cls.getDeclaredMethod("getThis");
-			
-			Object obj = cls.newInstance();	
-			
-			CE=(Command_cmd)m1.invoke(obj);
-			
-			
-			//关闭ClassLoader
-			ClassLoaderUtil.releaseLoader((URLClassLoader)loader);
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		
 		
 		
 		//注册命令
 		regCommandNameList.add(CommandTypeName);
 		
-		regCommandTypeMap.put(CommandTypeName, CE);
+		
+		regCommandTypeMap.put(CommandTypeName, CommandTypeEntity);
 		
 	}
 	
@@ -178,14 +153,13 @@ public class PluginsManager {
 				
 				ASMCP=(ASMCPlugin)m1.invoke(obj);
 				
-				//设置插件名称
-				ASMCP.setPluginName(PluginName);
+				
 				
 				//注册插件
 				installPluginMainClassMap.put(PluginName, ASMCP);
 				
-				//注册插件
-				installPluginList.add(PluginName);
+				//注册插件命令表
+				
 //				
 //				//添加插件命令类型到列表
 //				RegCommandTypeList.add(pluginRegCommandTypeName);
@@ -206,11 +180,11 @@ public class PluginsManager {
 			}
 			
 			//显示已注册的命令类型
-//			for(String str:regCommandNameList){
-//				
-//				msg.sendSysMessage("注册命令类型:"+str);
-//				
-//			}
+			for(String str:regCommandNameList){
+				
+				msg.sendSysMessage("注册命令类型:"+str);
+				
+			}
 			
 			
 			
