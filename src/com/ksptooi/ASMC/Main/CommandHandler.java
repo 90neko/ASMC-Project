@@ -70,14 +70,14 @@ public class CommandHandler{
 //			//根据命令类型执行命令
 //			CT.ExecuteOfType(ce);
 			
+			
+			
+			
 			//创建事件
+			CommandEvent event=new CommandEvent(CT, ce);
 			
-			CommandEvent cee=new CommandEvent();
-			
-			cee.setCommandType(CT);
-			cee.setCommandEntity(ce);
-			
-			ASMC.getEventmanager().startCommandEvent(cee);
+			//执行事件
+			ASMC.getEventmanager().startCommandEvent(event);
 
 			
 		}

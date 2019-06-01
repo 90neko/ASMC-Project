@@ -11,7 +11,6 @@ import com.ksptooi.ASMC.Command.Command_cmd;
 import com.ksptooi.ASMC.Main.ASMC;
 import com.ksptooi.ASMC.Message.MessageManager;
 import com.ksptooi.gdc.FileAPI.IOController_V5;
-
 import sun.misc.ClassLoaderUtil;
 
 public class PluginsManager {
@@ -20,8 +19,6 @@ public class PluginsManager {
 	//已注册的插件列表
 	HashMap<String,Command_cmd> installPlugin=new HashMap<String,Command_cmd>();
 	
-	//插件主类实例&命令类型列表
-	HashMap<Command_cmd,String> installCommandType =new HashMap<Command_cmd,String>();
 	
 	//插件文件列表
 	ArrayList<File> pluginList=new ArrayList<File>();
@@ -100,8 +97,6 @@ public class PluginsManager {
 				//添加插件命令类型到列表
 				RegCommandTypeList.add(pluginRegCommandTypeName);
 				
-				//添加插件主类实例到列表
-				installCommandType.put(pluginCommandType, pluginRegCommandTypeName);
 				
 				//关闭ClassLoader
 				ClassLoaderUtil.releaseLoader((URLClassLoader)loader);
@@ -221,11 +216,6 @@ public class PluginsManager {
 
 
 
-
-
-	public HashMap<Command_cmd, String> getInstallCommandType() {
-		return installCommandType;
-	}
 
 
 

@@ -1,21 +1,19 @@
 package com.ksptooi.ASMC.eventManager;
 
-import java.util.HashMap;
-import com.ksptooi.ASMC.Main.ASMC;
+import java.util.ArrayList;
 import com.ksptooi.ASMC.Plugins.ASMCPlugin;
 import com.ksptooi.ASMC.event.CommandEvent;
 
 public class EventManager {
 
-	
+	//自带的eventHandler
 	private EventHandler eh=null;
 	
-	private HashMap<String,EventHandler> eventHandler =new HashMap<String,EventHandler>();
+	private ArrayList<EventHandler> eventHandler =new ArrayList<EventHandler>();
 	
 	public EventManager(){
 		eh = new EventHandler();
 	}
-	
 	
 	public void startCommandEvent(CommandEvent ce){
 		
@@ -24,30 +22,11 @@ public class EventManager {
 		
 		
 		//执行插件的事件处理器
-		for(String str:ASMC.getPluginManager().getRegCommandTypeList()){
+		for(EventHandler ch:eventHandler){
 			
-			
-			
-			//通过插件命令类型获取插件主类
-			ASMCPlugin asmcp=(ASMCPlugin)ASMC.getPluginManager().getInstallPlugin().get(str);
-			
-			//通过插件主类获取插件事件处理器
-			EventHandler em=eventHandler.get(asmcp);
-			
-			
-			if(em != null){
+			event = ch.event_onCommand(event);
 				
-				System.out.println("执行插件事件:"+str);
-				event=em.event_onCommand(ce);
-				
-				
-			}
-			
-			
-			
-			
 		}
-		
 		
 		
 		//判断是否被取消
@@ -61,7 +40,7 @@ public class EventManager {
 		}
 		
 		
-		//提交事件
+		//提交事件	
 		event.getCommandType().ExecuteOfType(event.getCommandEntity());
 		
 	}
@@ -71,12 +50,11 @@ public class EventManager {
 	//注册事件
 	public void regEventHandler(ASMCPlugin plugin,EventHandler eveh) {
 		
-		//通过插件主类 找出命令类型
-		String CommandType=ASMC.getPluginManager().getInstallCommandType().get(plugin);
 		
 		//注册事件
 		
-		eventHandler.put(CommandType, eveh);
+		
+		eventHandler.add(eveh);
 		
 	}
 

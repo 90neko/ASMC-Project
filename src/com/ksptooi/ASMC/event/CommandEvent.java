@@ -6,19 +6,32 @@ import com.ksptooi.ASMC.Entity.CommandEntity;
 public class CommandEvent {
 
 	
+	
 	private CommandEntity commandEntity=null;
 	
-	private Command_cmd CommandType=null;
+	private Command_cmd commandType=null;
 	
 	private boolean isCancel = false;
 	
 	private boolean isCommit = false;
+	
+	
+	
+	public CommandEvent(Command_cmd CommandType,CommandEntity commandEntity){
+		
+		this.commandType=CommandType;
+		this.commandEntity=commandEntity;
+		
+	}
+	
+	
+	
 
 	
 	//立即完成事件
 	public void commitEvent(){
 			
-		CommandType.ExecuteOfType(commandEntity);
+		commandType.ExecuteOfType(commandEntity);
 		
 		this.isCommit = true;
 		
@@ -34,10 +47,6 @@ public class CommandEvent {
 		return commandEntity;
 	}
 
-	public void setCommandEntity(CommandEntity commandEntity) {
-		this.commandEntity = commandEntity;
-	}
-
 	public boolean isCancel() {
 		return isCancel;
 	}
@@ -47,12 +56,9 @@ public class CommandEvent {
 	}
 
 	public Command_cmd getCommandType() {
-		return CommandType;
+		return commandType;
 	}
 
-	public void setCommandType(Command_cmd commandType) {
-		CommandType = commandType;
-	}
 	
 	
 }
