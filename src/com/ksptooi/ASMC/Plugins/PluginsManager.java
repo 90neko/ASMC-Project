@@ -140,7 +140,7 @@ public class PluginsManager {
 			
 			
 			//Ö´ÐÐ²å¼þµÄonEnable
-			for(String str:regCommandNameList){
+			for(String str:installPluginList){
 				
 				ASMCPlugin plugin=(ASMCPlugin) installPluginMainClassMap.get(str);			
 				plugin.onEnable();
