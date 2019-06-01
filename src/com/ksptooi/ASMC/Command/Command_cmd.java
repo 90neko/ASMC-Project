@@ -7,24 +7,23 @@ import com.ksptooi.ASMC.Main.ASMC;
 import com.ksptooi.ASMC.Message.MessageManager;
 import com.ksptooi.ASMC.auth.AuthManager;
 
-public interface Command_cmd {
+public abstract class Command_cmd {
 
-	MessageManager msg=ASMC.getMessageManager();
-	CommandManager cmm=ASMC.getCommandManager();
-	AuthManager um=ASMC.getUserManager();
-	SqlDAO dao=ASMC.getSqlmanager().getDAO();
+	public MessageManager msg=ASMC.getMessageManager();
+	public CommandManager cmm=ASMC.getCommandManager();
+	public AuthManager um=ASMC.getUserManager();
+	public SqlDAO dao=ASMC.getSqlmanager().getDAO();
 	
 	
 	
 	
 
-	public void ExecuteOfType(CommandEntity ce);
+	public abstract void ExecuteOfType(CommandEntity ce);
 	
 	//·µ»Ø×ÔÉí
-	public Command_cmd getThis();
+	public abstract Command_cmd getThis();
 	
 	
-
 	
 	
 }

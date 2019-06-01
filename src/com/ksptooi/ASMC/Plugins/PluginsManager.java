@@ -55,7 +55,38 @@ public class PluginsManager {
 	
 	MessageManager msg = ASMC.getMessageManager();
 	
+
 	
+	public void regCommandType(String CommandTypeName,Command_cmd CommandTypeEntity) {
+		
+			
+		
+		//ÅĞ¶ÏÊÇ·ñ³åÍ»
+		for(String str:regCommandNameList) {
+			
+			if(str.equalsIgnoreCase(CommandTypeName)) {
+				msg.sendErrorMessage("×¢²áÃüÁîÊ§°Ü,ÃüÁî³åÍ».");
+				return;
+			}
+			
+		}
+			
+
+			
+		msg.sendSysMessage("×¢²áÃüÁî:"+CommandTypeName);
+			
+			
+		
+		//×¢²áÃüÁî
+		regCommandNameList.add(CommandTypeName);
+		
+		regCommandTypeMap.put(CommandTypeName, CommandTypeEntity);
+		
+	}
+	
+
+	/**
+	 * 
 	
 	//×¢²áÃüÁî
 	public void regCommandType(ASMCPlugin plugin,String CommandTypeName,String CommandTypeEntityAddress) {
@@ -109,6 +140,7 @@ public class PluginsManager {
 		
 	}
 	
+	*/
 	
 	
 	

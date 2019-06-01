@@ -3,17 +3,14 @@ package com.ksptooi.ASMC.Command;
 import java.util.ArrayList;
 
 import com.ksptooi.ASMC.Entity.CommandEntity;
-import com.ksptooi.ASMC.Main.ASMC;
 
-public class Command_ListCmd implements Command_cmd{
+public class Command_ListCmd extends Command_cmd{
 
 	@Override
 	public void ExecuteOfType(CommandEntity ce1) {
 		
 		
-		if( ! ASMC.getUserManager().isHaveAccess(ce1)){
-			return;
-		}
+
 		
 		
 		ArrayList<CommandEntity> list=cmm.getAllCommand();
