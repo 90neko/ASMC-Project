@@ -49,7 +49,7 @@ public class CommandTools {
 	private static Command_cmd getTypeOfPlugin(String TypeName){
 		
 		
-		HashMap<String, Command_cmd> pluginList=ASMC.getPluginManager().getInstallPlugin();
+		HashMap<String, Command_cmd> pluginList=ASMC.getPluginManager().getRegCommandTypeMap();
 		
 			
 		return pluginList.get(TypeName);

@@ -12,7 +12,12 @@ public class EventManager {
 	//自带的eventHandler
 	private EventHandler eh=null;
 	
+	
+	//已注册的全部事件
 	private ArrayList<EventHandler> eventHandler =new ArrayList<EventHandler>();
+	
+
+	
 	
 	public EventManager(){
 		eh = new EventHandler();
@@ -50,7 +55,7 @@ public class EventManager {
 	
 	
 	//开始一个ActiveUserChange事件
-	public void startActiveUserChangeEvent(ActiveUserChangeEvent event) {
+	public boolean startActiveUserChangeEvent(ActiveUserChangeEvent event) {
 		
 		ActiveUserChangeEvent AUCE = eh.onActiveUserChange(event);
 		
@@ -59,11 +64,13 @@ public class EventManager {
 		}
 		
 		if(event.isCancel()){
-			return;
+			return false;
 		}
 		
 		//提交事件
-		ASMC.getUserManager().setActiveUser(AUCE.getChangeToUser());
+		
+		ASMC.getUserManager().changeActiveUser(AUCE.getChangeToUser());
+		return true;
 		
 	}
 	

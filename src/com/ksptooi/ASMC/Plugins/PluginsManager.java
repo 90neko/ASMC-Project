@@ -16,21 +16,38 @@ import sun.misc.ClassLoaderUtil;
 public class PluginsManager {
 
 
-	//已注册的插件列表
-	HashMap<String,Command_cmd> installPlugin=new HashMap<String,Command_cmd>();
+	//已注册的插件主类Map (插件名 || 插件主类实例)
+	HashMap<String,ASMCPlugin> installPluginMainClassMap=new HashMap<String,ASMCPlugin>();
+	
+	//已注册插件列表
+	ArrayList<String> installPluginList = new ArrayList<String>();
+
 	
 	
-	//插件文件列表
+	
+	
+	//待注册插件主类Map (插件名 || 主类地址)
+	HashMap<String,String> pluginMainClassMap=new HashMap<String,String>();
+	
+	//待注册插件文件map (插件名 || 文件实例)
+	HashMap<String,File> pluginFileMap=new HashMap<String,File>();	
+	
+	//待注册插件文件列表
 	ArrayList<File> pluginList=new ArrayList<File>();
 	
-	//插件主类列表
-	HashMap<String,String> pluginMainClassList=new HashMap<String,String>();
+	//待注册插件名字列表
+	ArrayList<String> pluginNameList=new ArrayList<String>();
 	
-	//插件注册命令列表
-	HashMap<String,String> pluginCommandTypeList=new HashMap<String,String>();
 	
-	//已注册的命令类型列表
-	ArrayList<String> RegCommandTypeList=new ArrayList<String>();
+	
+	//已注册的命令类型Map (命令类型名 || 命令类型实例)
+	HashMap<String,Command_cmd> regCommandTypeMap=new HashMap<String,Command_cmd>();
+
+	//已注册的命令列表
+	ArrayList<String> regCommandNameList=new ArrayList<String>();
+	
+	
+	
 	
 	
 	//公用
@@ -40,42 +57,58 @@ public class PluginsManager {
 	
 	
 	
+	//注册命令
+	public void regCommandType(String CommandTypeName,Command_cmd CommandTypeEntity) {
+		
+		if(CommandTypeEntity == null) {
+			msg.sendErrorMessage("注册命令失败");
+			return;
+		}	
+		
+		//判断是否冲突
+		for(String str:regCommandNameList) {
+			
+			if(str.equalsIgnoreCase(CommandTypeName)) {
+				msg.sendErrorMessage("注册命令失败,命令冲突.");
+				return;
+			}
+			
+		}
+		
+		
+		//注册命令
+		regCommandNameList.add(CommandTypeName);
+		
+		
+		regCommandTypeMap.put(CommandTypeName, CommandTypeEntity);
+		
+	}
+	
+	
+	
+	
 	//加载插件
 	public void LoadAllPlugins(){
 		
 		try{
 			
 			//加载
-			for(File pluginFile:pluginList){
+			for(String PluginName:pluginNameList){
 				
-				//插件主类
-				String pluginMainClass = pluginMainClassList.get(pluginFile.getName());
-								
-				//插件命令实例
-				Command_cmd pluginCommandType=null;
+				//插件主类字符串
+				String pluginMainClass = pluginMainClassMap.get(PluginName);
+
+				//插件文件
+				File pluginFile = pluginFileMap.get(PluginName);
 				
-				//插件文件名
-				String pluginFileName=pluginFile.getName();
-				
-				//插件注册命令类型名
-				String pluginRegCommandTypeName=pluginCommandTypeList.get(pluginFileName);
-				
+				//插件主类实例
+				ASMCPlugin ASMCP=null;
 				
 				URL url=pluginFile.toURI().toURL();
 				ClassLoader loader=new URLClassLoader(new URL[]{url});//创建ClassLoader
-				
-				
-				//判断命令类型是否已存在
-				if(installPlugin.containsKey(pluginRegCommandTypeName)){
-					
-					msg.sendWarningMessage("插件"+pluginFileName+"注册命令类型时失败,命令类型出现冲突");
-					
-					ClassLoaderUtil.releaseLoader((URLClassLoader)loader);
-					continue;
-				}
-				
-				
-				msg.sendSysMessage("加载:"+pluginFile.getName());
+								
+							
+				msg.sendSysMessage("加载:"+PluginName);
 				
 				
 				
@@ -86,16 +119,18 @@ public class PluginsManager {
 				Object obj = cls.newInstance();
 				
 				
-				pluginCommandType=(Command_cmd)m1.invoke(obj);
-						
+				ASMCP=(ASMCPlugin)m1.invoke(obj);
 				
 				
 				
 				//注册插件
-				installPlugin.put(pluginRegCommandTypeName, pluginCommandType);
+				installPluginMainClassMap.put(PluginName, ASMCP);
 				
-				//添加插件命令类型到列表
-				RegCommandTypeList.add(pluginRegCommandTypeName);
+				//注册插件命令表
+				
+//				
+//				//添加插件命令类型到列表
+//				RegCommandTypeList.add(pluginRegCommandTypeName);
 				
 				
 				//关闭ClassLoader
@@ -103,20 +138,19 @@ public class PluginsManager {
 			}
 			
 			
-			//显示已注册的命令类型
-			for(String str:RegCommandTypeList){
+			
+			//执行插件的onEnable
+			for(String str:regCommandNameList){
 				
-				msg.sendSysMessage("注册命令类型:"+str);
+				ASMCPlugin plugin=(ASMCPlugin) installPluginMainClassMap.get(str);			
+				plugin.onEnable();
 				
 			}
 			
-			
-			
-			//执行插件的onEnable
-			for(String str:RegCommandTypeList){
+			//显示已注册的命令类型
+			for(String str:regCommandNameList){
 				
-				ASMCPlugin plugin=(ASMCPlugin) installPlugin.get(str);			
-				plugin.onEnable();
+				msg.sendSysMessage("注册命令类型:"+str);
 				
 			}
 			
@@ -127,7 +161,6 @@ public class PluginsManager {
 		}
 		
 
-		
 		
 	}
 	
@@ -142,6 +175,7 @@ public class PluginsManager {
 		
 		msg.sendSysMessage("加载ASMC插件");
 		
+		String PluginName = null;
 		
 		//创建插件文件夹
 		ASMC.getMainPluginsfolder().mkdirs();
@@ -149,7 +183,7 @@ public class PluginsManager {
 		
 		//取所有插件
 		File[] PrePluginList = ASMC.getMainPluginsfolder().listFiles();
-			
+			 
 		
 		//去除不是插件的文件 || 并将文件添加至 PluginList中
 		for(int i=0;i<PrePluginList.length;i++){
@@ -163,9 +197,7 @@ public class PluginsManager {
 		}
 
 		try{		
-	
 			
-			String commandType=null;
 			
 	
 			//获取
@@ -181,14 +213,29 @@ public class PluginsManager {
 				
 				
 				is=url.openStream();
-				commandType=v5.getKeyValueOfInputStream(is, "Plugin_CommandTypeName");
+				PluginName=v5.getKeyValueOfInputStream(is, "Plugin_Name");
+				
+				
+				//判断是否有重名插件
+				for(String str:pluginNameList){
+					
+					if(str.equalsIgnoreCase(PluginName)){
+						msg.sendErrorMessage("加载插件:"+PluginName+"时发生错误,插件名称冲突!");
+						continue;
+					}
+					
+				}
 							
 				
-				//加入插件主类
-				pluginMainClassList.put(f.getName(), main);		
+				//加入插件名字
+				pluginNameList.add(PluginName);
 				
-				//加入插件命令
-				pluginCommandTypeList.put(f.getName(), commandType);
+				//加入插件文件
+				pluginFileMap.put(PluginName, f);
+				
+				//加入插件主类
+				pluginMainClassMap.put(PluginName, main);		
+				
 			
 			}
 			
@@ -206,32 +253,22 @@ public class PluginsManager {
 
 
 
-
-
-
-	public HashMap<String, Command_cmd> getInstallPlugin() {
-		return installPlugin;
-	}
-
-
-
-
-
-
+	
+	
 
 
 
 
 	public ArrayList<String> getRegCommandTypeList() {
-		return RegCommandTypeList;
+		return regCommandNameList;
 	}
 
 
 
 
-
-
-
+	public HashMap<String, Command_cmd> getRegCommandTypeMap() {
+		return regCommandTypeMap;
+	}
 
 
 

@@ -151,17 +151,23 @@ public class AuthManager {
 		ActiveUserChangeEvent AUCE = new ActiveUserChangeEvent(this.getActiveUser(), activeUser);
 		
 		
+		boolean isSuccess=ASMC.getEventmanager().startActiveUserChangeEvent(AUCE);
 		
-		ActiveUser = activeUser;
+		if(isSuccess) {
+			msg.sendBr();
+			msg.sendWarningMessage("!权限被更新.");
+			
+			msg.sendWarningMessage("ActiveUser:"+ActiveUser.getAccount());
+		}
 		
 		
-		
-		msg.sendBr();
-		msg.sendWarningMessage("!权限被更新.");
-		
-		msg.sendWarningMessage("ActiveUser:"+ActiveUser.getAccount());
-
-
+	}
+	
+	
+	
+	//切换用户(不经过事件)
+	public void changeActiveUser(UserEntity activeUser) {		
+		this.ActiveUser = activeUser;	
 	}
 	
 	
