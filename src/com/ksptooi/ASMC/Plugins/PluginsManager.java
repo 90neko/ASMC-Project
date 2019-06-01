@@ -70,6 +70,9 @@ public class PluginsManager {
 			msg.sendErrorMessage("×¢²áÃüÁîÊ§°Ü");
 			return;
 		}	
+<<<<<<< HEAD
+>>>>>>> parent of 9c1ccf3... Version 3.29-E "äº‹ä»¶" å‡çº§
+=======
 >>>>>>> parent of 9c1ccf3... Version 3.29-E "äº‹ä»¶" å‡çº§
 		
 		//ÅĞ¶ÏÊÇ·ñ³åÍ»
@@ -81,6 +84,7 @@ public class PluginsManager {
 			}
 			
 		}
+<<<<<<< HEAD
 <<<<<<< HEAD
 			
 
@@ -119,6 +123,9 @@ public class PluginsManager {
 		}
 		
 =======
+>>>>>>> parent of 9c1ccf3... Version 3.29-E "äº‹ä»¶" å‡çº§
+=======
+		
 >>>>>>> parent of 9c1ccf3... Version 3.29-E "äº‹ä»¶" å‡çº§
 		
 		//×¢²áÃüÁî
