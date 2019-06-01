@@ -4,12 +4,14 @@ import com.ksptooi.ASMC.Entity.CommandEntity;
 import com.ksptooi.ASMC.Main.ASMC;
 import com.ksptooi.ASMC.Message.MessageManager;
 
-public class Command_Link extends Command_cmd{
+public class Command_Link implements Command_cmd{
 
 	@Override
 	public void ExecuteOfType(CommandEntity ce) {
 
-
+		if( ! ASMC.getUserManager().isHaveAccess(ce)){
+			return;
+		}
 		
 		
 		MessageManager msg=ASMC.getMessageManager();

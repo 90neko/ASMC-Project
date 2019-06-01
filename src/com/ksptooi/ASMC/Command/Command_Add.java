@@ -2,18 +2,21 @@ package com.ksptooi.ASMC.Command;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+
 import com.ksptooi.ASMC.Entity.CommandEntity;
 import com.ksptooi.ASMC.Main.ASMC;
 import com.ksptooi.ASMC.Message.MessageManager;
 
-public class Command_Add extends Command_cmd{
+public class Command_Add implements Command_cmd{
 
 	
 	
 	@Override
 	public void ExecuteOfType(CommandEntity ce) {
 		
-
+		if( ! ASMC.getUserManager().isHaveAccess(ce)){
+			return;
+		}
 		
 		
 		String Content="";

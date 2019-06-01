@@ -55,25 +55,15 @@ public class PluginsManager {
 	
 	MessageManager msg = ASMC.getMessageManager();
 	
-
 	
-<<<<<<< HEAD
-	public void regCommandType(String CommandTypeName,Command_cmd CommandTypeEntity) {
-		
-			
-=======
 	
 	//×¢²áÃüÁî
-	public void regCommandType(String CommandTypeName,Command_cmd CommandTypeEntity) {
+	public void regCommandType(ASMCPlugin plugin,String CommandTypeName,String CommandTypeEntityAddress) {
 		
-		if(CommandTypeEntity == null) {
-			msg.sendErrorMessage("×¢²áÃüÁîÊ§°Ü");
-			return;
-		}	
-<<<<<<< HEAD
->>>>>>> parent of 9c1ccf3... Version 3.29-E "äº‹ä»¶" å‡çº§
-=======
->>>>>>> parent of 9c1ccf3... Version 3.29-E "äº‹ä»¶" å‡çº§
+		
+		Command_cmd CE=null;
+		
+		File pluginFile=pluginFileMap.get(plugin.getPluginName());
 		
 		//ÅĞ¶ÏÊÇ·ñ³åÍ»
 		for(String str:regCommandNameList) {
@@ -84,59 +74,41 @@ public class PluginsManager {
 			}
 			
 		}
-<<<<<<< HEAD
-<<<<<<< HEAD
-			
-
-			
-		msg.sendSysMessage("×¢²áÃüÁî:"+CommandTypeName);
-			
 			
 		
-		//×¢²áÃüÁî
-		regCommandNameList.add(CommandTypeName);
-		
-		regCommandTypeMap.put(CommandTypeName, CommandTypeEntity);
-		
-	}
-	
-
-	/**
-	 * 
-	
-	//×¢²áÃüÁî
-	public void regCommandType(String CommandTypeName,Command_cmd CommandTypeEntity) {
-		
-		if(CommandTypeEntity == null) {
-			msg.sendErrorMessage("×¢²áÃüÁîÊ§°Ü");
-			return;
-		}	
-		
-		//ÅĞ¶ÏÊÇ·ñ³åÍ»
-		for(String str:regCommandNameList) {
+		try {
 			
-			if(str.equalsIgnoreCase(CommandTypeName)) {
-				msg.sendErrorMessage("×¢²áÃüÁîÊ§°Ü,ÃüÁî³åÍ».");
-				return;
-			}
+			URL url=pluginFile.toURI().toURL();
+			ClassLoader loader=new URLClassLoader(new URL[]{url});//´´½¨ClassLoader
+							
+			msg.sendSysMessage("×¢²áÃüÁî:"+CommandTypeName);
 			
+			
+			Class<?> cls=loader.loadClass(CommandTypeEntityAddress);
+			
+			Method m1 = cls.getDeclaredMethod("getThis");
+			
+			Object obj = cls.newInstance();	
+			
+			CE=(Command_cmd)m1.invoke(obj);
+			
+			
+			//¹Ø±ÕClassLoader
+			ClassLoaderUtil.releaseLoader((URLClassLoader)loader);
+			
+		}catch(Exception e) {
+			e.printStackTrace();
 		}
 		
-=======
->>>>>>> parent of 9c1ccf3... Version 3.29-E "äº‹ä»¶" å‡çº§
-=======
 		
->>>>>>> parent of 9c1ccf3... Version 3.29-E "äº‹ä»¶" å‡çº§
 		
 		//×¢²áÃüÁî
 		regCommandNameList.add(CommandTypeName);
 		
-		
-		regCommandTypeMap.put(CommandTypeName, CommandTypeEntity);
+		regCommandTypeMap.put(CommandTypeName, CE);
 		
 	}
 	
-	*/
 	
 	
 	
@@ -174,13 +146,14 @@ public class PluginsManager {
 				
 				ASMCP=(ASMCPlugin)m1.invoke(obj);
 				
-				
+				//ÉèÖÃ²å¼şÃû³Æ
+				ASMCP.setPluginName(PluginName);
 				
 				//×¢²á²å¼ş
 				installPluginMainClassMap.put(PluginName, ASMCP);
 				
-				//×¢²á²å¼şÃüÁî±í
-				
+				//×¢²á²å¼ş
+				installPluginList.add(PluginName);
 //				
 //				//Ìí¼Ó²å¼şÃüÁîÀàĞÍµ½ÁĞ±í
 //				RegCommandTypeList.add(pluginRegCommandTypeName);
@@ -201,11 +174,11 @@ public class PluginsManager {
 			}
 			
 			//ÏÔÊ¾ÒÑ×¢²áµÄÃüÁîÀàĞÍ
-			for(String str:regCommandNameList){
-				
-				msg.sendSysMessage("×¢²áÃüÁîÀàĞÍ:"+str);
-				
-			}
+//			for(String str:regCommandNameList){
+//				
+//				msg.sendSysMessage("×¢²áÃüÁîÀàĞÍ:"+str);
+//				
+//			}
 			
 			
 			
