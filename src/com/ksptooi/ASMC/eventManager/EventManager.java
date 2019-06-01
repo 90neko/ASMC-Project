@@ -3,6 +3,7 @@ package com.ksptooi.ASMC.eventManager;
 import java.util.ArrayList;
 
 import com.ksptooi.ASMC.Main.ASMC;
+import com.ksptooi.ASMC.Message.MessageManager;
 import com.ksptooi.ASMC.Plugins.ASMCPlugin;
 import com.ksptooi.ASMC.event.ActiveUserChangeEvent;
 import com.ksptooi.ASMC.event.CommandEvent;
@@ -11,6 +12,8 @@ public class EventManager {
 
 	//自带的eventHandler
 	private EventHandler eh=null;
+	
+	MessageManager msg = ASMC.getMessageManager();
 	
 	
 	//已注册的全部事件
@@ -21,6 +24,7 @@ public class EventManager {
 	
 	public EventManager(){
 		eh = new EventHandler();
+		
 	}
 	
 	//开始一个Command事件
@@ -81,6 +85,7 @@ public class EventManager {
 	//注册事件
 	public void regEventHandler(ASMCPlugin plugin,EventHandler eveh) {
 		
+		msg.sendSysMessage("注册事件处理器:"+plugin.getPluginName());
 		
 		//注册事件		
 		eventHandler.add(eveh);
