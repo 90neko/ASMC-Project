@@ -88,7 +88,7 @@ public class ASMC {
 		
 		msg.sendWarningMessage("ASMCÆô¶¯ºÄÊ±:"+APC.StopTimer());
 		
-		authManager.setActiveUser("user");
+		authManager.setActiveUser(ASMC.getUserManager().getUser("user"));
 		
 		cm=new CommandManager();
 		
@@ -141,7 +141,7 @@ public class ASMC {
 
 
 
-	public static AuthManager getUsermanager() {
+	public static AuthManager getUserManager() {
 		return authManager;
 	}
 	

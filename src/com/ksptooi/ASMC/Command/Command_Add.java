@@ -14,7 +14,7 @@ public class Command_Add implements Command_cmd{
 	@Override
 	public void ExecuteOfType(CommandEntity ce) {
 		
-		if( ! ASMC.getUsermanager().isHaveAccess(ce)){
+		if( ! ASMC.getUserManager().isHaveAccess(ce)){
 			return;
 		}
 		
@@ -53,7 +53,7 @@ public class Command_Add implements Command_cmd{
 				addCE.setTitle("-");
 			}
 			
-			addCE.setCCA(ASMC.getUsermanager().getActiveUser());
+			addCE.setCCA(ASMC.getUserManager().getActiveUser().getAccount());
 			
 			if(ASMC.getCommandManager().isExistsCmd(addCE.getName())){
 				msg.sendErrorMessage("添加失败,已包含此命令.");

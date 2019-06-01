@@ -9,12 +9,12 @@ public class Command_Login implements Command_cmd{
 	public void ExecuteOfType(CommandEntity ce) {
 
 		
-		if( ! ASMC.getUsermanager().isHaveAccess(ce)){
+		if( ! ASMC.getUserManager().isHaveAccess(ce)){
 			return;
 		}
 		
 		
-		ASMC.getUsermanager().userLogin();
+		ASMC.getUserManager().userLogin();
 
 	}
 

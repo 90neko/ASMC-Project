@@ -16,7 +16,7 @@ public class Command_Del implements Command_cmd{
 	@Override
 	public void ExecuteOfType(CommandEntity ce) {
 		
-		if( ! ASMC.getUsermanager().isHaveAccess(ce)){
+		if( ! ASMC.getUserManager().isHaveAccess(ce)){
 			return;
 		}
 		

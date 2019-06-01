@@ -11,7 +11,7 @@ public class Command_ListCmd implements Command_cmd{
 	public void ExecuteOfType(CommandEntity ce1) {
 		
 		
-		if( ! ASMC.getUsermanager().isHaveAccess(ce1)){
+		if( ! ASMC.getUserManager().isHaveAccess(ce1)){
 			return;
 		}
 		

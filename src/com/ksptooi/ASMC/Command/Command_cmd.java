@@ -11,7 +11,7 @@ public interface Command_cmd {
 
 	MessageManager msg=ASMC.getMessageManager();
 	CommandManager cmm=ASMC.getCommandManager();
-	AuthManager um=ASMC.getUsermanager();
+	AuthManager um=ASMC.getUserManager();
 	SqlDAO dao=ASMC.getSqlmanager().getDAO();
 	
 	

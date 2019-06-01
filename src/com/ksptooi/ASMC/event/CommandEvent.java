@@ -6,11 +6,13 @@ import com.ksptooi.ASMC.Entity.CommandEntity;
 public class CommandEvent {
 
 	
+
+	private final String eventName = "CommandEvent";
 	
 	private CommandEntity commandEntity=null;
 	
 	private Command_cmd commandType=null;
-	
+
 	private boolean isCancel = false;
 	
 	private boolean isCommit = false;
@@ -26,11 +28,14 @@ public class CommandEvent {
 	
 	
 	
-
-	
 	//立即完成事件
 	public void commitEvent(){
 			
+		//如果此事件已经被前一个插件完成 则不执行任何操作
+		if(isCommit == true){
+			return;
+		}
+		
 		commandType.ExecuteOfType(commandEntity);
 		
 		this.isCommit = true;
@@ -52,6 +57,12 @@ public class CommandEvent {
 	}
 
 	public void setCancel(boolean isCancel) {
+		
+		if(isCancel == false) {
+			return;
+		}
+		
+		
 		this.isCancel = isCancel;
 	}
 
@@ -60,5 +71,8 @@ public class CommandEvent {
 	}
 
 	
+	public String getEventName() {
+		return eventName;
+	}
 	
 }
