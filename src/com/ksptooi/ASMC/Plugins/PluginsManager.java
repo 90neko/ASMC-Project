@@ -57,9 +57,20 @@ public class PluginsManager {
 	
 
 	
+<<<<<<< HEAD
 	public void regCommandType(String CommandTypeName,Command_cmd CommandTypeEntity) {
 		
 			
+=======
+	
+	//×¢²áÃüÁî
+	public void regCommandType(String CommandTypeName,Command_cmd CommandTypeEntity) {
+		
+		if(CommandTypeEntity == null) {
+			msg.sendErrorMessage("×¢²áÃüÁîÊ§°Ü");
+			return;
+		}	
+>>>>>>> parent of 9c1ccf3... Version 3.29-E "äº‹ä»¶" å‡çº§
 		
 		//ÅĞ¶ÏÊÇ·ñ³åÍ»
 		for(String str:regCommandNameList) {
@@ -70,6 +81,7 @@ public class PluginsManager {
 			}
 			
 		}
+<<<<<<< HEAD
 			
 
 			
@@ -106,6 +118,8 @@ public class PluginsManager {
 			
 		}
 		
+=======
+>>>>>>> parent of 9c1ccf3... Version 3.29-E "äº‹ä»¶" å‡çº§
 		
 		//×¢²áÃüÁî
 		regCommandNameList.add(CommandTypeName);
