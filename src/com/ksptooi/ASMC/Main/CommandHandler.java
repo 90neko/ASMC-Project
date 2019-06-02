@@ -27,7 +27,7 @@ public class CommandHandler{
 			
 			System.out.println("");
 			
-			System.out.print("ASMC@Normal:");
+			System.out.print("ASMC@:"+ASMC.getUserManager().getActiveUser().getAccount());
 			
 			String PreCommand=br.readLine();
 			

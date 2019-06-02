@@ -7,8 +7,7 @@ import java.awt.datatransfer.Transferable;
 
 public class Var {
 	
-	public static final String ASMC_Version = "V3.29-H";
-	
+	public static final String ASMC_Version = "V3.29-K";
 	
 	
 	 public static void setClipboardString(String text) { 
@@ -17,8 +16,7 @@ public class Var {
 		 // 封装文本内容 
 		 Transferable trans = new StringSelection(text); 
 		 // 把文本内容设置到系统剪贴板 
-		 clipboard.setContents(trans, null); 
-		 
+		 clipboard.setContents(trans, null);  
 	 }
 	 
 
