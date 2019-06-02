@@ -28,7 +28,7 @@ public class Command_Add implements Command_cmd{
 		MessageManager msg=ASMC.getMessageManager();
 		
 		
-		msg.sendSysMessage("Ìí¼ÓÓï¾ä:Ãû³Æ,µØÖ·,ÀàĞÍ,ÃèÊö");
+		msg.sendSysMessage("æ·»åŠ è¯­å¥:åç§°,åœ°å€,ç±»å‹,æè¿°");
 		
 		
 		try {
@@ -56,7 +56,7 @@ public class Command_Add implements Command_cmd{
 			addCE.setCCA(ASMC.getUserManager().getActiveUser().getAccount());
 			
 			if(ASMC.getCommandManager().isExistsCmd(addCE.getName())){
-				msg.sendErrorMessage("Ìí¼ÓÊ§°Ü,ÒÑ°üº¬´ËÃüÁî.");
+				msg.sendErrorMessage("æ·»åŠ å¤±è´¥,å·²åŒ…å«æ­¤å‘½ä»¤.");
 				return;
 			}
 			
@@ -69,7 +69,7 @@ public class Command_Add implements Command_cmd{
 			
 			
 		} catch (Exception e) {
-			msg.sendWarningMessage("Óï¾ä´íÎó!");
+			msg.sendWarningMessage("è¯­å¥é”™è¯¯!");
 		}
 		
 		
@@ -79,7 +79,7 @@ public class Command_Add implements Command_cmd{
 
 	@Override
 	public Command_cmd getThis() {
-		// TODO ×Ô¶¯Éú³ÉµÄ·½·¨´æ¸ù
+		// TODO è‡ªåŠ¨ç”Ÿæˆçš„æ–¹æ³•å­˜æ ¹
 		return this;
 	}
 

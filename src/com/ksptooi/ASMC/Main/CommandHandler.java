@@ -2,7 +2,6 @@ package com.ksptooi.ASMC.Main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
 
 import com.ksptooi.ASMC.Command.CommandTools;
 import com.ksptooi.ASMC.Command.Command_cmd;
@@ -18,7 +17,7 @@ public class CommandHandler{
 	public void ExecuteCommand() throws IOException{
 		
 		
-		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+		BufferedReader br=ASMC.getBr();
 		CommandManager cm=ASMC.getCommandManager();
 		MessageManager msg=new MessageManager();
 		
@@ -35,7 +34,7 @@ public class CommandHandler{
 			
 			CommandEntity ce=null;
 			
-			//½øĞĞÃüÁîÔ¤´¦Àí	
+			//è¿›è¡Œå‘½ä»¤é¢„å¤„ç†	
 			if(PreCommand.contains(" ")|PreCommand.equals("")){
 				continue;
 			}
@@ -43,40 +42,49 @@ public class CommandHandler{
 			Command = PreCommand.trim().split(">")[0];
 			
 			
-			//Ô¤´¦Àí - end
+			//é¢„å¤„ç† - end
 			
 			
-			//¼ì²éÃüÁîÊÇ·ñ´æÔÚ
+			//åˆ›å»ºé¢„å‘½ä»¤äº‹ä»¶
+			boolean isPreCommandSuccess = ASMC.getEventmanager().startPreCommandEvent(Command);
+			
+			if(!isPreCommandSuccess) {
+				continue;
+			}
+			
+			
+			
+			
+			//æ£€æŸ¥å‘½ä»¤æ˜¯å¦å­˜åœ¨
 			if(!cm.isExistsCmd(Command)){
-				msg.sendWarningMessage("'"+Command+"'"+"²»ÊÇÓĞĞ§µÄASMCÃüÁî");
+				msg.sendWarningMessage("'"+Command+"'"+"ä¸æ˜¯æœ‰æ•ˆçš„ASMCå‘½ä»¤");
 				continue;
 			}
 			
 			ce=cm.getCommandByName(Command);
 			
 			
-			//²éÑ¯ÃüÁîÀàĞÍ
+			//æŸ¥è¯¢å‘½ä»¤ç±»å‹
 			Command_cmd CT= CommandTools.getType(ce.getType());
 
 			
 			if(CT == null){
-				msg.sendWarningMessage("'"+Command+"'"+"²»ÊÇÓĞĞ§µÄASMCÃüÁî");
+				msg.sendWarningMessage("'"+Command+"'"+"ä¸æ˜¯æœ‰æ•ˆçš„ASMCå‘½ä»¤");
 				continue;
 			}		
 
 
 			ce.setPreCommand(PreCommand);
 			
-//			//¸ù¾İÃüÁîÀàĞÍÖ´ĞĞÃüÁî
+//			//æ ¹æ®å‘½ä»¤ç±»å‹æ‰§è¡Œå‘½ä»¤
 //			CT.ExecuteOfType(ce);
 			
+				
 			
-			
-			
-			//´´½¨ÊÂ¼ş
+			//åˆ›å»ºäº‹ä»¶
 			CommandEvent event=new CommandEvent(CT, ce);
 			
-			//Ö´ĞĞÊÂ¼ş
+			//æ‰§è¡Œäº‹ä»¶
 			ASMC.getEventmanager().startCommandEvent(event);
 
 			

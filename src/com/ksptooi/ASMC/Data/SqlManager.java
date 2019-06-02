@@ -10,25 +10,25 @@ public class SqlManager {
 
 	
 	
-	//´ò¿ªÓëÊı¾İ¿âµÄÁ¬½Ó
+	//æ‰“å¼€ä¸æ•°æ®åº“çš„è¿æ¥
 	public void Connect(){	
 		dao.Connect();	
 	}
 	
-	//ÅĞ¶ÏÊÇ·ñÁ¬½Ó³É¹¦
+	//åˆ¤æ–­æ˜¯å¦è¿æ¥æˆåŠŸ
 	public boolean isActive(){
 		return dao.isActive();
 	}
 	
 	
-	//»ñÈ¡dao
+	//è·å–dao
 	public SqlDAO getDAO(){
 		return dao;
 	}
 	
 	
 	
-	//»ñÈ¡/ÉèÖÃÁ¬½Ó
+	//è·å–/è®¾ç½®è¿æ¥
 	public Connection getConn() {
 		return dao.getConn();
 	}
@@ -44,7 +44,7 @@ public class SqlManager {
 	
 	/**
 	
-	//²éÑ¯ÃüÁîÀàĞÍ
+	//æŸ¥è¯¢å‘½ä»¤ç±»å‹
 	public String getTypeOfCmd(String cmd){
 		
 		String sql="select "+Field_CommandType+" from "+Table_Command+" where Name='"+cmd+"'";
@@ -70,7 +70,7 @@ public class SqlManager {
 		
 	}
 	
-	//²éÑ¯ÃüÁîµØÖ·
+	//æŸ¥è¯¢å‘½ä»¤åœ°å€
 	public String getPathOfCmd(String cmd){
 		
 		String sql="select "+Field_CommandPath+" from "+Table_Command+" where Name='"+cmd+"'";
@@ -98,7 +98,7 @@ public class SqlManager {
 	
 	**/
 	
-//	//»ñÈ¡ËùÓĞTypeÎªlinkµÄ×Ö¶Î
+//	//è·å–æ‰€æœ‰Typeä¸ºlinkçš„å­—æ®µ
 //	public ArrayList<String> getAllCommandOfLink(){
 //		
 //		Statement stm=null;
@@ -122,7 +122,7 @@ public class SqlManager {
 //			
 //		} catch (SQLException e) {
 //			e.printStackTrace();
-//			Var.MessageManager.SendErrorMessage("Êı¾İ¿âÁ¬½Ó´íÎó£¡");
+//			Var.MessageManager.SendErrorMessage("æ•°æ®åº“è¿æ¥é”™è¯¯ï¼");
 //		}
 //		
 //
@@ -131,7 +131,7 @@ public class SqlManager {
 //		
 //	}
 	
-//	//¸ù¾İµØÖ·É¾³ıÃüÁî
+//	//æ ¹æ®åœ°å€åˆ é™¤å‘½ä»¤
 //	public void DeleteCommandONAddress(String Address){
 //		
 //			String SQL="delete from CMDTable where CMDAddress like '%"+Address+"%' ";
@@ -147,7 +147,7 @@ public class SqlManager {
 //			
 //		} catch (SQLException e) {
 //			e.printStackTrace();
-//			Var.MessageManager.SendErrorMessage("Êı¾İ¿âÁ¬½Ó´íÎó£¡");
+//			Var.MessageManager.SendErrorMessage("æ•°æ®åº“è¿æ¥é”™è¯¯ï¼");
 //		}
 //		
 //		
@@ -156,7 +156,7 @@ public class SqlManager {
 	
 	
 	
-//	//É¾³ıÒ»¸öÃüÁî
+//	//åˆ é™¤ä¸€ä¸ªå‘½ä»¤
 //	public void delCommand(String Name){
 //		
 //		Statement stm=null;
@@ -169,17 +169,17 @@ public class SqlManager {
 //			stm=Var.SQLConn.createStatement();
 //			
 //			if(!Var.SFAC_SQL.CMDisExists(Name)){
-//				Var.MessageManager.SendWarningMessage("´ËÃüÁî²»´æÔÚ");
+//				Var.MessageManager.SendWarningMessage("æ­¤å‘½ä»¤ä¸å­˜åœ¨");
 //				return;
 //			}
 //			
 //			stm.executeUpdate(SQL);
 //			
-//			Var.MessageManager.SendSysMessage("ÒÑÍ¬²½ÖÁÊı¾İ¿â.");
+//			Var.MessageManager.SendSysMessage("å·²åŒæ­¥è‡³æ•°æ®åº“.");
 //			
 //		} catch (SQLException e) {
 //			e.printStackTrace();
-//			Var.MessageManager.SendErrorMessage("Êı¾İ¿âÁ¬½Ó´íÎó!");
+//			Var.MessageManager.SendErrorMessage("æ•°æ®åº“è¿æ¥é”™è¯¯!");
 //			
 //		}
 //		

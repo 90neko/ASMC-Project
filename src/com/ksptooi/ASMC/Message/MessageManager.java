@@ -14,53 +14,53 @@ public class MessageManager {
 
 	
 	
-	//·¢ËÍÏµÍ³ÏûÏ¢
+	//å‘é€ç³»ç»Ÿæ¶ˆæ¯
 	public void sendSysMessage(String Message){
 		
 		
-		System.out.println("[ĞÅÏ¢]:"+Message);
+		System.out.println("[ä¿¡æ¯]:"+Message);
 		
 	}
 	
-	//·¢ËÍ¾¯¸æÏûÏ¢
+	//å‘é€è­¦å‘Šæ¶ˆæ¯
 	public void sendWarningMessage(String Message){
 		
 		AnsiConsole.systemInstall();
 	
-		System.out.println(ansi().fg(YELLOW).a("[¾¯¸æ]:"+Message).reset());
+		System.out.println(ansi().fg(YELLOW).a("[è­¦å‘Š]:"+Message).reset());
 		
 		AnsiConsole.systemUninstall();
 		
 		
-//		System.out.println("[¾¯¸æ]:"+Message);
+//		System.out.println("[è­¦å‘Š]:"+Message);
 		
 	}
 	
-	//·¢ËÍ´íÎóÏûÏ¢
+	//å‘é€é”™è¯¯æ¶ˆæ¯
 	public void sendErrorMessage(String Message){
 		
 		
 		AnsiConsole.systemInstall();
 		
-		System.out.println(ansi().fg(RED).a("[ÑÏÖØ]:"+Message).reset());
+		System.out.println(ansi().fg(RED).a("[ä¸¥é‡]:"+Message).reset());
 		
 		AnsiConsole.systemUninstall();
 		
-//		System.out.println("[ÑÏÖØ]:"+Message);
+//		System.out.println("[ä¸¥é‡]:"+Message);
 	}
 	
 
-	//·¢ËÍÏµÍ³ĞÅÏ¢(²»»»ĞĞ)
+	//å‘é€ç³»ç»Ÿä¿¡æ¯(ä¸æ¢è¡Œ)
 	public void sendSysMessageNoLine(String Message){	
 		System.out.print(Message);	
 	}
 	
-	//·¢ËÍ»»ĞĞ·û
+	//å‘é€æ¢è¡Œç¬¦
 	public void sendBr(){
 		System.out.println("");
 	}
 	
-	//»ñÈ¡ÓÃ»§ÊäÈëµÄĞÅÏ¢
+	//è·å–ç”¨æˆ·è¾“å…¥çš„ä¿¡æ¯
 	public String getMessage(){
 		
 		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
@@ -84,7 +84,7 @@ public class MessageManager {
 	}
 	
 	
-	//»ñÈ¡ÓÃ»§ÊäÈëµÄÃÜÂë
+	//è·å–ç”¨æˆ·è¾“å…¥çš„å¯†ç 
 	public String getMessageOfPWD(){
 		
 		Console cons=System.console();

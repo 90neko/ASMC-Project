@@ -40,7 +40,7 @@ public class CommandManager {
 	}
 	
 	
-	//ÅĞ¶ÏÄ³ÌõÃüÁîÊÇ·ñ´æÔÚ
+	//åˆ¤æ–­æŸæ¡å‘½ä»¤æ˜¯å¦å­˜åœ¨
 	public boolean isExistsCmd(String cmd){
 		
 		String sql="select "+Field_CommandName+" from "+Table_Command+" where Name='"+cmd+"'";
@@ -71,7 +71,7 @@ public class CommandManager {
 	}
 	
 	
-	//²éÑ¯ÃüÁî ¸ù¾İÃüÁîÃû
+	//æŸ¥è¯¢å‘½ä»¤ æ ¹æ®å‘½ä»¤å
 	public CommandEntity getCommandByName(String cmd){
 		
 		String sql="select * from "+Table_Command+" where Name='"+cmd+"'";
@@ -105,7 +105,7 @@ public class CommandManager {
 		
 	}
 	
-	//²éÑ¯ËùÓĞÃüÁî
+	//æŸ¥è¯¢æ‰€æœ‰å‘½ä»¤
 	public ArrayList<CommandEntity> getAllCommand(){
 		
 		
@@ -140,7 +140,7 @@ public class CommandManager {
 		
 	}
 	
-	//Ìí¼ÓÃüÁî
+	//æ·»åŠ å‘½ä»¤
 	public void addCommand(CommandEntity ce){
 		
 		
@@ -151,21 +151,21 @@ public class CommandManager {
 		
 	}
 	
-	//É¾³ıÃüÁî
+	//åˆ é™¤å‘½ä»¤
 	public void delCommand(String cmd){
 		
 		
 		String sql="delete "+Table_Command+" where "+Field_CommandName+"='"+cmd+"'";
 		
 		if(!this.isExistsCmd(cmd)){
-			msg.sendWarningMessage("´ıÉ¾³ıµÄÃüÁî²»´æÔÚ.");
+			msg.sendWarningMessage("å¾…åˆ é™¤çš„å‘½ä»¤ä¸å­˜åœ¨.");
 			return;
 		}
 		
 		
-		msg.sendSysMessage("µÈ´ıÊı¾İ¿â..");
+		msg.sendSysMessage("ç­‰å¾…æ•°æ®åº“..");
 		dao.noQuery(sql);
-		msg.sendSysMessage("²Ù×÷³É¹¦!");
+		msg.sendSysMessage("æ“ä½œæˆåŠŸ!");
 		
 	}
 	

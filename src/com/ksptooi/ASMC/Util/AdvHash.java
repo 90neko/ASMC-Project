@@ -31,10 +31,10 @@ public class AdvHash {
             
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
-            throw new RuntimeException("算法异常! - MD5");
+            throw new RuntimeException("绠楁硶寮傚父! - MD5");
         }
         
-        String md5code = new BigInteger(1, secretBytes).toString(16);// 16进制数字
+        String md5code = new BigInteger(1, secretBytes).toString(16);// 16杩涘埗鏁板瓧
 
         for (int i = 0; i < 32 - md5code.length(); i++) {
             md5code = "0" + md5code;

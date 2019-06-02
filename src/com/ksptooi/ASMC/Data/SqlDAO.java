@@ -13,7 +13,7 @@ public class SqlDAO {
 	
 	private Connection conn=null;
 	
-	//´ò¿ªÓëÊı¾İ¿âµÄÁ¬½Ó
+	//æ‰“å¼€ä¸æ•°æ®åº“çš„è¿æ¥
 	public void Connect() {
 			
 		
@@ -26,7 +26,7 @@ public class SqlDAO {
 			
 		} catch (Exception e) {
 			e.printStackTrace();
-			ASMC.getMessageManager().sendErrorMessage("Êı¾İ¿âÁ¬½Ó´íÎó£¡");
+			ASMC.getMessageManager().sendErrorMessage("æ•°æ®åº“è¿æ¥é”™è¯¯ï¼");
 		}
 		
 	}
@@ -34,7 +34,7 @@ public class SqlDAO {
 	
 	
 	
-	//ÅĞ¶ÏÊÇ·ñÁ¬½Ó³É¹¦
+	//åˆ¤æ–­æ˜¯å¦è¿æ¥æˆåŠŸ
 	public boolean isActive(){
 		
 		if(conn == null){
@@ -45,7 +45,7 @@ public class SqlDAO {
 	}
 	
 
-	//Ö´ĞĞ²éÑ¯
+	//æ‰§è¡ŒæŸ¥è¯¢
 	public ResultSet query(String sql){
 		
 		try {
@@ -59,7 +59,7 @@ public class SqlDAO {
 		
 	}
 	
-	//Ö´ĞĞ·Ç²éÑ¯
+	//æ‰§è¡ŒéæŸ¥è¯¢
 	public void noQuery(String sql){
 		
 		try {

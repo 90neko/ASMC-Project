@@ -20,7 +20,7 @@ public interface Command_cmd {
 
 	public void ExecuteOfType(CommandEntity ce);
 	
-	//·µ»Ø×ÔÉí
+	//è¿”å›žè‡ªèº«
 	public Command_cmd getThis();
 	
 	

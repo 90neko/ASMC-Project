@@ -7,7 +7,7 @@ public class ASMC_PerformanceCount implements Runnable{
 	double time=0.0;
 	Thread TH=null;
 	
-	//SAC Timer³õÊ¼»¯
+	//SAC Timeråˆå§‹åŒ–
 	public ASMC_PerformanceCount(){
 		time=0.0;
 		TH=new Thread(this);	

@@ -7,16 +7,17 @@ import com.ksptooi.ASMC.Message.MessageManager;
 import com.ksptooi.ASMC.Plugins.ASMCPlugin;
 import com.ksptooi.ASMC.event.ActiveUserChangeEvent;
 import com.ksptooi.ASMC.event.CommandEvent;
+import com.ksptooi.ASMC.event.PreCommandEvent;
 
 public class EventManager {
 
-	//×Ô´øµÄeventHandler
+	//è‡ªå¸¦çš„eventHandler
 	private EventHandler eh=null;
 	
 	MessageManager msg = ASMC.getMessageManager();
 	
 	
-	//ÒÑ×¢²áµÄÈ«²¿ÊÂ¼ş
+	//å·²æ³¨å†Œçš„å…¨éƒ¨äº‹ä»¶
 	private ArrayList<EventHandler> eventHandler =new ArrayList<EventHandler>();
 	
 
@@ -27,38 +28,38 @@ public class EventManager {
 		
 	}
 	
-	//¿ªÊ¼Ò»¸öCommandÊÂ¼ş
+	//å¼€å§‹ä¸€ä¸ªCommandäº‹ä»¶
 	public void startCommandEvent(CommandEvent ce){
 		
-		//Ö´ĞĞ×Ô´øµÄÊÂ¼ş´¦ÀíÆ÷
+		//æ‰§è¡Œè‡ªå¸¦çš„äº‹ä»¶å¤„ç†å™¨
 		CommandEvent event=eh.onCommand(ce);
 		
 		
-		//Ö´ĞĞ²å¼şµÄÊÂ¼ş´¦ÀíÆ÷
+		//æ‰§è¡Œæ’ä»¶çš„äº‹ä»¶å¤„ç†å™¨
 		for(EventHandler ch:eventHandler){		
 			event = ch.onCommand(event);				
 		}
 		
 		
-		//ÅĞ¶ÏÊÇ·ñ±»È¡Ïû
+		//åˆ¤æ–­æ˜¯å¦è¢«å–æ¶ˆ
 		if(event.isCancel()){
 			return;
 		}
 		
-		//ÅĞ¶ÏÊÇ·ñÒÑ±»Á¢¼´Ìá½»
+		//åˆ¤æ–­æ˜¯å¦å·²è¢«ç«‹å³æäº¤
 		if(event.isCommit()){
 			return;
 		}
 		
 		
-		//Ìá½»ÊÂ¼ş	
+		//æäº¤äº‹ä»¶	
 		event.getCommandType().ExecuteOfType(event.getCommandEntity());
 		
 	}
 
 	
 	
-	//¿ªÊ¼Ò»¸öActiveUserChangeÊÂ¼ş
+	//å¼€å§‹ä¸€ä¸ªActiveUserChangeäº‹ä»¶
 	public boolean startActiveUserChangeEvent(ActiveUserChangeEvent event) {
 		
 		ActiveUserChangeEvent AUCE = eh.onActiveUserChange(event);
@@ -71,7 +72,7 @@ public class EventManager {
 			return false;
 		}
 		
-		//Ìá½»ÊÂ¼ş
+		//æäº¤äº‹ä»¶
 		
 		ASMC.getUserManager().changeActiveUser(AUCE.getChangeToUser());
 		return true;
@@ -80,14 +81,33 @@ public class EventManager {
 	
 	
 	
+	//å¼€å§‹ä¸€ä¸ªPreCommandEventäº‹ä»¶
+	public boolean startPreCommandEvent(String PreCommand) {
+		
+		PreCommandEvent PCE = new PreCommandEvent(PreCommand);
+		
+		for(EventHandler ch:eventHandler){		
+			PCE=ch.onPreCommandEvent(PCE);
+		}
+		
+		if(PCE.isCancel()){
+			return false;
+		}
+		
+		return true;
+		
+	}
+	
+	
+	
 
 	
-	//×¢²áÊÂ¼ş
+	//æ³¨å†Œäº‹ä»¶
 	public void regEventHandler(ASMCPlugin plugin,EventHandler eveh) {
 		
-		msg.sendSysMessage("×¢²áÊÂ¼ş´¦ÀíÆ÷:"+plugin.getPluginName());
+		msg.sendSysMessage("æ³¨å†Œäº‹ä»¶å¤„ç†å™¨:"+plugin.getPluginName());
 		
-		//×¢²áÊÂ¼ş		
+		//æ³¨å†Œäº‹ä»¶		
 		eventHandler.add(eveh);
 		
 	}

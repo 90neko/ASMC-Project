@@ -22,7 +22,7 @@ public class ConfigManager {
 		
 		ConfigEntity ce=new ConfigEntity();
 		
-		msg.sendSysMessage("¡¤´ÓÎÄ¼ş¶ÁÈ¡ÅäÖÃÏî.");
+		msg.sendSysMessage("Â·ä»æ–‡ä»¶è¯»å–é…ç½®é¡¹.");
 		
 		v5.setTarget(ASMC.getMainConfigFile());
 		
@@ -73,7 +73,7 @@ public class ConfigManager {
 	
 	public void CheckAndCreatorConfig(){
 		
-		msg.sendSysMessage("¡¤¼ì²éASMCÅäÖÃÏî");
+		msg.sendSysMessage("Â·æ£€æŸ¥ASMCé…ç½®é¡¹");
 		
 		
 		v5.setTarget(ASMC.getMainConfigFile());
@@ -81,8 +81,8 @@ public class ConfigManager {
 		
 		if(v5.createNewGdcFile(ASMC.getMainConfigFile())){
 			
-			msg.sendWarningMessage("¡¤ÅäÖÃÏî²»´æÔÚ.");
-			msg.sendWarningMessage("¡¤´´½¨Ä¬ÈÏÅäÖÃÏî");
+			msg.sendWarningMessage("Â·é…ç½®é¡¹ä¸å­˜åœ¨.");
+			msg.sendWarningMessage("Â·åˆ›å»ºé»˜è®¤é…ç½®é¡¹");
 			
 			v5.addLine("ActiveAccount=AQSCP");
 			
@@ -108,12 +108,12 @@ public class ConfigManager {
 			v5.addLine("Field_AQSCPAccount=AQSCPAccount");
 			v5.addLine("Field_AQSCPPassword=AQSCPPassword");
 			
-			msg.sendWarningMessage("¡¤ASMCÅäÖÃÏî´´½¨Íê³É!");
+			msg.sendWarningMessage("Â·ASMCé…ç½®é¡¹åˆ›å»ºå®Œæˆ!");
 			return;
 		}
 		
 		
-		msg.sendWarningMessage("¡¤ASMCÅäÖÃÏî¼ì²éÍê³É!");
+		msg.sendWarningMessage("Â·ASMCé…ç½®é¡¹æ£€æŸ¥å®Œæˆ!");
 		
 	}
 	

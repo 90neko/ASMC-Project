@@ -36,7 +36,7 @@ public class AuthManager {
 		
 				
 		if(!ce.getCCA().equals(ASMC.getUserManager().getActiveUser().getAccount())){
-			msg.sendErrorMessage("Ö´ĞĞÃüÁîÊ±·¢Éú´íÎó:È¨ÏŞ²»×ã.");
+			msg.sendErrorMessage("æ‰§è¡Œå‘½ä»¤æ—¶å‘ç”Ÿé”™è¯¯:æƒé™ä¸è¶³.");
 			return false;
 		}		
 		
@@ -46,7 +46,7 @@ public class AuthManager {
 	
 	
 	
-	//ÕË»§µÇÂ¼
+	//è´¦æˆ·ç™»å½•
 	public boolean userLogin(){
 		
 		String userName=null;
@@ -55,13 +55,13 @@ public class AuthManager {
 		UserEntity ue=null;
 			
 	
-		msg.sendSysMessageNoLine("ÕËºÅ:");
+		msg.sendSysMessageNoLine("è´¦å·:");
 		userName=msg.getMessage();
 		
 		
-		//ÅĞ¶ÏÊÇ·ñÎªnull
+		//åˆ¤æ–­æ˜¯å¦ä¸ºnull
 		if(userName == null){
-			msg.sendWarningMessage("·ÅÆú²Ù×÷.");
+			msg.sendWarningMessage("æ”¾å¼ƒæ“ä½œ.");
 			return false;
 		}
 		
@@ -69,30 +69,30 @@ public class AuthManager {
 		pwd=msg.getMessageOfPWD();
 		
 		if(pwd == null){
-			msg.sendWarningMessage("·ÅÆú²Ù×÷.");
+			msg.sendWarningMessage("æ”¾å¼ƒæ“ä½œ.");
 			return false;
 		}
 		
 		
-		//µ÷ÓÃ·½·¨È¡ÓÃ»§ÊµÀı
+		//è°ƒç”¨æ–¹æ³•å–ç”¨æˆ·å®ä¾‹
 		ue = this.getUser(userName);
 		
 		if(ue == null){
-			msg.sendSysMessage("¡¤µÈ´ıÊı¾İ¿â...");
-			msg.sendErrorMessage("¡¤Ê§°Ü.");
+			msg.sendSysMessage("Â·ç­‰å¾…æ•°æ®åº“...");
+			msg.sendErrorMessage("Â·å¤±è´¥.");
 			msg.sendBr();
 			return false;
 		}
 		
 		
 		if(!AdvHash.md5(pwd).equals(ue.getPassword())){
-			msg.sendSysMessage("¡¤µÈ´ıÊı¾İ¿â...");
-			msg.sendErrorMessage("¡¤Ê§°Ü.");
+			msg.sendSysMessage("Â·ç­‰å¾…æ•°æ®åº“...");
+			msg.sendErrorMessage("Â·å¤±è´¥.");
 			msg.sendBr();
 			return false;
 		}
 		
-		msg.sendSysMessage("µÈ´ıÊı¾İ¿â...");
+		msg.sendSysMessage("ç­‰å¾…æ•°æ®åº“...");
 		
 		msg.sendBr();
 		
@@ -104,7 +104,7 @@ public class AuthManager {
 	
 	
 
-	//»ñÈ¡ÕË»§
+	//è·å–è´¦æˆ·
 	public UserEntity getUser(String name){
 		
 		String sql= "select * from "+Table_Main+" where "+Field_AQSCPAccount+"='"+name+"'";
@@ -141,12 +141,12 @@ public class AuthManager {
 	
 
 	/**
-	 * ÉèÖÃµ±Ç°»îÔ¾ÓÃ»§
+	 * è®¾ç½®å½“å‰æ´»è·ƒç”¨æˆ·
 	 * @param activeUser
 	 */
 	public void setActiveUser(UserEntity activeUser) {
 		
-		//´´½¨ÊÂ¼ş
+		//åˆ›å»ºäº‹ä»¶
 		
 		ActiveUserChangeEvent AUCE = new ActiveUserChangeEvent(this.getActiveUser(), activeUser);
 		
@@ -155,7 +155,7 @@ public class AuthManager {
 		
 		if(isSuccess) {
 			msg.sendBr();
-			msg.sendWarningMessage("!È¨ÏŞ±»¸üĞÂ.");
+			msg.sendWarningMessage("!æƒé™è¢«æ›´æ–°.");
 			
 			msg.sendWarningMessage("ActiveUser:"+ActiveUser.getAccount());
 		}
@@ -165,7 +165,7 @@ public class AuthManager {
 	
 	
 	
-	//ÇĞ»»ÓÃ»§(²»¾­¹ıÊÂ¼ş)
+	//åˆ‡æ¢ç”¨æˆ·(ä¸ç»è¿‡äº‹ä»¶)
 	public void changeActiveUser(UserEntity activeUser) {		
 		this.ActiveUser = activeUser;	
 	}

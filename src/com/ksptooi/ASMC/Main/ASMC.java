@@ -1,7 +1,10 @@
 package com.ksptooi.ASMC.Main;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+
 import com.ksptooi.ASMC.Config.ConfigManager;
 import com.ksptooi.ASMC.Data.CommandManager;
 import com.ksptooi.ASMC.Data.SqlManager;
@@ -38,6 +41,8 @@ public class ASMC {
 
 	private static PluginsManager pluginManager=new PluginsManager();
 	
+	private static final BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+	
 	
 	private final static EventManager eventManager=new EventManager();
 	
@@ -55,16 +60,16 @@ public class ASMC {
 		SqlManager sqlManager=ASMC.getSqlmanager();
 		 
 		
-		msg.sendSysMessage("ASMC °æ±¾ºÅ:"+Var.ASMC_Version);
+		msg.sendSysMessage("ASMC ç‰ˆæœ¬å·:"+Var.ASMC_Version);
 		
-		//¿ªÊ¼ĞÔÄÜ¼ÆÊı
+		//å¼€å§‹æ€§èƒ½è®¡æ•°
 		APC.Timer();
 		
-		//¶ÁÅäÖÃÎÄ¼ş
+		//è¯»é…ç½®æ–‡ä»¶
 		CM.ReadConfig();		
 		
-		msg.sendWarningMessage("Êı¾İ¿â×´Ì¬:ÀëÏß");
-		msg.sendSysMessage("ÕıÔÚÁ¬½ÓÖÁÊı¾İ¿â");
+		msg.sendWarningMessage("æ•°æ®åº“çŠ¶æ€:ç¦»çº¿");
+		msg.sendSysMessage("æ­£åœ¨è¿æ¥è‡³æ•°æ®åº“");
 
 		authManager = new AuthManager();
 		
@@ -72,21 +77,21 @@ public class ASMC {
 		
 		if(!sqlManager.isActive()){
 			
-			msg.sendWarningMessage("Êı¾İ¿â×´Ì¬:Á¬½ÓÊ§°Ü");
+			msg.sendWarningMessage("æ•°æ®åº“çŠ¶æ€:è¿æ¥å¤±è´¥");
 			System.exit(0);
 		}
 		
-		msg.sendSysMessage("µÈ´ıÊı¾İ¿â..");
-		msg.sendWarningMessage("Êı¾İ¿â×´Ì¬:ÔÚÏß");
+		msg.sendSysMessage("ç­‰å¾…æ•°æ®åº“..");
+		msg.sendWarningMessage("æ•°æ®åº“çŠ¶æ€:åœ¨çº¿");
 		
-		//²éÕÒASMC²å¼ş
+		//æŸ¥æ‰¾ASMCæ’ä»¶
 		ASMC.getPluginManager().SearchPlugins();
 		
-		//¼ÓÔØ
+		//åŠ è½½
 		ASMC.getPluginManager().LoadAllPlugins();
 		
 		
-		msg.sendWarningMessage("ASMCÆô¶¯ºÄÊ±:"+APC.StopTimer());
+		msg.sendWarningMessage("ASMCå¯åŠ¨è€—æ—¶:"+APC.StopTimer());
 		
 		authManager.setActiveUser(ASMC.getUserManager().getUser("user"));
 		
@@ -173,6 +178,12 @@ public class ASMC {
 	public static EventManager getEventmanager() {
 		return eventManager;
 	}
+
+	
+	public static BufferedReader getBr() {
+		return br;
+	}
+
 
 	
 }

@@ -2,107 +2,90 @@ package com.ksptooi.ASMC.Plugins;
 
 import java.io.File;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 import java.net.URL;
-import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import com.ksptooi.ASMC.Command.Command_cmd;
 import com.ksptooi.ASMC.Main.ASMC;
 import com.ksptooi.ASMC.Message.MessageManager;
 import com.ksptooi.gdc.FileAPI.IOController_V5;
-import sun.misc.ClassLoaderUtil;
 
 public class PluginsManager {
 
 
-	//ÒÑ×¢²áµÄ²å¼şÖ÷ÀàMap (²å¼şÃû || ²å¼şÖ÷ÀàÊµÀı)
+	//å·²æ³¨å†Œçš„æ’ä»¶ä¸»ç±»Map (æ’ä»¶å || æ’ä»¶ä¸»ç±»å®ä¾‹)
 	HashMap<String,ASMCPlugin> installPluginMainClassMap=new HashMap<String,ASMCPlugin>();
 	
-	//ÒÑ×¢²á²å¼şÁĞ±í
+	//å·²æ³¨å†Œæ’ä»¶åˆ—è¡¨
 	ArrayList<String> installPluginList = new ArrayList<String>();
 
-	
-	
-	
-	
-	//´ı×¢²á²å¼şÖ÷ÀàMap (²å¼şÃû || Ö÷ÀàµØÖ·)
+
+	//å¾…æ³¨å†Œæ’ä»¶ä¸»ç±»Map (æ’ä»¶å || ä¸»ç±»åœ°å€)
 	HashMap<String,String> pluginMainClassMap=new HashMap<String,String>();
 	
-	//´ı×¢²á²å¼şÎÄ¼şmap (²å¼şÃû || ÎÄ¼şÊµÀı)
+	//å¾…æ³¨å†Œæ’ä»¶æ–‡ä»¶map (æ’ä»¶å || æ–‡ä»¶å®ä¾‹)
 	HashMap<String,File> pluginFileMap=new HashMap<String,File>();	
 	
-	//´ı×¢²á²å¼şÎÄ¼şÁĞ±í
+	//å¾…æ³¨å†Œæ’ä»¶æ–‡ä»¶åˆ—è¡¨
 	ArrayList<File> pluginList=new ArrayList<File>();
 	
-	//´ı×¢²á²å¼şÃû×ÖÁĞ±í
+	//å¾…æ³¨å†Œæ’ä»¶åå­—åˆ—è¡¨
 	ArrayList<String> pluginNameList=new ArrayList<String>();
 	
 	
 	
-	//ÒÑ×¢²áµÄÃüÁîÀàĞÍMap (ÃüÁîÀàĞÍÃû || ÃüÁîÀàĞÍÊµÀı)
+	//å·²æ³¨å†Œçš„å‘½ä»¤ç±»å‹Map (å‘½ä»¤ç±»å‹å || å‘½ä»¤ç±»å‹å®ä¾‹)
 	HashMap<String,Command_cmd> regCommandTypeMap=new HashMap<String,Command_cmd>();
 
-	//ÒÑ×¢²áµÄÃüÁîÁĞ±í
+	//å·²æ³¨å†Œçš„å‘½ä»¤åˆ—è¡¨
 	ArrayList<String> regCommandNameList=new ArrayList<String>();
 	
 	
 	
 	
-	
-	//¹«ÓÃ
+	//å…¬ç”¨
 	IOController_V5 v5=ASMC.getV5();
 	
 	MessageManager msg = ASMC.getMessageManager();
 	
 	
+	PluginClassLoader Loader = null;
 	
-	//×¢²áÃüÁî
+	
+	//æ³¨å†Œå‘½ä»¤
 	public void regCommandType(ASMCPlugin plugin,String CommandTypeName,String CommandTypeEntityAddress) {
+		
+		
+		
 		
 		
 		Command_cmd CE=null;
 		
 		File pluginFile=pluginFileMap.get(plugin.getPluginName());
 		
-		//ÅĞ¶ÏÊÇ·ñ³åÍ»
+		
+		//åˆ¤æ–­æ˜¯å¦å†²çª
 		for(String str:regCommandNameList) {
 			
 			if(str.equalsIgnoreCase(CommandTypeName)) {
-				msg.sendErrorMessage("×¢²áÃüÁîÊ§°Ü,ÃüÁî³åÍ».");
+				msg.sendErrorMessage("æ³¨å†Œå‘½ä»¤å¤±è´¥,å‘½ä»¤å†²çª.");
 				return;
 			}
 			
 		}
-			
-		
-		try {
-			
-			URL url=pluginFile.toURI().toURL();
-			ClassLoader loader=new URLClassLoader(new URL[]{url});//´´½¨ClassLoader
 							
-			msg.sendSysMessage("×¢²áÃüÁî:"+CommandTypeName);
+		msg.sendSysMessage("æ³¨å†Œå‘½ä»¤:"+CommandTypeName);
+						
+
+		Loader = new PluginClassLoader(pluginFile);
 			
 			
-			Class<?> cls=loader.loadClass(CommandTypeEntityAddress);
-			
-			Method m1 = cls.getDeclaredMethod("getThis");
-			
-			Object obj = cls.newInstance();	
-			
-			CE=(Command_cmd)m1.invoke(obj);
-			
-			
-			//¹Ø±ÕClassLoader
-			ClassLoaderUtil.releaseLoader((URLClassLoader)loader);
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		Object obj=Loader.loadClass(CommandTypeEntityAddress);
+		
+		CE = (Command_cmd)obj;
 		
 		
-		
-		//×¢²áÃüÁî
+		//æ³¨å†Œå‘½ä»¤
 		regCommandNameList.add(CommandTypeName);
 		
 		regCommandTypeMap.put(CommandTypeName, CE);
@@ -112,60 +95,52 @@ public class PluginsManager {
 	
 	
 	
-	//¼ÓÔØ²å¼ş
+	//åŠ è½½æ’ä»¶
 	public void LoadAllPlugins(){
+		
+		PluginClassLoader Loader = null;
 		
 		try{
 			
-			//¼ÓÔØ
+			//åŠ è½½
 			for(String PluginName:pluginNameList){
 				
-				//²å¼şÖ÷Àà×Ö·û´®
+				//æ’ä»¶ä¸»ç±»å­—ç¬¦ä¸²
 				String pluginMainClass = pluginMainClassMap.get(PluginName);
 
-				//²å¼şÎÄ¼ş
+				//æ’ä»¶æ–‡ä»¶
 				File pluginFile = pluginFileMap.get(PluginName);
 				
-				//²å¼şÖ÷ÀàÊµÀı
-				ASMCPlugin ASMCP=null;
+
+
+				msg.sendSysMessage("åŠ è½½:"+PluginName);
 				
-				URL url=pluginFile.toURI().toURL();
-				ClassLoader loader=new URLClassLoader(new URL[]{url});//´´½¨ClassLoader
-								
 							
-				msg.sendSysMessage("¼ÓÔØ:"+PluginName);
+				Loader = new PluginClassLoader(pluginFile);
 				
 				
+				ASMCPlugin ASMCP=(ASMCPlugin) Loader.loadClass(pluginMainClass);
 				
-				Class<?> cls=loader.loadClass(pluginMainClass);
+
 				
-				Method m1 = cls.getDeclaredMethod("getThis");
-				
-				Object obj = cls.newInstance();
-				
-				
-				ASMCP=(ASMCPlugin)m1.invoke(obj);
-				
-				//ÉèÖÃ²å¼şÃû³Æ
+				//è®¾ç½®æ’ä»¶åç§°
 				ASMCP.setPluginName(PluginName);
 				
-				//×¢²á²å¼ş
+				//æ³¨å†Œæ’ä»¶
 				installPluginMainClassMap.put(PluginName, ASMCP);
 				
-				//×¢²á²å¼ş
+				//æ³¨å†Œæ’ä»¶
 				installPluginList.add(PluginName);
 //				
-//				//Ìí¼Ó²å¼şÃüÁîÀàĞÍµ½ÁĞ±í
+//				//æ·»åŠ æ’ä»¶å‘½ä»¤ç±»å‹åˆ°åˆ—è¡¨
 //				RegCommandTypeList.add(pluginRegCommandTypeName);
 				
-				
-				//¹Ø±ÕClassLoader
-				ClassLoaderUtil.releaseLoader((URLClassLoader)loader);
+
 			}
 			
 			
 			
-			//Ö´ĞĞ²å¼şµÄonEnable
+			//æ‰§è¡Œæ’ä»¶çš„onEnable
 			for(String str:installPluginList){
 				
 				ASMCPlugin plugin=(ASMCPlugin) installPluginMainClassMap.get(str);			
@@ -173,10 +148,10 @@ public class PluginsManager {
 				
 			}
 			
-			//ÏÔÊ¾ÒÑ×¢²áµÄÃüÁîÀàĞÍ
+			//æ˜¾ç¤ºå·²æ³¨å†Œçš„å‘½ä»¤ç±»å‹
 //			for(String str:regCommandNameList){
 //				
-//				msg.sendSysMessage("×¢²áÃüÁîÀàĞÍ:"+str);
+//				msg.sendSysMessage("æ³¨å†Œå‘½ä»¤ç±»å‹:"+str);
 //				
 //			}
 			
@@ -195,23 +170,23 @@ public class PluginsManager {
 	
 	
 	
-	//²éÕÒ²å¼ş
+	//æŸ¥æ‰¾æ’ä»¶
 	public void SearchPlugins(){
 
 		
-		msg.sendSysMessage("¼ÓÔØASMC²å¼ş");
+		msg.sendSysMessage("åŠ è½½ASMCæ’ä»¶");
 		
 		String PluginName = null;
 		
-		//´´½¨²å¼şÎÄ¼ş¼Ğ
+		//åˆ›å»ºæ’ä»¶æ–‡ä»¶å¤¹
 		ASMC.getMainPluginsfolder().mkdirs();
 		
 		
-		//È¡ËùÓĞ²å¼ş
+		//å–æ‰€æœ‰æ’ä»¶
 		File[] PrePluginList = ASMC.getMainPluginsfolder().listFiles();
 			 
 		
-		//È¥³ı²»ÊÇ²å¼şµÄÎÄ¼ş || ²¢½«ÎÄ¼şÌí¼ÓÖÁ PluginListÖĞ
+		//å»é™¤ä¸æ˜¯æ’ä»¶çš„æ–‡ä»¶ || å¹¶å°†æ–‡ä»¶æ·»åŠ è‡³ PluginListä¸­
 		for(int i=0;i<PrePluginList.length;i++){
 			
 			if( ! PrePluginList[i].getName().contains(".jar")){
@@ -226,10 +201,10 @@ public class PluginsManager {
 			
 			
 	
-			//»ñÈ¡
+			//è·å–
 			for(File f:pluginList){
 				
-				msg.sendSysMessage("»ñÈ¡:"+f.getName());
+				msg.sendSysMessage("è·å–:"+f.getName());
 								
 				URL url=new URL("jar:file:/"+f.getPath()+"!/ASMC_Plugin.gd"); 
 			
@@ -242,24 +217,24 @@ public class PluginsManager {
 				PluginName=v5.getKeyValueOfInputStream(is, "Plugin_Name");
 				
 				
-				//ÅĞ¶ÏÊÇ·ñÓĞÖØÃû²å¼ş
+				//åˆ¤æ–­æ˜¯å¦æœ‰é‡åæ’ä»¶
 				for(String str:pluginNameList){
 					
 					if(str.equalsIgnoreCase(PluginName)){
-						msg.sendErrorMessage("¼ÓÔØ²å¼ş:"+PluginName+"Ê±·¢Éú´íÎó,²å¼şÃû³Æ³åÍ»!");
+						msg.sendErrorMessage("åŠ è½½æ’ä»¶:"+PluginName+"æ—¶å‘ç”Ÿé”™è¯¯,æ’ä»¶åç§°å†²çª!");
 						continue;
 					}
 					
 				}
 							
 				
-				//¼ÓÈë²å¼şÃû×Ö
+				//åŠ å…¥æ’ä»¶åå­—
 				pluginNameList.add(PluginName);
 				
-				//¼ÓÈë²å¼şÎÄ¼ş
+				//åŠ å…¥æ’ä»¶æ–‡ä»¶
 				pluginFileMap.put(PluginName, f);
 				
-				//¼ÓÈë²å¼şÖ÷Àà
+				//åŠ å…¥æ’ä»¶ä¸»ç±»
 				pluginMainClassMap.put(PluginName, main);		
 				
 			

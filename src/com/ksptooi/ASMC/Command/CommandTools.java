@@ -8,9 +8,9 @@ import com.ksptooi.ASMC.Main.ASMC;
 public class CommandTools {
 
 	
-	//VF9 - Í¨¹ıÀàÃû»ñÈ¡ÀàÊµÀı
+	//VF9 - é€šè¿‡ç±»åè·å–ç±»å®ä¾‹
 	
-	//»ñÈ¡ÀàĞÍ
+	//è·å–ç±»å‹
 	public static Command_cmd getType(String TypeName){
 		
 		try {
@@ -28,7 +28,7 @@ public class CommandTools {
 			
 		} catch (Exception e) {	
 			
-			//»ñÈ¡²å¼şµÄÃüÁîÀàĞÍ
+			//è·å–æ’ä»¶çš„å‘½ä»¤ç±»å‹
 			
 			Command_cmd PCT=getTypeOfPlugin(TypeName);
 			
@@ -38,14 +38,14 @@ public class CommandTools {
 			}
 			
 			
-			ASMC.getMessageManager().sendWarningMessage("Ã»ÓĞÕÒµ½´ËCommandType:"+TypeName);
+			ASMC.getMessageManager().sendWarningMessage("æ²¡æœ‰æ‰¾åˆ°æ­¤CommandType:"+TypeName);
 			return null;
 		}
 		
 	}
 	
 	
-	//´Ó²å¼ş»ñÈ¡ÀàĞÍ
+	//ä»æ’ä»¶è·å–ç±»å‹
 	private static Command_cmd getTypeOfPlugin(String TypeName){
 		
 		

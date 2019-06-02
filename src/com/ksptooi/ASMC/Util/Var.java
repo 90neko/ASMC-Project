@@ -7,15 +7,15 @@ import java.awt.datatransfer.Transferable;
 
 public class Var {
 	
-	public static final String ASMC_Version = "V3.29-K";
+	public static final String ASMC_Version = "V3.31-C";
 	
 	
 	 public static void setClipboardString(String text) { 
-		 // »ñÈ¡ÏµÍ³¼ôÌù°å 
+		 // è·å–ç³»ç»Ÿå‰ªè´´æ¿ 
 		 Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard(); 
-		 // ·â×°ÎÄ±¾ÄÚÈİ 
+		 // å°è£…æ–‡æœ¬å†…å®¹ 
 		 Transferable trans = new StringSelection(text); 
-		 // °ÑÎÄ±¾ÄÚÈİÉèÖÃµ½ÏµÍ³¼ôÌù°å 
+		 // æŠŠæ–‡æœ¬å†…å®¹è®¾ç½®åˆ°ç³»ç»Ÿå‰ªè´´æ¿ 
 		 clipboard.setContents(trans, null);  
 	 }
 	 

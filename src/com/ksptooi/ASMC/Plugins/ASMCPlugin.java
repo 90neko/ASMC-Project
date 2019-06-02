@@ -8,7 +8,7 @@ public abstract class ASMCPlugin{
 	private boolean issetPluginName=false;
 	
 	
-	//²å¼ş¼ÓÔØÊ±½«»áÖ´ĞĞÒ»´Î
+	//æ’ä»¶åŠ è½½æ—¶å°†ä¼šæ‰§è¡Œä¸€æ¬¡
 	public void onEnable(){
 		
 		
@@ -24,7 +24,7 @@ public abstract class ASMCPlugin{
 
 	public void setPluginName(String pluginName) {
 		
-		//²å¼şÃû³ÆÖ»ÄÜÉèÖÃÒ»±é
+		//æ’ä»¶åç§°åªèƒ½è®¾ç½®ä¸€é
 		if(issetPluginName == true) {
 			return;
 		}

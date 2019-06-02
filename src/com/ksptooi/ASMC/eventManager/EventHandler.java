@@ -2,11 +2,12 @@ package com.ksptooi.ASMC.eventManager;
 
 import com.ksptooi.ASMC.event.ActiveUserChangeEvent;
 import com.ksptooi.ASMC.event.CommandEvent;
+import com.ksptooi.ASMC.event.PreCommandEvent;
 
 public class EventHandler{
 
 	
-	//ÃüÁîÖ´ĞĞÊÂ¼ş
+	//å‘½ä»¤æ‰§è¡Œäº‹ä»¶
 	public CommandEvent onCommand(CommandEvent ce) {
 					
 		return ce;		
@@ -14,9 +15,15 @@ public class EventHandler{
 
 	
 	
-	//»î¶¯ÓÃ»§×ª»»ÊÂ¼ş
+	//æ´»åŠ¨ç”¨æˆ·è½¬æ¢äº‹ä»¶
 	public ActiveUserChangeEvent onActiveUserChange(ActiveUserChangeEvent AUCE) {
 		return AUCE;	
+	}
+	
+	
+	//é¢„è¾“å…¥å‘½ä»¤äº‹ä»¶
+	public PreCommandEvent onPreCommandEvent(PreCommandEvent PCE) {
+		return PCE;
 	}
 	
 	

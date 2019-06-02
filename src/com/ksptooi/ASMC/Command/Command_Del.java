@@ -25,7 +25,7 @@ public class Command_Del implements Command_cmd{
 		
 		MessageManager msg=ASMC.getMessageManager();
 		
-		msg.sendSysMessage("ÊäÈëÒªÉ¾³ıµÄÃüÁî");
+		msg.sendSysMessage("è¾“å…¥è¦åˆ é™¤çš„å‘½ä»¤");
 		
 		try {
 			

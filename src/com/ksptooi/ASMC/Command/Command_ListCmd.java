@@ -19,7 +19,7 @@ public class Command_ListCmd implements Command_cmd{
 		ArrayList<CommandEntity> list=cmm.getAllCommand();
 		
 		msg.sendBr();
-		//将没有权限的命令地址进行替换
+		//灏嗘病鏈夋潈闄愮殑鍛戒护鍦板潃杩涜鏇挎崲
 		
 		for(int i=0;i<list.size();i++){
 			
@@ -30,13 +30,11 @@ public class Command_ListCmd implements Command_cmd{
 			list.get(i).setPath("******");
 			
 		}
-		//完成
+		//瀹屾垚
 		
 		
 		
-		
-		
-		String R2="|   名称   |    Type    |             Path             |      Title      |  CCA信息  |";
+		String R2="|   鍚嶇О   |    Type    |             Path             |      Title      |  CCA淇℃伅  |";
 		
 		System.out.println(R2);
 		
