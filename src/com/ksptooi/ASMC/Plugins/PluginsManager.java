@@ -74,7 +74,7 @@ public class PluginsManager {
 			
 		}
 							
-		msg.sendSysMessage("注册命令:"+CommandTypeName);
+//		msg.sendSysMessage("注册命令:"+CommandTypeName);
 						
 
 		Loader = new PluginClassLoader(pluginFile);
@@ -149,11 +149,11 @@ public class PluginsManager {
 			}
 			
 			//显示已注册的命令类型
-//			for(String str:regCommandNameList){
-//				
-//				msg.sendSysMessage("注册命令类型:"+str);
-//				
-//			}
+			for(String str:regCommandNameList){
+				
+				msg.sendSysMessage("注册命令类型:"+str);
+				
+			}
 			
 			
 			

@@ -162,10 +162,9 @@ public class CommandManager {
 			return;
 		}
 		
-		
-		msg.sendSysMessage("等待数据库..");
+
 		dao.noQuery(sql);
-		msg.sendSysMessage("操作成功!");
+
 		
 	}
 	

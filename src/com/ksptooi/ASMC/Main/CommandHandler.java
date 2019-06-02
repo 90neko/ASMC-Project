@@ -35,7 +35,11 @@ public class CommandHandler{
 			CommandEntity ce=null;
 			
 			//进行命令预处理	
-			if(PreCommand.contains(" ")|PreCommand.equals("")){
+//			if(PreCommand.contains("")|PreCommand.equals("")){
+//				continue;
+//			}
+			
+			if(PreCommand.equals("")){
 				continue;
 			}
 			
