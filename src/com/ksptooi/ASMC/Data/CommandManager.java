@@ -143,6 +143,8 @@ public class CommandManager {
 	//添加命令
 	public void addCommand(CommandEntity ce){
 		
+		ce.setPath(ce.getPath().replace("/", "//"));
+		ce.setPath(ce.getPath().replace("\\", "\\\\"));
 		
 		String sql="insert into "+Table_Command+" values('"+ce.getName()+"','"+ce.getType()+"','"+ce.getPath()+"','"+ce.getTitle()+"','"+ce.getCCA()+"')";
 		
@@ -155,7 +157,7 @@ public class CommandManager {
 	public void delCommand(String cmd){
 		
 		
-		String sql="delete "+Table_Command+" where "+Field_CommandName+"='"+cmd+"'";
+		String sql="delete from "+Table_Command+" where "+Field_CommandName+"='"+cmd+"'";
 		
 		if(!this.isExistsCmd(cmd)){
 			msg.sendWarningMessage("待删除的命令不存在.");

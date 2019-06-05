@@ -7,7 +7,7 @@ import java.awt.datatransfer.Transferable;
 
 public class Var {
 	
-	public static final String ASMC_Version = "V3.31-G";
+	public static final String ASMC_Version = "V3.35-A";
 	
 	
 	 public static void setClipboardString(String text) { 
