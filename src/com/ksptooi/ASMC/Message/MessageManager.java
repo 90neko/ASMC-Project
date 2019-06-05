@@ -1,24 +1,32 @@
 package com.ksptooi.ASMC.Message;
 
+import static org.fusesource.jansi.Ansi.ansi;
+import static org.fusesource.jansi.Ansi.Color.RED;
+import static org.fusesource.jansi.Ansi.Color.YELLOW;
+
 import java.io.BufferedReader;
 import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 
 import org.fusesource.jansi.AnsiConsole;
 
-import static org.fusesource.jansi.Ansi.*;
-import static org.fusesource.jansi.Ansi.Color.*;
-
 public class MessageManager {
 
+	
+	PrintStream out = System.out;
+	
+	//发送消息(不含日志)
+	public void sendMessage(String Message){
+		out.println(Message);
+	}
 	
 	
 	//发送系统消息
 	public void sendSysMessage(String Message){
 		
-		
-		System.out.println("[信息]:"+Message);
+		out.println("[信息]:"+Message);
 		
 	}
 	
@@ -27,7 +35,7 @@ public class MessageManager {
 		
 		AnsiConsole.systemInstall();
 	
-		System.out.println(ansi().fg(YELLOW).a("[警告]:"+Message).reset());
+		out.println(ansi().fg(YELLOW).a("[警告]:"+Message).reset());
 		
 		AnsiConsole.systemUninstall();
 		
@@ -42,7 +50,7 @@ public class MessageManager {
 		
 		AnsiConsole.systemInstall();
 		
-		System.out.println(ansi().fg(RED).a("[严重]:"+Message).reset());
+		out.println(ansi().fg(RED).a("[严重]:"+Message).reset());
 		
 		AnsiConsole.systemUninstall();
 		
@@ -52,12 +60,12 @@ public class MessageManager {
 
 	//发送系统信息(不换行)
 	public void sendSysMessageNoLine(String Message){	
-		System.out.print(Message);	
+		out.print(Message);	
 	}
 	
 	//发送换行符
 	public void sendBr(){
-		System.out.println("");
+		out.println("");
 	}
 	
 	//获取用户输入的信息
@@ -93,6 +101,14 @@ public class MessageManager {
 		
 		return str;
 		
+	}
+	
+	public PrintStream getOut() {
+		return out;
+	}
+
+	public void setOut(PrintStream out) {
+		this.out = out;
 	}
 	
 	

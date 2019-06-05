@@ -46,10 +46,10 @@ public class ASMC {
 	
 	private final static EventManager eventManager=new EventManager();
 	
-
 	
 	
 	public static void main(String rk[]) throws IOException, InterruptedException{
+		
 		
 		MessageManager msg=new MessageManager();
 		
