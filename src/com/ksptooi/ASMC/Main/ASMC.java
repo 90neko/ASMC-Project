@@ -4,7 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import com.ksptooi.ASMC.Config.ConfigManager;
 import com.ksptooi.ASMC.Data.CommandManager;
 import com.ksptooi.ASMC.Data.SqlManager;
@@ -42,7 +41,6 @@ public class ASMC {
 	private static PluginsManager pluginManager=new PluginsManager();
 	
 	private static final BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-	
 	
 	private final static EventManager eventManager=new EventManager();
 	
@@ -82,7 +80,7 @@ public class ASMC {
 		}
 		
 		msg.sendSysMessage("等待数据库..");
-		msg.sendWarningMessage("数据库状态:在线");
+		msg.successMessage("数据库状态:在线");
 		
 		//查找ASMC插件
 		ASMC.getPluginManager().SearchPlugins();
@@ -90,7 +88,7 @@ public class ASMC {
 		//加载
 		ASMC.getPluginManager().LoadAllPlugins();
 		
-		
+		msg.sendWarningMessage("启动完成");
 		msg.sendWarningMessage("ASMC启动耗时:"+APC.StopTimer());
 		
 		authManager.setActiveUser(ASMC.getUserManager().getUser("user"));
@@ -98,13 +96,6 @@ public class ASMC {
 		cm=new CommandManager();
 		
 		ch.ExecuteCommand();
-		
-		
-		
-		
-		
-		
-		
 		
 		
 	}

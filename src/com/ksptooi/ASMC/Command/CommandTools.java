@@ -2,7 +2,6 @@ package com.ksptooi.ASMC.Command;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
-
 import com.ksptooi.ASMC.Main.ASMC;
 
 public class CommandTools {

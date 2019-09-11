@@ -12,8 +12,6 @@ public class EventHandler{
 					
 		return ce;		
 	}
-
-	
 	
 	//活动用户转换事件
 	public ActiveUserChangeEvent onActiveUserChange(ActiveUserChangeEvent AUCE) {

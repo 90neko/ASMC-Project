@@ -9,37 +9,43 @@ import java.io.Console;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+import org.fusesource.jansi.Ansi.Color;
 import org.fusesource.jansi.AnsiConsole;
 
 public class MessageManager {
 
 	
 	
-	//发送消息(不含日志)
+	//发送消息(不含颜色代码)
 	public void sendMessage(String Message){
 		System.out.println(Message);
+	}
+	
+	//发送成功消息
+	public void successMessage(String message){
+		
+		AnsiConsole.systemInstall();
+		System.out.println(ansi().fg(Color.GREEN).a("[信息]:"+message).reset());
+		AnsiConsole.systemUninstall();
+		
 	}
 	
 	
 	//发送系统消息
 	public void sendSysMessage(String Message){
-		
-		
-		
+				
 		System.out.println("[信息]:"+Message);
-		
-
 		
 	}
 	
 	//发送警告消息
 	public void sendWarningMessage(String Message){
 		
+		
 		AnsiConsole.systemInstall();
 		System.out.println(ansi().fg(YELLOW).a("[警告]:"+Message).reset());
 		AnsiConsole.systemUninstall();
 		
-
 		
 	}
 	

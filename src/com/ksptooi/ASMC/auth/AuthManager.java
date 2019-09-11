@@ -155,9 +155,9 @@ public class AuthManager {
 		
 		if(isSuccess) {
 			msg.sendBr();
-			msg.sendWarningMessage("!权限被更新.");
+			msg.successMessage("!权限被更新.");
 			
-			msg.sendWarningMessage("ActiveUser:"+ActiveUser.getAccount());
+			msg.successMessage("ActiveUser:"+ActiveUser.getAccount());
 		}
 		
 		
