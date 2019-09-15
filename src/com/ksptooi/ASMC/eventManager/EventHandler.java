@@ -3,13 +3,13 @@ package com.ksptooi.ASMC.eventManager;
 import com.ksptooi.ASMC.event.ActiveUserChangeEvent;
 import com.ksptooi.ASMC.event.CommandEvent;
 import com.ksptooi.ASMC.event.PreCommandEvent;
+import com.ksptooi.ASMC.event.UnknowCommandEvent;
 
 public class EventHandler{
 
 	
 	//命令执行事件
-	public CommandEvent onCommand(CommandEvent ce) {
-					
+	public CommandEvent onCommand(CommandEvent ce) {				
 		return ce;		
 	}
 	
@@ -23,6 +23,12 @@ public class EventHandler{
 	public PreCommandEvent onPreCommandEvent(PreCommandEvent PCE) {
 		return PCE;
 	}
+	
+	//未知命令事件
+	public UnknowCommandEvent onUnknowCommandEvent(UnknowCommandEvent UCE){	
+		return UCE;
+	}
+	
 	
 	
 }

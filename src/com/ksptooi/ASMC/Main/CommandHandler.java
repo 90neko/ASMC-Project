@@ -2,11 +2,11 @@ package com.ksptooi.ASMC.Main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+
 import com.ksptooi.ASMC.Command.CommandTools;
 import com.ksptooi.ASMC.Command.Command_cmd;
 import com.ksptooi.ASMC.Data.CommandManager;
 import com.ksptooi.ASMC.Entity.CommandEntity;
-import com.ksptooi.ASMC.Message.MessageManager;
 import com.ksptooi.ASMC.event.CommandEvent;
 
 public class CommandHandler{
@@ -20,7 +20,6 @@ public class CommandHandler{
 		
 		BufferedReader br=ASMC.getBr();
 		CommandManager cm=ASMC.getCommandManager();
-		MessageManager msg=new MessageManager();
 		
 		while(true){
 			
@@ -57,12 +56,13 @@ public class CommandHandler{
 				continue;
 			}
 			
-			
-			
-			
+						
 			//检查命令是否存在
 			if(!cm.isExistsCmd(Command)){
-				msg.sendWarningMessage("'"+Command+"'"+"不是有效的ASMC命令");
+				
+				//创建事件 - 未知命令
+				ASMC.getEventmanager().startUnknowCommandEvent(PreCommand);
+				
 				continue;
 			}
 			
@@ -74,18 +74,14 @@ public class CommandHandler{
 
 			
 			if(CT == null){
-				msg.sendWarningMessage("'"+Command+"'"+"不是有效的ASMC命令");
+				//创建事件 - 未知命令
+				ASMC.getEventmanager().startUnknowCommandEvent(PreCommand);
 				continue;
-			}		
+			}
 
 
 			ce.setPreCommand(PreCommand);
-			
-//			//根据命令类型执行命令
-//			CT.ExecuteOfType(ce);
-			
-				
-			
+		
 			//创建事件
 			CommandEvent event=new CommandEvent(CT, ce);
 			

@@ -1,5 +1,7 @@
 package com.ksptooi.ASMC.Entity;
 
+import com.ksptooi.ASMC.Main.ASMC;
+
 public class CommandEntity {
 
 	private String PreCommand=null;
@@ -62,6 +64,30 @@ public class CommandEntity {
 		PreCommand = preCommand;
 	}
 	
+	//获取命令参数
+	public String[] getParameter(){
+		
+		String PerCommand = this.getPreCommand();
+		String[] parameter = null;
+		
+		//非空判断
+		if(PerCommand == null){
+			return null;
+		}
+		
+		try{
+			//获取命令参数
+			parameter = PerCommand.split(">")[1].split(",");
+		}catch(Exception e){
+			ASMC.getMessageManager().sendWarningMessage("此命令要求提供参数!");
+			return null;
+		}
+		
+
+		
+		return parameter;	
+		
+	}
 	
 	
 	

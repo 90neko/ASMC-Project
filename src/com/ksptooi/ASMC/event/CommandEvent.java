@@ -3,10 +3,9 @@ package com.ksptooi.ASMC.event;
 import com.ksptooi.ASMC.Command.Command_cmd;
 import com.ksptooi.ASMC.Entity.CommandEntity;
 
-public class CommandEvent {
+public class CommandEvent extends BasicEvent{
 
 	
-
 	private final String eventName = "CommandEvent";
 	
 	private CommandEntity commandEntity=null;

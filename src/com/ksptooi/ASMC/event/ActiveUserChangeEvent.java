@@ -2,7 +2,7 @@ package com.ksptooi.ASMC.event;
 
 import com.ksptooi.ASMC.Entity.UserEntity;
 
-public class ActiveUserChangeEvent {
+public class ActiveUserChangeEvent extends BasicEvent{
 
 	
 	
@@ -22,9 +22,6 @@ public class ActiveUserChangeEvent {
 		this.changeToUser=newUser;
 		
 	}
-	
-	
-	
 	
 	
 	

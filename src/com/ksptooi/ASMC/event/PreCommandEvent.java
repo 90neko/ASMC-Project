@@ -1,6 +1,6 @@
 package com.ksptooi.ASMC.event;
 
-public class PreCommandEvent {
+public class PreCommandEvent extends BasicEvent{
 	
 	
 
