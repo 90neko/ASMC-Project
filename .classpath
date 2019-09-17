@@ -3,7 +3,8 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="lib" path="Library/jansi-1.11.jar"/>
-	<classpathentry kind="lib" path="Library/GeneralDataCoreV5.1.jar"/>
 	<classpathentry kind="lib" path="Library/mysql-connector-java-8.0.11.jar"/>
+	<classpathentry kind="lib" path="Library/GeneralDataCoreV5.1.jar"/>
+	<classpathentry kind="lib" path="Library/GeneralDataCoreV6.28A.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
