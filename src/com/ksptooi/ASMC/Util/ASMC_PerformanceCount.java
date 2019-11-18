@@ -2,6 +2,8 @@ package com.ksptooi.ASMC.Util;
 
 import java.text.DecimalFormat;
 
+import com.ksptooi.ASMC.Main.ASMC;
+
 public class ASMC_PerformanceCount implements Runnable{
 
 	double time=0.0;
@@ -11,6 +13,9 @@ public class ASMC_PerformanceCount implements Runnable{
 	public ASMC_PerformanceCount(){
 		time=0.0;
 		TH=new Thread(this);	
+		
+		ASMC.getMessageManager().sendSysMessage("开始性能计数");
+		
 	}
 	
 	public void Timer(){

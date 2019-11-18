@@ -1,21 +1,34 @@
 package com.ksptooi.ASMC.Config;
 
-import com.ksptooi.ASMC.Entity.ConfigEntity;
+import java.io.File;
+
 import com.ksptooi.ASMC.Main.ASMC;
 import com.ksptooi.ASMC.Message.MessageManager;
 //import com.ksptooi.gdc.v5.Manager.IOController_V5;
 import com.ksptooi.gdc.FileAPI.IOController_V5;
 
+import uk.iksp.asmc.entity.config.ConfigEntity;
+import uk.iksp.v7.Factory.DataSessionFactory;
+import uk.iksp.v7.Session.DataSession;
+
 public class ConfigManager {
 
+	private final File configFile=new File("C:/asmc_core/asmc.conf");
+	
+	DataSessionFactory dataSessionFactory = null;
 	
 	IOController_V5 v5=null;
 	MessageManager msg=null;
 	
 	
+	
 	public ConfigManager(){
-		v5=new IOController_V5();
-		msg=new MessageManager();
+
+		this.msg=ASMC.getMessageManager();
+		this.dataSessionFactory=ASMC.getDataSessionFactory();
+		
+		msg.sendSysMessage("初始化内部组件 - 配置管理");
+		
 	}
 	
 	
@@ -23,47 +36,22 @@ public class ConfigManager {
 		
 		ConfigEntity ce=new ConfigEntity();
 		
-		msg.sendSysMessage("·从文件读取配置项.");
 		
-		v5.setTarget(ASMC.getMainConfigFile());
+		msg.sendSysMessage("·配置管理 - 读取配置项");
 		
-		this.CheckAndCreatorConfig();
 		
-		ce.setActiveAccount(v5.getKeyValue("ActiveAccount"));
-		
-		ce.setSql_URL(v5.getKeyValue("sql_URL"));
-		
-		ce.setSql_USER(v5.getKeyValue("sql_USER"));
-		
-		ce.setSql_PWD(v5.getKeyValue("sql_PWD"));
-		
-		ce.setTable_Command(v5.getKeyValue("Table_Command"));
-		
-		ce.setField_CommandType(v5.getKeyValue("Field_CommandType"));
-		
-		ce.setField_CommandName(v5.getKeyValue("Field_CommandName"));
-		
-		ce.setField_CommandPath(v5.getKeyValue("Field_CommandPath"));
-		
-		ce.setFiled_CommandTitle(v5.getKeyValue("Filed_CommandTitle"));
-		
-		ce.setFiled_CommandCreateAccount(v5.getKeyValue("Filed_CommandCreateAccount"));
+		this.createConfig();
 
-		ce.setTable_Account(v5.getKeyValue("Table_Account"));
 		
-		ce.setField_Account(v5.getKeyValue("Field_Account"));
+		try(DataSession ds=dataSessionFactory.openSession(configFile)){
+					
+			ce.setUrl(ds.get("url"));
+			ce.setUserName(ds.get("userName"));
+			ce.setPassWord(ds.get("passWord"));
+			ce.setPoolMaximumActiveConnections(ds.get("poolMaximumActiveConnections"));
+				
+		}
 		
-		ce.setField_Password(v5.getKeyValue("Field_Password"));
-		
-		ce.setField_AccountType(v5.getKeyValue("Field_AccountType"));
-		
-		ce.setField_AccountTitle(v5.getKeyValue("Field_AccountTitle"));
-		
-		ce.setTable_Main(v5.getKeyValue("Table_Main"));
-		
-		ce.setField_AQSCPAccount(v5.getKeyValue("Field_AQSCPAccount"));
-		
-		ce.setField_AQSCPPassword(v5.getKeyValue("Field_AQSCPPassword"));
 		
 		ASMC.setConfigEntity(ce);
 		
@@ -72,50 +60,42 @@ public class ConfigManager {
 	
 	
 	
-	public void CheckAndCreatorConfig(){
+	public void createConfig(){
 		
-		msg.sendSysMessage("·检查ASMC配置项");
-		
-		
-		v5.setTarget(ASMC.getMainConfigFile());
+		msg.sendSysMessage("·配置管理 - 检查配置项.");
 		
 		
-		if(v5.createNewGdcFile(ASMC.getMainConfigFile())){
+		
+		boolean isCreate=dataSessionFactory.createdata(configFile);
+		
+		
+		if(isCreate){
 			
-			msg.sendWarningMessage("·配置项不存在.");
-			msg.sendWarningMessage("·创建默认配置项");
+			msg.sendSysMessage("·配置管理 - 创建默认配置项.");
+			msg.sendSysMessage("·配置管理 - 写入配置项");
 			
-			v5.addLine("ActiveAccount=AQSCP");
+	
+			try(DataSession ds=dataSessionFactory.openSession(configFile)){
+						
+				
+				ds.put("url", "jdbc:mysql://127.0.0.1:3306/");
+				ds.put("userName", "root");
+				ds.put("passWord", "root");
+				ds.put("poolMaximumActiveConnections", "8");
+				
+			}
 			
-			v5.addLine("sql_URL=jdbc:sqlserver://127.0.0.1:1433;DatabaseName=AQSCP");
-			v5.addLine("sql_USER=sa");
-			v5.addLine("sql_PWD=sa");
-
 			
-			v5.addLine("Table_Command=Commands");
-			v5.addLine("Field_CommandType=Type");
-			v5.addLine("Field_CommandName=Name");
-			v5.addLine("Field_CommandPath=Path");
-			v5.addLine("Filed_CommandTitle=Title");
-			v5.addLine("Filed_CommandCreateAccount=CCA");
-			
-			v5.addLine("Table_Account=Account");
-			v5.addLine("Field_Account=Name");
-			v5.addLine("Field_Password=Password");
-			v5.addLine("Field_AccountType=Type");
-			v5.addLine("Field_AccountTitle=Title");
-			
-			v5.addLine("Table_Main=AQSCP");
-			v5.addLine("Field_AQSCPAccount=AQSCPAccount");
-			v5.addLine("Field_AQSCPPassword=AQSCPPassword");
-			
-			msg.sendWarningMessage("·ASMC配置项创建完成!");
-			return;
 		}
 		
 		
-		msg.sendWarningMessage("·ASMC配置项检查完成!");
+		msg.sendSysMessage("·配置管理 - 完成检查");
 		
+	}
+
+
+	public File getConfigFile() {
+		return configFile;
 	}
 	
 	

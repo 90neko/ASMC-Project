@@ -5,38 +5,34 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import com.ksptooi.ASMC.Config.ConfigManager;
-import com.ksptooi.ASMC.Data.CommandManager;
-import com.ksptooi.ASMC.Data.SqlManager;
-import com.ksptooi.ASMC.Entity.ConfigEntity;
 import com.ksptooi.ASMC.Message.MessageManager;
-import com.ksptooi.ASMC.Plugins.PluginsManager;
+import com.ksptooi.ASMC.PluginsManager.PluginsManager;
 import com.ksptooi.ASMC.Util.ASMC_PerformanceCount;
-import com.ksptooi.ASMC.Util.Var;
 import com.ksptooi.ASMC.auth.AuthManager;
 import com.ksptooi.ASMC.eventManager.EventManager;
-//import com.ksptooi.gdc.v5.Manager.IOController_V5;
 import com.ksptooi.gdc.FileAPI.IOController_V5;
-
+import uk.iksp.asmc.Mysql.MysqlServices;
+import uk.iksp.asmc.plugins.CorePluginManager;
+import uk.iksp.v7.Factory.DataSessionFactory;
+import uk.iksp.v7.FactoryBuilder.GeneralDataFactoryBuilder;
+import uk.iksp.asmc.command.services.CommandService;
+import uk.iksp.asmc.entity.config.ConfigEntity;
 
 
 public class ASMC {
-
-
+	
+	
 	private static ConfigEntity configEntity=null;
 	
-	private final static File mainConfigFile=new File("C:/ASMC/ASMC.Conf");
 	
-	private final static File mainPluginsFolder=new File("C:/ASMC/plugins/");
+	private final static File pluginFolder=new File("C:/asmc_core/plugins/");
 	
 	private final static IOController_V5 v5=new IOController_V5();
 	
-	private final static SqlManager sqlManager=new SqlManager();
 	
 	private final static MessageManager messageManager=new MessageManager();
 	
 	private final static CommandHandler ch=new CommandHandler();
-	
-	private static CommandManager cm=null;
 	
 	private static AuthManager authManager=null;
 
@@ -47,42 +43,54 @@ public class ASMC {
 	private final static EventManager eventManager=new EventManager();
 	
 	
+	private static DataSessionFactory dataSessionFactory = new DataSessionFactory(4);
+	
+	private static GeneralDataFactoryBuilder generalDataFactoryBuilder=new GeneralDataFactoryBuilder();
+	
+	private static MysqlServices mysqlSerices = null;
+	
+	private static ConfigManager configManager = null;
+	
+	private static CorePluginManager corePluginManager = null;
+	
+	private static CommandService commandService = null;
+	
+	public static final String ASMC_Version = "V4.05-E";
+	
 	
 	public static void main(String rk[]) throws IOException, InterruptedException{
 		
 		
 		MessageManager msg=new MessageManager();
 		
+		
+		msg.sendSysMessage("初始化内部组件");
+		
 		ASMC_PerformanceCount APC=new ASMC_PerformanceCount();
 		
-		ConfigManager CM=new ConfigManager();
 		
-		SqlManager sqlManager=ASMC.getSqlmanager();
-		 
 		
-		msg.sendSysMessage("ASMC 版本号:"+Var.ASMC_Version);
+		
+		msg.sendSysMessage("·Core 版本号:"+ASMC.ASMC_Version);
 		
 		//开始性能计数
 		APC.Timer();
 		
+		configManager = new ConfigManager();
+		
+		
 		//读配置文件
-		CM.ReadConfig();		
+		configManager.ReadConfig();		
 		
-		msg.sendWarningMessage("数据库状态:离线");
-		msg.sendSysMessage("正在连接至数据库");
-
-		authManager = new AuthManager();
+		mysqlSerices = new MysqlServices();
 		
-		sqlManager.Connect();
 		
-		if(!sqlManager.isActive()){
-			
-			msg.sendWarningMessage("数据库状态:连接失败");
-			System.exit(0);
-		}
+		//初始化插件
+		corePluginManager = new CorePluginManager();
 		
-		msg.sendSysMessage("等待数据库..");
-		msg.successMessage("数据库状态:在线");
+		//初始化命令服务
+		commandService = new CommandService();
+		
 		
 		//查找ASMC插件
 		ASMC.getPluginManager().SearchPlugins();
@@ -93,12 +101,10 @@ public class ASMC {
 		msg.sendWarningMessage("启动完成");
 		msg.sendWarningMessage("ASMC启动耗时:"+APC.StopTimer());
 		
-		authManager.setActiveUser(ASMC.getUserManager().getUser("user"));
+//		authManager.setActiveUser(ASMC.getUserManager().getUser("user"));
 		
-		cm=new CommandManager();
 		
 		ch.ExecuteCommand();
-		
 		
 	}
 
@@ -113,18 +119,7 @@ public class ASMC {
 	public static void setConfigEntity(ConfigEntity configEntity) {
 		ASMC.configEntity = configEntity;
 	}
-
-
-	public static File getMainConfigFile() {
-		return mainConfigFile;
-	}
-
-
-
-	public static SqlManager getSqlmanager() {
-		return sqlManager;
-	}
-
+	
 
 
 	public static MessageManager getMessageManager() {
@@ -132,10 +127,6 @@ public class ASMC {
 	}
 
 
-
-	public static CommandManager getCommandManager() {
-		return cm;
-	}
 
 
 
@@ -150,7 +141,7 @@ public class ASMC {
 
 
 	public static File getMainPluginsfolder() {
-		return mainPluginsFolder;
+		return pluginFolder;
 	}
 
 
@@ -175,6 +166,81 @@ public class ASMC {
 	
 	public static BufferedReader getBr() {
 		return br;
+	}
+
+
+
+
+
+
+	public static DataSessionFactory getDataSessionFactory() {
+		return dataSessionFactory;
+	}
+
+
+
+	public static void setDataSessionFactory(DataSessionFactory dataSessionFactory) {
+		ASMC.dataSessionFactory = dataSessionFactory;
+	}
+
+
+
+	public static MysqlServices getMysqlSerices() {
+		return mysqlSerices;
+	}
+
+
+
+	public static void setMysqlSerices(MysqlServices mysqlSerices) {
+		ASMC.mysqlSerices = mysqlSerices;
+	}
+
+
+
+	public static ConfigManager getConfigManager() {
+		return configManager;
+	}
+
+
+
+	public static void setConfigManager(ConfigManager configManager) {
+		ASMC.configManager = configManager;
+	}
+
+
+
+	public static CorePluginManager getCorePluginManager() {
+		return corePluginManager;
+	}
+
+
+
+	public static void setCorePluginManager(CorePluginManager corePluginManager) {
+		ASMC.corePluginManager = corePluginManager;
+	}
+
+
+
+	public static GeneralDataFactoryBuilder getGeneralDataFactoryBuilder() {
+		return generalDataFactoryBuilder;
+	}
+
+
+
+	public static void setGeneralDataFactoryBuilder(GeneralDataFactoryBuilder generalDataFactoryBuilder) {
+		ASMC.generalDataFactoryBuilder = generalDataFactoryBuilder;
+	}
+
+
+
+	public static CommandService getCommandService() {
+		return commandService;
+	}
+
+
+
+	public static void setCommandService(CommandService commandService) {
+		commandService = commandService;
 	}
 
 

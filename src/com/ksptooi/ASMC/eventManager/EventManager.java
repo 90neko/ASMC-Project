@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import com.ksptooi.ASMC.Main.ASMC;
 import com.ksptooi.ASMC.Message.MessageManager;
-import com.ksptooi.ASMC.Plugins.ASMCPlugin;
+import com.ksptooi.ASMC.PluginsManager.ASMCPlugin;
 import com.ksptooi.ASMC.event.ActiveUserChangeEvent;
 import com.ksptooi.ASMC.event.CommandEvent;
 import com.ksptooi.ASMC.event.PreCommandEvent;

@@ -7,8 +7,7 @@ import java.awt.datatransfer.Transferable;
 
 public class Var {
 	
-	public static final String ASMC_Version = "V3.35-D";
-	
+
 	
 	 public static void setClipboardString(String text) { 
 		 // 获取系统剪贴板 

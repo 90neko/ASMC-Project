@@ -1,7 +1,9 @@
 package com.ksptooi.ASMC.event;
 
-import com.ksptooi.ASMC.Command.Command_cmd;
-import com.ksptooi.ASMC.Entity.CommandEntity;
+
+
+import uk.iksp.asmc.command.type.Command_cmd;
+import uk.iksp.asmc.entity.command.CommandEntity;
 
 public class CommandEvent extends BasicEvent{
 

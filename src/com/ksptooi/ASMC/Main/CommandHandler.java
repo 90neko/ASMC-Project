@@ -2,12 +2,11 @@ package com.ksptooi.ASMC.Main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
-import com.ksptooi.ASMC.Command.CommandTools;
-import com.ksptooi.ASMC.Command.Command_cmd;
-import com.ksptooi.ASMC.Data.CommandManager;
-import com.ksptooi.ASMC.Entity.CommandEntity;
 import com.ksptooi.ASMC.event.CommandEvent;
+import uk.iksp.asmc.command.services.CommandService;
+import uk.iksp.asmc.command.services.CommandTools;
+import uk.iksp.asmc.command.type.Command_cmd;
+import uk.iksp.asmc.entity.command.CommandEntity;
 
 public class CommandHandler{
 	
@@ -19,14 +18,14 @@ public class CommandHandler{
 		
 		
 		BufferedReader br=ASMC.getBr();
-		CommandManager cm=ASMC.getCommandManager();
+		
+		CommandService service = ASMC.getCommandService();
 		
 		while(true){
 			
-			
 			System.out.println("");
 			
-			System.out.print("ASMC@"+ASMC.getUserManager().getActiveUser().getAccount()+":");
+//			System.out.print("ASMC@"+ASMC.getUserManager().getActiveUser().getAccount()+":");
 			
 			String PreCommand=br.readLine();
 			
@@ -58,7 +57,7 @@ public class CommandHandler{
 			
 						
 			//检查命令是否存在
-			if(!cm.isExistsCmd(Command)){
+			if(!service.isExistsCommand(Command)){
 				
 				//创建事件 - 未知命令
 				ASMC.getEventmanager().startUnknowCommandEvent(PreCommand);
@@ -66,11 +65,11 @@ public class CommandHandler{
 				continue;
 			}
 			
-			ce=cm.getCommandByName(Command);
+			ce=service.getCommand(Command);
 			
 			
 			//查询命令类型
-			Command_cmd CT= CommandTools.getType(ce.getType());
+			Command_cmd CT= CommandTools.getType(ce.getCm_Type());
 
 			
 			if(CT == null){

@@ -1,6 +1,6 @@
 package com.ksptooi.ASMC.event;
 
-import com.ksptooi.ASMC.Entity.UserEntity;
+import uk.iksp.asmc.entity.user.UserEntity;
 
 public class ActiveUserChangeEvent extends BasicEvent{
 

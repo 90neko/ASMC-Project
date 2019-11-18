@@ -6,5 +6,6 @@
 	<classpathentry kind="lib" path="Library/mysql-connector-java-8.0.11.jar"/>
 	<classpathentry kind="lib" path="Library/GeneralDataCoreV5.1.jar"/>
 	<classpathentry kind="lib" path="Library/GeneralDataCoreV6.28A.jar"/>
+	<classpathentry kind="lib" path="lib/GeneralDataCoreV7.19P.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
