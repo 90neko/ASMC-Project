@@ -1,4 +1,4 @@
-package uk.iksp.asmc.plugins;
+package uk.iksp.asmc.plugins.manager;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -9,6 +9,9 @@ import com.ksptooi.ASMC.Message.MessageManager;
 import uk.iksp.asmc.command.type.Command_cmd;
 import uk.iksp.asmc.entity.plugins.AsmcPlugin;
 import uk.iksp.asmc.entity.plugins.LoadedAsmcPlugin;
+import uk.iksp.asmc.plugin.loader.PluginClassLoader;
+import uk.iksp.asmc.plugin.loader.PluginLoader;
+import uk.iksp.asmc.plugin.loader.PluginSearch;
 import uk.iksp.asmc.plugins.type.ASMCPlugin;
 
 public class CorePluginManager{
@@ -19,21 +22,24 @@ public class CorePluginManager{
 	
 	private final File pluginFolder=new File("C:/asmc_core/plugins/");
 	
+	
+	//插件搜索器
 	private PluginSearch pluginSearch = null;
+	//插件加载器
+	private PluginLoader pluginLoader = null;
 	
 	
 	//已注册的插件列表
-	private ArrayList<LoadedAsmcPlugin> loadedPlugin = new ArrayList<LoadedAsmcPlugin>();
+	ArrayList<LoadedAsmcPlugin> loadedPlugin = new ArrayList<LoadedAsmcPlugin>();
 	
 	
 	//已注册的命令类型Map (命令类型名 || 命令类型实例)
-	private HashMap<String,Command_cmd> regCommandTypeMap=new HashMap<String,Command_cmd>();
+	HashMap<String,Command_cmd> regCommandTypeMap=new HashMap<String,Command_cmd>();
 	
 	//已注册的命令列表
 	ArrayList<String> regCommandNameList=new ArrayList<String>();
 	
 	
-	PluginClassLoader loader = null;
 	
 	/**
 	 * 插件管理器
@@ -43,7 +49,7 @@ public class CorePluginManager{
 		msg.sendSysMessage("初始化内部组件 - ASMC插件管理");
 		
 		this.pluginSearch = new PluginSearch();
-		
+		this.pluginLoader = new PluginLoader();
 	}
 	
 	
@@ -52,17 +58,23 @@ public class CorePluginManager{
 	 */
 	public void loadAllPlugin(){
 		
+		
+		
 		//搜索插件
 		ArrayList<AsmcPlugin> pluginList = this.pluginSearch.searchPlugins(pluginFolder);
 		
 		//加载插件
 		for(AsmcPlugin plugin:pluginList){
 			
-			LoadedAsmcPlugin lap = this.loadPlugin(plugin);
 			
-			this.loadedPlugin.add(lap);
+			msg.sendSysMessage("·ASMC插件加载器 - 加载:"+plugin.getName());
 			
-			System.out.println("1234");
+			LoadedAsmcPlugin lap = this.pluginLoader.loadPlugin(plugin);
+			
+			loadedPlugin.add(lap);
+			
+			//执行插件onEnable方法
+			lap.getAsmcPlugin().onEnable();
 			
 		}	
 		
@@ -130,33 +142,6 @@ public class CorePluginManager{
 	}
 	
 	
-	/**
-	 * 加载插件
-	 */
-	public LoadedAsmcPlugin loadPlugin(AsmcPlugin plugin){
-		
-		msg.sendSysMessage("·ASMC插件加载器 - 加载:"+plugin.getName());
-		
-		loader = new PluginClassLoader(plugin.getFile());
-		
-		
-		
-		LoadedAsmcPlugin lap=new LoadedAsmcPlugin();
-		
-		lap.setAsmcPlugin((ASMCPlugin)loader.loadClass(plugin.getMainClass()));
-		lap.setName(plugin.getName());
-		lap.setFile(plugin.getFile());
-		lap.setMainClass(plugin.getMainClass());
-		
-		//设置插件名
-		lap.getAsmcPlugin().setPluginName(plugin.getName());
-		
-		//执行插件的onEnable
-		lap.getAsmcPlugin().onEnable();
-		
-		
-		return lap;
-	}
 	
 	
 	

@@ -8,13 +8,14 @@ import com.ksptooi.ASMC.Config.ConfigManager;
 import com.ksptooi.ASMC.Message.MessageManager;
 import com.ksptooi.ASMC.Util.ASMC_PerformanceCount;
 import com.ksptooi.ASMC.auth.AuthManager;
-import uk.iksp.asmc.Mysql.MysqlServices;
-import uk.iksp.asmc.plugins.CorePluginManager;
+
 import uk.iksp.v7.Factory.DataSessionFactory;
 import uk.iksp.v7.FactoryBuilder.GeneralDataFactoryBuilder;
 import uk.iksp.asmc.command.services.CommandService;
 import uk.iksp.asmc.entity.config.ConfigEntity;
 import uk.iksp.asmc.event.manager.EventManager;
+import uk.iksp.asmc.mysql.MysqlServices;
+import uk.iksp.asmc.plugins.manager.CorePluginManager;
 
 
 public class ASMC {
@@ -46,7 +47,7 @@ public class ASMC {
 	
 	private static CommandService commandService = null;
 	
-	public static final String ASMC_Version = "V4.05-F";
+	public static final String ASMC_Version = "V4.05-G";
 	
 	public static void main(String rk[]) throws IOException, InterruptedException{
 		

@@ -1,4 +1,4 @@
-package uk.iksp.asmc.Mysql;
+package uk.iksp.asmc.mysql;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 

@@ -1,4 +1,4 @@
-package uk.iksp.asmc.plugins;
+package uk.iksp.asmc.plugin.loader;
 
 import java.io.File;
 import java.io.InputStream;
