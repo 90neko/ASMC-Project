@@ -2,11 +2,12 @@ package com.ksptooi.ASMC.Main;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import com.ksptooi.ASMC.event.CommandEvent;
+
 import uk.iksp.asmc.command.services.CommandService;
 import uk.iksp.asmc.command.services.CommandTools;
 import uk.iksp.asmc.command.type.Command_cmd;
 import uk.iksp.asmc.entity.command.CommandEntity;
+import uk.iksp.asmc.event.type.CommandEvent;
 
 public class CommandHandler{
 	
@@ -86,7 +87,6 @@ public class CommandHandler{
 			
 			//执行事件
 			ASMC.getEventmanager().startCommandEvent(event);
-
 			
 		}
 			

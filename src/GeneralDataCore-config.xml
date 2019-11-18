@@ -26,7 +26,7 @@
   
    <!-- 映射器文件地址 --> 
   <mappers>
-    <mapper resource="uk/iksp/asmc/Mysql/Inteface/CommandMapper.xml"></mapper> 
+    <mapper resource="uk/iksp/asmc/command/Inteface/CommandMapper.xml"></mapper> 
   </mappers>
   
 </configuration>

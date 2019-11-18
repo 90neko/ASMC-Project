@@ -22,7 +22,7 @@ public class PluginSearch{
 	
 	public PluginSearch(){
 		
-		msg.sendSysMessage("·初始化内部组件 - ASMC插件搜索 ");
+		msg.sendSysMessage("初始化内部组件 - ASMC插件搜索 ");
 		
 	}
 	

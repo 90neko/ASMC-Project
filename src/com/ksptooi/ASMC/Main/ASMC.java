@@ -6,17 +6,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import com.ksptooi.ASMC.Config.ConfigManager;
 import com.ksptooi.ASMC.Message.MessageManager;
-import com.ksptooi.ASMC.PluginsManager.PluginsManager;
 import com.ksptooi.ASMC.Util.ASMC_PerformanceCount;
 import com.ksptooi.ASMC.auth.AuthManager;
-import com.ksptooi.ASMC.eventManager.EventManager;
-import com.ksptooi.gdc.FileAPI.IOController_V5;
 import uk.iksp.asmc.Mysql.MysqlServices;
 import uk.iksp.asmc.plugins.CorePluginManager;
 import uk.iksp.v7.Factory.DataSessionFactory;
 import uk.iksp.v7.FactoryBuilder.GeneralDataFactoryBuilder;
 import uk.iksp.asmc.command.services.CommandService;
 import uk.iksp.asmc.entity.config.ConfigEntity;
+import uk.iksp.asmc.event.manager.EventManager;
 
 
 public class ASMC {
@@ -24,11 +22,7 @@ public class ASMC {
 	
 	private static ConfigEntity configEntity=null;
 	
-	
 	private final static File pluginFolder=new File("C:/asmc_core/plugins/");
-	
-	private final static IOController_V5 v5=new IOController_V5();
-	
 	
 	private final static MessageManager messageManager=new MessageManager();
 	
@@ -36,12 +30,9 @@ public class ASMC {
 	
 	private static AuthManager authManager=null;
 
-	private static PluginsManager pluginManager=new PluginsManager();
-	
 	private static final BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 	
 	private final static EventManager eventManager=new EventManager();
-	
 	
 	private static DataSessionFactory dataSessionFactory = new DataSessionFactory(4);
 	
@@ -55,7 +46,7 @@ public class ASMC {
 	
 	private static CommandService commandService = null;
 	
-	public static final String ASMC_Version = "V4.05-E";
+	public static final String ASMC_Version = "V4.05-F";
 	
 	
 	public static void main(String rk[]) throws IOException, InterruptedException{
@@ -92,17 +83,14 @@ public class ASMC {
 		commandService = new CommandService();
 		
 		
-		//查找ASMC插件
-		ASMC.getPluginManager().SearchPlugins();
+		//加载ASMC插件
+		ASMC.getCorePluginManager().loadAllPlugin();
 		
-		//加载
-		ASMC.getPluginManager().LoadAllPlugins();
 		
 		msg.sendWarningMessage("启动完成");
 		msg.sendWarningMessage("ASMC启动耗时:"+APC.StopTimer());
 		
 //		authManager.setActiveUser(ASMC.getUserManager().getUser("user"));
-		
 		
 		ch.ExecuteCommand();
 		
@@ -134,28 +122,13 @@ public class ASMC {
 		return authManager;
 	}
 	
-	public static IOController_V5 getV5(){
-		return v5;
-	}
+
 
 
 
 	public static File getMainPluginsfolder() {
 		return pluginFolder;
 	}
-
-
-
-	public static PluginsManager getPluginManager() {
-		return pluginManager;
-	}
-
-
-
-	public static void setPluginManager(PluginsManager pluginManager) {
-		ASMC.pluginManager = pluginManager;
-	}
-
 
 
 
@@ -235,12 +208,6 @@ public class ASMC {
 
 	public static CommandService getCommandService() {
 		return commandService;
-	}
-
-
-
-	public static void setCommandService(CommandService commandService) {
-		commandService = commandService;
 	}
 
 

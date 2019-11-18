@@ -4,9 +4,6 @@ import java.io.File;
 
 import com.ksptooi.ASMC.Main.ASMC;
 import com.ksptooi.ASMC.Message.MessageManager;
-//import com.ksptooi.gdc.v5.Manager.IOController_V5;
-import com.ksptooi.gdc.FileAPI.IOController_V5;
-
 import uk.iksp.asmc.entity.config.ConfigEntity;
 import uk.iksp.v7.Factory.DataSessionFactory;
 import uk.iksp.v7.Session.DataSession;
@@ -17,7 +14,6 @@ public class ConfigManager {
 	
 	DataSessionFactory dataSessionFactory = null;
 	
-	IOController_V5 v5=null;
 	MessageManager msg=null;
 	
 	

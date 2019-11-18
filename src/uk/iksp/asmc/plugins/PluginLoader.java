@@ -2,10 +2,9 @@ package uk.iksp.asmc.plugins;
 
 import com.ksptooi.ASMC.Main.ASMC;
 import com.ksptooi.ASMC.Message.MessageManager;
-import com.ksptooi.ASMC.PluginsManager.ASMCPlugin;
 
 import uk.iksp.asmc.plugins.PluginClassLoader;
-
+import uk.iksp.asmc.plugins.type.ASMCPlugin;
 import uk.iksp.asmc.entity.plugins.AsmcPlugin;
 import uk.iksp.asmc.entity.plugins.LoadedAsmcPlugin;
 
@@ -17,7 +16,7 @@ public class PluginLoader{
 	 * 插件加载器
 	 */
 	public PluginLoader(){
-		msg.sendSysMessage("·初始化内部组件 - ASMC插件加载器");
+		msg.sendSysMessage("初始化内部组件 - ASMC插件加载器");
 	}
 	
 	/**

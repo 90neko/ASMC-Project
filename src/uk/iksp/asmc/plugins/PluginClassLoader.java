@@ -4,17 +4,21 @@ import java.io.File;
 import java.net.URL;
 import java.net.URLClassLoader;
 
+import com.ksptooi.ASMC.Main.ASMC;
+import com.ksptooi.ASMC.Message.MessageManager;
+
 import sun.misc.ClassLoaderUtil;
 
 public class PluginClassLoader {
 
-	
+	private MessageManager msg = ASMC.getMessageManager();
 	
 	private URLClassLoader classLoader;
 	
 
     public PluginClassLoader(File file){  
     	
+    	msg.sendSysMessage("初始化内部组件 - ASMC类加载器");
     	
     	URL url;
 		try {

@@ -6,12 +6,10 @@ import java.util.HashMap;
 
 import com.ksptooi.ASMC.Main.ASMC;
 import com.ksptooi.ASMC.Message.MessageManager;
-import com.ksptooi.ASMC.PluginsManager.ASMCPlugin;
-import com.ksptooi.ASMC.PluginsManager.PluginClassLoader;
-
 import uk.iksp.asmc.command.type.Command_cmd;
 import uk.iksp.asmc.entity.plugins.AsmcPlugin;
 import uk.iksp.asmc.entity.plugins.LoadedAsmcPlugin;
+import uk.iksp.asmc.plugins.type.ASMCPlugin;
 
 public class CorePluginManager {
 
@@ -39,7 +37,7 @@ public class CorePluginManager {
 	 */
 	public CorePluginManager(){
 		
-		msg.sendSysMessage("·初始化内部组件 - ASMC插件管理");
+		msg.sendSysMessage("初始化内部组件 - ASMC插件管理");
 		
 		this.pluginSearch = new PluginSearch();
 		this.pluginLoader = new PluginLoader();
@@ -144,6 +142,16 @@ public class CorePluginManager {
 
 	public void setPluginSearch(PluginSearch pluginSearch) {
 		this.pluginSearch = pluginSearch;
+	}
+
+
+	public HashMap<String, Command_cmd> getRegCommandTypeMap() {
+		return regCommandTypeMap;
+	}
+
+
+	public void setRegCommandTypeMap(HashMap<String, Command_cmd> regCommandTypeMap) {
+		this.regCommandTypeMap = regCommandTypeMap;
 	}
 	
 	

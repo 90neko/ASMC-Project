@@ -8,7 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import com.ksptooi.ASMC.Main.ASMC;
 import com.ksptooi.ASMC.Message.MessageManager;
 
-import uk.iksp.asmc.Mysql.Inteface.CommandData;
+import uk.iksp.asmc.command.Inteface.CommandData;
 import uk.iksp.asmc.entity.command.CommandEntity;
 
 public class CommandService {

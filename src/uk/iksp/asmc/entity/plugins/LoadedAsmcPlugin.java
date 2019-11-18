@@ -2,7 +2,7 @@ package uk.iksp.asmc.entity.plugins;
 
 import java.util.ArrayList;
 
-import com.ksptooi.ASMC.PluginsManager.ASMCPlugin;
+import uk.iksp.asmc.plugins.type.ASMCPlugin;
 
 public class LoadedAsmcPlugin extends AsmcPlugin{
 

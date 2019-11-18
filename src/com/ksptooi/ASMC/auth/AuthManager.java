@@ -3,10 +3,10 @@ package com.ksptooi.ASMC.auth;
 import com.ksptooi.ASMC.Main.ASMC;
 import com.ksptooi.ASMC.Message.MessageManager;
 import com.ksptooi.ASMC.Util.AdvHash;
-import com.ksptooi.ASMC.event.ActiveUserChangeEvent;
 
 import uk.iksp.asmc.entity.command.CommandEntity;
 import uk.iksp.asmc.entity.user.UserEntity;
+import uk.iksp.asmc.event.type.ActiveUserChangeEvent;
 
 public class AuthManager {
 

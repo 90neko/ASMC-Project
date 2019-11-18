@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="uk.iksp.asmc.command.Inteface.CommandData"> 
+
+
+
+	<!-- 根据命令名查询命令 -->
+	<select id="queryCommandByName" parameterType="String" resultType="Command">
+		select * from asmc_commands where cm_Name=#{0}
+	</select>
+
+		
+	<!-- 查询所有命令 -->
+	<select id="queryCommand" resultType="Command">
+		select * from asmc_commands
+	</select>
+	
+	<!-- 添加一个命令 -->
+	<select id="addCommand" parameterType="Command">
+		insert into asmc_commands values(0,#{cm_Name},#{cm_Type},#{cm_Path},#{cm_File},#{cm_Title},#{cm_CCA})
+	</select>
+	
+	<!-- 删除一个命令 -->
+	<select id="delCommand" parameterType="String">
+		delete from asmc_commands where cm_name=#{0}
+	</select>
+	
+  
+</mapper>
