@@ -32,8 +32,23 @@ public class PluginClassLoader {
 			e.printStackTrace();
 		}
     	
+    }
+    
+    public void setFile(File file){
     	
-    }  
+    	URL url;
+		try {
+			
+			
+			url = file.toURI().toURL();
+			classLoader = new URLClassLoader(new URL[]{url});
+	
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+    	
+    }
      
    
    

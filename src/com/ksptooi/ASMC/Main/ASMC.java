@@ -48,7 +48,6 @@ public class ASMC {
 	
 	public static final String ASMC_Version = "V4.05-F";
 	
-	
 	public static void main(String rk[]) throws IOException, InterruptedException{
 		
 		

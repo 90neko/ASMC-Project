@@ -11,26 +11,29 @@ import uk.iksp.asmc.entity.plugins.AsmcPlugin;
 import uk.iksp.asmc.entity.plugins.LoadedAsmcPlugin;
 import uk.iksp.asmc.plugins.type.ASMCPlugin;
 
-public class CorePluginManager {
-
+public class CorePluginManager{
 	
+	
+
 	private MessageManager msg = ASMC.getMessageManager();
 	
 	private final File pluginFolder=new File("C:/asmc_core/plugins/");
 	
 	private PluginSearch pluginSearch = null;
 	
-	private PluginLoader pluginLoader = null;
-	
 	
 	//已注册的插件列表
 	private ArrayList<LoadedAsmcPlugin> loadedPlugin = new ArrayList<LoadedAsmcPlugin>();
+	
 	
 	//已注册的命令类型Map (命令类型名 || 命令类型实例)
 	private HashMap<String,Command_cmd> regCommandTypeMap=new HashMap<String,Command_cmd>();
 	
 	//已注册的命令列表
 	ArrayList<String> regCommandNameList=new ArrayList<String>();
+	
+	
+	PluginClassLoader loader = null;
 	
 	/**
 	 * 插件管理器
@@ -40,7 +43,6 @@ public class CorePluginManager {
 		msg.sendSysMessage("初始化内部组件 - ASMC插件管理");
 		
 		this.pluginSearch = new PluginSearch();
-		this.pluginLoader = new PluginLoader();
 		
 	}
 	
@@ -56,10 +58,14 @@ public class CorePluginManager {
 		//加载插件
 		for(AsmcPlugin plugin:pluginList){
 			
-			LoadedAsmcPlugin lap = this.pluginLoader.loadPlugin(plugin);
-			loadedPlugin.add(lap);
+			LoadedAsmcPlugin lap = this.loadPlugin(plugin);
+			
+			this.loadedPlugin.add(lap);
+			
+			System.out.println("1234");
 			
 		}	
+		
 		
 	}
 	
@@ -123,6 +129,34 @@ public class CorePluginManager {
 		return getLoadedPlugin(plugin.getPluginName());	
 	}
 	
+	
+	/**
+	 * 加载插件
+	 */
+	public LoadedAsmcPlugin loadPlugin(AsmcPlugin plugin){
+		
+		msg.sendSysMessage("·ASMC插件加载器 - 加载:"+plugin.getName());
+		
+		loader = new PluginClassLoader(plugin.getFile());
+		
+		
+		
+		LoadedAsmcPlugin lap=new LoadedAsmcPlugin();
+		
+		lap.setAsmcPlugin((ASMCPlugin)loader.loadClass(plugin.getMainClass()));
+		lap.setName(plugin.getName());
+		lap.setFile(plugin.getFile());
+		lap.setMainClass(plugin.getMainClass());
+		
+		//设置插件名
+		lap.getAsmcPlugin().setPluginName(plugin.getName());
+		
+		//执行插件的onEnable
+		lap.getAsmcPlugin().onEnable();
+		
+		
+		return lap;
+	}
 	
 	
 	
