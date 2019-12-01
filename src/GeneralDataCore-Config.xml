@@ -7,6 +7,7 @@
   <!-- 配置类型的别名 --> 
   <typeAliases>
     <typeAlias alias="Command" type="uk.iksp.asmc.entity.command.CommandEntity" /> 
+    <typeAlias alias="User" type="uk.iksp.asmc.entity.user.UserEntity"/>
   </typeAliases>
   
   
@@ -26,7 +27,8 @@
   
    <!-- 映射器文件地址 --> 
   <mappers>
-    <mapper resource="uk/iksp/asmc/command/Inteface/CommandMapper.xml"></mapper> 
+    <mapper resource="uk/iksp/asmc/inteface/command/CommandMapper.xml"></mapper> 
+    <mapper resource="uk/iksp/asmc/inteface/user/UserMapper.xml"/>
   </mappers>
   
 </configuration>

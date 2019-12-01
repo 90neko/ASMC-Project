@@ -5,6 +5,7 @@ public abstract class ASMCPlugin{
 
 	private String PluginName="General ASMC Plugins";
 
+	
 	private boolean issetPluginName=false;
 	
 	

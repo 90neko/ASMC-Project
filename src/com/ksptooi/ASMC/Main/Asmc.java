@@ -7,18 +7,19 @@ import java.io.InputStreamReader;
 import com.ksptooi.ASMC.Config.ConfigManager;
 import com.ksptooi.ASMC.Message.MessageManager;
 import com.ksptooi.ASMC.Util.ASMC_PerformanceCount;
-import com.ksptooi.ASMC.auth.AuthManager;
-
-import uk.iksp.v7.Factory.DataSessionFactory;
-import uk.iksp.v7.FactoryBuilder.GeneralDataFactoryBuilder;
+import uk.iksp.asmc.command.handler.CommandHandler;
 import uk.iksp.asmc.command.services.CommandService;
 import uk.iksp.asmc.entity.config.ConfigEntity;
+import uk.iksp.asmc.event.manager.EventCreate;
 import uk.iksp.asmc.event.manager.EventManager;
 import uk.iksp.asmc.mysql.MysqlServices;
 import uk.iksp.asmc.plugins.manager.CorePluginManager;
+import uk.iksp.asmc.user.service.UserService;
+import uk.iksp.v7.Factory.DataSessionFactory;
+import uk.iksp.v7.FactoryBuilder.GeneralDataFactoryBuilder;
 
 
-public class ASMC {
+public class Asmc {
 	
 	
 	private static ConfigEntity configEntity=null;
@@ -28,12 +29,10 @@ public class ASMC {
 	private final static MessageManager messageManager=new MessageManager();
 	
 	private final static CommandHandler ch=new CommandHandler();
-	
-	private static AuthManager authManager=null;
 
 	private static final BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 	
-	private final static EventManager eventManager=new EventManager();
+	private static EventManager eventManager=null;
 	
 	private static DataSessionFactory dataSessionFactory = new DataSessionFactory(4);
 	
@@ -47,34 +46,31 @@ public class ASMC {
 	
 	private static CommandService commandService = null;
 	
-	public static final String ASMC_Version = "V4.05-G";
+	private static EventCreate eventCreate = null;
+	
+	private static UserService userService =null;
+	
+	public static final String asmc_Version = "V4.21-P";
 	
 	public static void main(String rk[]) throws IOException, InterruptedException{
 		
-		
 		MessageManager msg=new MessageManager();
-		
 		
 		msg.sendSysMessage("初始化内部组件");
 		
 		ASMC_PerformanceCount APC=new ASMC_PerformanceCount();
 		
-		
-		
-		
-		msg.sendSysMessage("·Core 版本号:"+ASMC.ASMC_Version);
+		msg.sendSysMessage("·Core 版本号:"+Asmc.asmc_Version);
 		
 		//开始性能计数
 		APC.Timer();
 		
-		configManager = new ConfigManager();
-		
+		configManager = new ConfigManager();	
 		
 		//读配置文件
 		configManager.ReadConfig();		
 		
-		mysqlSerices = new MysqlServices();
-		
+		mysqlSerices = new MysqlServices();	
 		
 		//初始化插件
 		corePluginManager = new CorePluginManager();
@@ -82,15 +78,20 @@ public class ASMC {
 		//初始化命令服务
 		commandService = new CommandService();
 		
+		eventManager = new EventManager();
+		
+		eventCreate = new EventCreate();
+		
+		userService = new UserService();
 		
 		//加载ASMC插件
-		ASMC.getCorePluginManager().loadAllPlugin();
-		
+		Asmc.getCorePluginManager().loadAllPlugin();
 		
 		msg.sendWarningMessage("启动完成");
 		msg.sendWarningMessage("ASMC启动耗时:"+APC.StopTimer());
 		
-//		authManager.setActiveUser(ASMC.getUserManager().getUser("user"));
+		//切换用户	
+		userService.changeActiveUser(userService.getUser("user"));
 		
 		ch.ExecuteCommand();
 		
@@ -105,7 +106,7 @@ public class ASMC {
 
 
 	public static void setConfigEntity(ConfigEntity configEntity) {
-		ASMC.configEntity = configEntity;
+		Asmc.configEntity = configEntity;
 	}
 	
 
@@ -113,16 +114,6 @@ public class ASMC {
 	public static MessageManager getMessageManager() {
 		return messageManager;
 	}
-
-
-
-
-
-	public static AuthManager getUserManager() {
-		return authManager;
-	}
-	
-
 
 
 
@@ -137,25 +128,18 @@ public class ASMC {
 	}
 
 	
-	public static BufferedReader getBr() {
+	public static BufferedReader getConsoleInput() {
 		return br;
 	}
-
-
-
-
-
-
+	
 	public static DataSessionFactory getDataSessionFactory() {
 		return dataSessionFactory;
 	}
 
 
-
 	public static void setDataSessionFactory(DataSessionFactory dataSessionFactory) {
-		ASMC.dataSessionFactory = dataSessionFactory;
+		Asmc.dataSessionFactory = dataSessionFactory;
 	}
-
 
 
 	public static MysqlServices getMysqlSerices() {
@@ -165,7 +149,7 @@ public class ASMC {
 
 
 	public static void setMysqlSerices(MysqlServices mysqlSerices) {
-		ASMC.mysqlSerices = mysqlSerices;
+		Asmc.mysqlSerices = mysqlSerices;
 	}
 
 
@@ -177,7 +161,7 @@ public class ASMC {
 
 
 	public static void setConfigManager(ConfigManager configManager) {
-		ASMC.configManager = configManager;
+		Asmc.configManager = configManager;
 	}
 
 
@@ -189,7 +173,7 @@ public class ASMC {
 
 
 	public static void setCorePluginManager(CorePluginManager corePluginManager) {
-		ASMC.corePluginManager = corePluginManager;
+		Asmc.corePluginManager = corePluginManager;
 	}
 
 
@@ -201,13 +185,37 @@ public class ASMC {
 
 
 	public static void setGeneralDataFactoryBuilder(GeneralDataFactoryBuilder generalDataFactoryBuilder) {
-		ASMC.generalDataFactoryBuilder = generalDataFactoryBuilder;
+		Asmc.generalDataFactoryBuilder = generalDataFactoryBuilder;
 	}
 
 
 
 	public static CommandService getCommandService() {
 		return commandService;
+	}
+
+
+
+	public static EventCreate getEventCreate() {
+		return eventCreate;
+	}
+
+
+
+	public static void setEventCreate(EventCreate eventCreate) {
+		Asmc.eventCreate = eventCreate;
+	}
+
+
+
+	public static UserService getUserService() {
+		return userService;
+	}
+
+
+
+	public static void setUserService(UserService userService) {
+		Asmc.userService = userService;
 	}
 
 

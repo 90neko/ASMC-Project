@@ -5,17 +5,21 @@ import java.util.ArrayList;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import com.ksptooi.ASMC.Main.ASMC;
+import com.ksptooi.ASMC.Main.Asmc;
 import com.ksptooi.ASMC.Message.MessageManager;
 
-import uk.iksp.asmc.command.Inteface.CommandData;
+import uk.iksp.asmc.command.exception.UnknowCommandTypeException;
+import uk.iksp.asmc.command.type.Command_cmd;
+import uk.iksp.asmc.entity.command.AsmcCommand;
 import uk.iksp.asmc.entity.command.CommandEntity;
+import uk.iksp.asmc.entity.command.InputCommand;
+import uk.iksp.asmc.inteface.command.CommandData;
 
 public class CommandService {
 
-	private MessageManager msg = ASMC.getMessageManager();
+	private MessageManager msg = Asmc.getMessageManager();
 	
-	private SqlSessionFactory ssf= ASMC.getMysqlSerices().getSqlSessionFactory();
+	private SqlSessionFactory ssf= Asmc.getMysqlSerices().getSqlSessionFactory();
 	
 	
 	public CommandService(){
@@ -60,6 +64,27 @@ public class CommandService {
 			
 	}
 	
+	//从数据库获取命令
+	public CommandEntity getCommand(InputCommand ic){
+		return this.getCommand(ic.getName());
+	}
+	
+	
+	//获取Asmc命令
+	public AsmcCommand getAsmcCommand(InputCommand ic) throws UnknowCommandTypeException{
+		
+		CommandEntity commandEntity = this.getCommand(ic);
+
+		Command_cmd commandType = CommandTools.getType(commandEntity.getCm_Type());
+		
+		AsmcCommand asmcCommand = commandEntity.getAsmcCommand(commandType);
+		
+		asmcCommand.setInputCommand(ic);
+		
+		return asmcCommand;
+	}
+	
+	
 	//查询所有命令
 	public ArrayList<CommandEntity> getAllCommand(){
 		
@@ -75,7 +100,10 @@ public class CommandService {
 	
 	//添加命令
 	public void addCommand(CommandEntity ce){
-			
+		
+		
+		
+		
 		try(SqlSession ss = ssf.openSession(true)){
 			
 			CommandData map = ss.getMapper(CommandData.class);

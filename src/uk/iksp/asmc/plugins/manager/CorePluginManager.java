@@ -4,7 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.ksptooi.ASMC.Main.ASMC;
+import com.ksptooi.ASMC.Main.Asmc;
 import com.ksptooi.ASMC.Message.MessageManager;
 import uk.iksp.asmc.command.type.Command_cmd;
 import uk.iksp.asmc.entity.plugins.AsmcPlugin;
@@ -18,7 +18,7 @@ public class CorePluginManager{
 	
 	
 
-	private MessageManager msg = ASMC.getMessageManager();
+	private MessageManager msg = Asmc.getMessageManager();
 	
 	private final File pluginFolder=new File("C:/asmc_core/plugins/");
 	
@@ -74,9 +74,15 @@ public class CorePluginManager{
 			loadedPlugin.add(lap);
 			
 			//执行插件onEnable方法
-			lap.getAsmcPlugin().onEnable();
+			
 			
 		}	
+		
+		//执行插件的onEnable方法
+		for(LoadedAsmcPlugin lap:this.loadedPlugin){
+			lap.getAsmcPlugin().onEnable();
+		}
+		
 		
 		
 	}
@@ -110,6 +116,8 @@ public class CorePluginManager{
 		lap.getCommands().add(commandName);
 		this.regCommandNameList.add(commandName);
 		this.regCommandTypeMap.put(commandName, CE);
+		
+		msg.sendSysMessage("注册命令"+commandName);
 		
 	}
 	

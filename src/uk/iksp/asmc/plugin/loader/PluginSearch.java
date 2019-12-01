@@ -4,7 +4,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
-import com.ksptooi.ASMC.Main.ASMC;
+import com.ksptooi.ASMC.Main.Asmc;
 import com.ksptooi.ASMC.Message.MessageManager;
 import sun.misc.JarFilter;
 import uk.iksp.asmc.entity.plugins.AsmcPlugin;
@@ -14,7 +14,7 @@ import uk.iksp.v7.Session.InputStreamReaderSession;
 public class PluginSearch{
 
 	
-	private MessageManager msg = ASMC.getMessageManager();
+	private MessageManager msg = Asmc.getMessageManager();
 	
 	/**
 	 * 插件搜索器
@@ -34,7 +34,7 @@ public class PluginSearch{
 		
 		msg.sendSysMessage("·ASMC插件搜索 - 正在获取插件");
 		
-		StreamFactory streamFactory = ASMC.getGeneralDataFactoryBuilder().buildStreamFactory();
+		StreamFactory streamFactory = Asmc.getGeneralDataFactoryBuilder().buildStreamFactory();
 		
 		ArrayList<AsmcPlugin> asmcPluginList = new ArrayList<AsmcPlugin>();
 		
@@ -44,7 +44,7 @@ public class PluginSearch{
 			folder.mkdirs();
 		
 			//取所有插件
-			File[] pluginList = ASMC.getMainPluginsfolder().listFiles(new JarFilter());
+			File[] pluginList = Asmc.getMainPluginsfolder().listFiles(new JarFilter());
 		
 		
 			//遍历获取插件信息

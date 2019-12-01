@@ -1,22 +1,23 @@
 package uk.iksp.asmc.event.type;
 
-public class PreCommandEvent extends BasicEvent{
+import uk.iksp.asmc.entity.command.InputCommand;
+import uk.iksp.asmc.event.basic.AsmcEvent;
+
+public class PreCommandEvent extends AsmcEvent{
 	
 	
 
 	private final String eventName = "PreCommandEvent";
 	
 	
-	private String PreCommand=null;
+	private InputCommand inputCommand = null;
 	
 
 	private boolean isCancel = false;
 	
-	
-	public PreCommandEvent(String PreCommand) {
-		this.PreCommand=PreCommand;
+	public PreCommandEvent(InputCommand ic){
+		this.inputCommand = ic;
 	}
-	
 	
 	
 	public boolean isCancel() {
@@ -32,14 +33,22 @@ public class PreCommandEvent extends BasicEvent{
 		
 		this.isCancel = isCancel;
 	}
+
 	
-	public String getPreCommand() {
-		return PreCommand;
-	}
-
-
 	public String getEventName() {
 		return eventName;
 	}
+
+
+
+	@Override
+	public void commit() {
+		
+	}
+
+	public InputCommand getInputCommand() {
+		return inputCommand;
+	}
+	
 	
 }

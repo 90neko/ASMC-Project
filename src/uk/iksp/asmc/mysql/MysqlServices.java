@@ -2,7 +2,7 @@ package uk.iksp.asmc.mysql;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import com.ksptooi.ASMC.Main.ASMC;
+import com.ksptooi.ASMC.Main.Asmc;
 import com.ksptooi.ASMC.Message.MessageManager;
 
 import uk.iksp.v7.FactoryBuilder.GeneralDataFactoryBuilder;
@@ -10,7 +10,7 @@ import uk.iksp.v7.FactoryBuilder.GeneralDataFactoryBuilder;
 public class MysqlServices {
 
 	
-	private MessageManager msg = ASMC.getMessageManager();
+	private MessageManager msg = Asmc.getMessageManager();
 	
 	
 	private SqlSessionFactory sqlSessionFactory = null;
@@ -22,7 +22,7 @@ public class MysqlServices {
 		msg.sendSysMessage("·数据服务 - 数据库状态:离线");
 		msg.sendSysMessage("·数据服务 - 连接到数据库");
 		GeneralDataFactoryBuilder gdfb = new GeneralDataFactoryBuilder();	
-		this.sqlSessionFactory = gdfb.buildSqlSessionFactory(ASMC.getConfigManager().getConfigFile());
+		this.sqlSessionFactory = gdfb.buildSqlSessionFactory(Asmc.getConfigManager().getConfigFile());
 		
 		msg.sendSysMessage("·数据服务 - 数据库状态:在线");
 		

@@ -3,7 +3,7 @@ package uk.iksp.asmc.command.services;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
-import com.ksptooi.ASMC.Main.ASMC;
+import com.ksptooi.ASMC.Main.Asmc;
 
 import uk.iksp.asmc.command.type.Command_cmd;
 
@@ -40,7 +40,7 @@ public class CommandTools {
 			}
 			
 			
-			ASMC.getMessageManager().sendWarningMessage("没有找到此CommandType:"+TypeName);
+			Asmc.getMessageManager().sendWarningMessage("没有找到此CommandType:"+TypeName);
 			return null;
 		}
 		
@@ -51,7 +51,7 @@ public class CommandTools {
 	private static Command_cmd getTypeOfPlugin(String TypeName){
 		
 		
-		HashMap<String, Command_cmd> pluginList=ASMC.getCorePluginManager().getRegCommandTypeMap();
+		HashMap<String, Command_cmd> pluginList=Asmc.getCorePluginManager().getRegCommandTypeMap();
 		
 			
 		return pluginList.get(TypeName);

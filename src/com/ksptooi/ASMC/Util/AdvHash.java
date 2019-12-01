@@ -10,7 +10,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-import com.ksptooi.ASMC.Main.ASMC;
+import com.ksptooi.ASMC.Main.Asmc;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
@@ -62,10 +62,9 @@ public class AdvHash {
 	            String AES_encode=new String(new BASE64Encoder().encode(byte_AES));
 	            return AES_encode;
 	        }catch(Exception e){
-	        	ASMC.getMessageManager().sendErrorMessage("编码时出现错误,可能的原因是:数据损坏 Rule错误");
+	        	Asmc.getMessageManager().sendErrorMessage("编码时出现错误,可能的原因是:数据损坏 Rule错误");
 	        }
 	            
-
 	        return "Encode_Failed";         
 	        
 	    }
@@ -85,7 +84,7 @@ public class AdvHash {
 	            String AES_decode=new String(byte_decode,"utf-8");
 	            return AES_decode;
 	        }catch(Exception e){
-	        	ASMC.getMessageManager().sendErrorMessage("编码时出现错误,可能的原因是:数据损坏 Rule错误");
+	        	Asmc.getMessageManager().sendErrorMessage("编码时出现错误,可能的原因是:数据损坏 Rule错误");
 	        }
 
 	        return "Encode_Failed";         

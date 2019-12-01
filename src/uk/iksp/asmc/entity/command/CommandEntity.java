@@ -1,55 +1,62 @@
 package uk.iksp.asmc.entity.command;
 
-import com.ksptooi.ASMC.Main.ASMC;
+import uk.iksp.asmc.command.exception.UnknowCommandTypeException;
+import uk.iksp.asmc.command.type.Command_cmd;
 
 public class CommandEntity {
 
 	
+	//命令id
 	private int id = 0;
+	//命令名称
 	private String cm_Name=null;
+	//命令类型
 	private String cm_Type=null;
+	//命令指向地址
 	private String cm_Path=null;
+	//命令指向文件
 	private String cm_File=null;
+	//命令描述
 	private String cm_Title=null;
+	//命令权限信息
 	private String cm_CCA=null;
-	private String PreCommand=null;
-
-
+	//预输入命令
+	private InputCommand inputCommand=null;
 	
 	
-	//获取命令参数
-	public String[] getParameter(){
-		
-		String PerCommand = this.getPreCommand();
-		String[] parameter = null;
-		
-		//非空判断
-		if(PerCommand == null){
-			return null;
-		}
-		
-		try{
-			//获取命令参数
-			parameter = PerCommand.split(">")[1].split(",");
-		}catch(Exception e){
-			ASMC.getMessageManager().sendWarningMessage("此命令要求提供参数!");
-			return null;
-		}
-		
-
-		
-		return parameter;	
+	public CommandEntity(){
 		
 	}
-
-
-
+	
+	public CommandEntity(InputCommand ic){
+		this.inputCommand = ic;
+	}
+	
+	
+	//转换为Asmc命令
+	public AsmcCommand getAsmcCommand(Command_cmd ct) throws UnknowCommandTypeException{
+		
+		if(ct == null){
+			throw new UnknowCommandTypeException();
+		}
+		
+		AsmcCommand ac = new AsmcCommand();
+		
+		ac.setId(this.id);
+		ac.setCm_Name(this.cm_Type);
+		ac.setCm_Path(this.cm_Path);
+		ac.setCm_File(this.cm_File);
+		ac.setCm_Title(this.cm_Title);
+		ac.setCm_CCA(this.cm_CCA);	
+		ac.setCommandType(ct);
+		
+		return ac;
+	}
+	
 
 	public int getId() {
 		return id;
 	}
-
-
 
 
 	public void setId(int id) {
@@ -128,31 +135,24 @@ public class CommandEntity {
 
 
 
-
-	public String getPreCommand() {
-		return PreCommand;
-	}
-
-
-
-
-	public void setPreCommand(String preCommand) {
-		PreCommand = preCommand;
-	}
-
-
-
-
 	public String getCm_Name() {
 		return cm_Name;
 	}
 
 
 
-
 	public void setCm_Name(String cm_Name) {
 		this.cm_Name = cm_Name;
 	}
+
+	public InputCommand getInputCommand() {
+		return inputCommand;
+	}
+
+	public void setInputCommand(InputCommand inputCommand) {
+		this.inputCommand = inputCommand;
+	}
+
 	
 	
 	

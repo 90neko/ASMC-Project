@@ -2,7 +2,7 @@ package com.ksptooi.ASMC.Config;
 
 import java.io.File;
 
-import com.ksptooi.ASMC.Main.ASMC;
+import com.ksptooi.ASMC.Main.Asmc;
 import com.ksptooi.ASMC.Message.MessageManager;
 import uk.iksp.asmc.entity.config.ConfigEntity;
 import uk.iksp.v7.Factory.DataSessionFactory;
@@ -20,8 +20,8 @@ public class ConfigManager {
 	
 	public ConfigManager(){
 
-		this.msg=ASMC.getMessageManager();
-		this.dataSessionFactory=ASMC.getDataSessionFactory();
+		this.msg=Asmc.getMessageManager();
+		this.dataSessionFactory=Asmc.getDataSessionFactory();
 		
 		msg.sendSysMessage("初始化内部组件 - 配置管理");
 		
@@ -49,7 +49,7 @@ public class ConfigManager {
 		}
 		
 		
-		ASMC.setConfigEntity(ce);
+		Asmc.setConfigEntity(ce);
 		
 	}
 	

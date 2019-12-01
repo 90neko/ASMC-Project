@@ -1,6 +1,6 @@
-package uk.iksp.asmc.event.type;
+package uk.iksp.asmc.event.basic;
 
-public class BasicEvent {
+public abstract class AsmcEvent {
 
 	
 	String eventName = "BasicEvent";
@@ -10,11 +10,11 @@ public class BasicEvent {
 	boolean isCommit = false;
 	
 	
-	public BasicEvent(String eventName){
+	public AsmcEvent(String eventName){
 		this.eventName=eventName;
 	}
 	
-	public BasicEvent(){
+	public AsmcEvent(){
 		
 	}
 	
@@ -48,7 +48,6 @@ public class BasicEvent {
 
 	public void setCommit(boolean isCommit) {
 		
-		
 		//阻止重新将commit设置回false
 		if(isCommit == false) {
 			return;
@@ -57,6 +56,10 @@ public class BasicEvent {
 		this.isCommit = isCommit;
 	}
 	
+	/**
+	 * 提交事件
+	 */
+	public abstract void commit();
 	
 	
 }

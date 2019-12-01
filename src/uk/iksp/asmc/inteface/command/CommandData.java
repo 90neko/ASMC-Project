@@ -1,4 +1,4 @@
-package uk.iksp.asmc.command.Inteface;
+package uk.iksp.asmc.inteface.command;
 
 import java.util.ArrayList;
 

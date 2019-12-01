@@ -2,150 +2,53 @@ package uk.iksp.asmc.event.manager;
 
 import java.util.ArrayList;
 
-import com.ksptooi.ASMC.Main.ASMC;
+import com.ksptooi.ASMC.Main.Asmc;
 import com.ksptooi.ASMC.Message.MessageManager;
-import uk.iksp.asmc.event.bus.EventHandler;
-import uk.iksp.asmc.event.type.ActiveUserChangeEvent;
-import uk.iksp.asmc.event.type.CommandEvent;
-import uk.iksp.asmc.event.type.PreCommandEvent;
-import uk.iksp.asmc.event.type.UnknowCommandEvent;
+import uk.iksp.asmc.event.bus.EventBus;
 import uk.iksp.asmc.plugins.type.ASMCPlugin;
 
 public class EventManager {
 
-	//自带的eventHandler
-	private EventHandler basicEventHandler=null;
-	
-	MessageManager msg = ASMC.getMessageManager();
-	
-	//已注册的全部事件处理器
-	private ArrayList<EventHandler> eventHandler =new ArrayList<EventHandler>();
-		
-	
-	
-	
-	
-	public EventManager(){
-		basicEventHandler = new EventHandler();
-		
-	}
-	
-	//开始一个Command事件
-	public void startCommandEvent(CommandEvent ce){
-		
-		//执行自带的事件处理器
-		CommandEvent event=basicEventHandler.onCommand(ce);
-		
-		
-		//执行插件的事件处理器
-		for(EventHandler ch:eventHandler){		
-			event = ch.onCommand(event);				
-		}
-		
-		
-		//判断是否被取消
-		if(event.isCancel()){
-			return;
-		}
-		
-		//判断是否已被立即提交
-		if(event.isCommit()){
-			return;
-		}
-		
-		
-		//提交事件	
-		event.getCommandType().ExecuteOfType(event.getCommandEntity());
-		
-	}
 
 	
-	
-	//开始一个ActiveUserChange事件
-	public boolean startActiveUserChangeEvent(ActiveUserChangeEvent event) {
-		
-		ActiveUserChangeEvent AUCE = basicEventHandler.onActiveUserChange(event);
-		
-		for(EventHandler ch:eventHandler){		
-			event = ch.onActiveUserChange(AUCE);				
-		}
-		
-		if(event.isCancel()){
-			return false;
-		}
-		
-		//提交事件
-		
-		ASMC.getUserManager().changeActiveUser(AUCE.getChangeToUser());
-		return true;
-		
-	}
+	MessageManager msg = Asmc.getMessageManager();
 	
 	
-	
-	//开始一个PreCommandEvent事件
-	public boolean startPreCommandEvent(String PreCommand) {
+	//已注册的全部事件处理器
+	private ArrayList<EventBus> pluginEventBus = null;
 		
-		PreCommandEvent PCE = new PreCommandEvent(PreCommand);
+
+	public EventManager(){
+		msg.sendSysMessage("初始化内部组件 - 事件总线");
 		
-		for(EventHandler ch:eventHandler){		
-			PCE=ch.onPreCommandEvent(PCE);
-		}
-		
-		if(PCE.isCancel()){
-			return false;
-		}
-		
-		return true;
-		
-	}
-	
-	
-	//开始一个UnknowCommandEvent事件
-	public boolean startUnknowCommandEvent(String PreCommand){
-		
-		UnknowCommandEvent uce=new UnknowCommandEvent(PreCommand);
-		
-		basicEventHandler.onUnknowCommandEvent(uce);
-		
-		//执行插件的事件处理器
-		for(EventHandler ch:eventHandler){		
-			uce = ch.onUnknowCommandEvent(uce);
-		}
-		
-		//判断是否取消
-		if(uce.isCancel()){		
-			return false;		
-		}
-		
-		//判断是否立即提交
-		if(uce.isCommit()){
-			return false;
-		}
-		
-		//发送一条错误消息
-		ASMC.getMessageManager().sendWarningMessage("'"+uce.getPreCommand()+"'"+uce.getMessage());
-		
-		return true;
-		
+		this.pluginEventBus = new ArrayList<EventBus>();
 	}
 	
 	
 	
 	//注册事件处理器
-	public void regEventHandler(ASMCPlugin plugin,EventHandler eveh) {
+	public void regEventHandler(ASMCPlugin plugin,EventBus eveh) {
 		
 		msg.sendSysMessage("注册事件处理器:"+plugin.getPluginName());
 		
-		//注册事件		
-		eventHandler.add(eveh);
+		String pluginName = Asmc.getCorePluginManager().getLoadedPlugin(plugin).getName();
+		eveh.setPluginName(pluginName);
 		
+		//注册事件		
+		pluginEventBus.add(eveh);
+		
+	}
+	
+
+	public ArrayList<EventBus> getPluginEventBus() {
+		return pluginEventBus;
 	}
 
 
 
-	
-	
+
+
+
 	
 	
 	

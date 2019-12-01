@@ -1,8 +1,9 @@
 package uk.iksp.asmc.event.type;
 
 import uk.iksp.asmc.entity.user.UserEntity;
+import uk.iksp.asmc.event.basic.AsmcEvent;
 
-public class ActiveUserChangeEvent extends BasicEvent{
+public class ActiveUserChangeEvent extends AsmcEvent{
 
 	
 	
@@ -63,6 +64,17 @@ public class ActiveUserChangeEvent extends BasicEvent{
 	
 	public String getEventName() {
 		return eventName;
+	}
+
+
+
+	@Override
+	public void commit() {
+		
+		if(this.isCancel()){
+			return;
+		}
+		
 	}
 	
 	

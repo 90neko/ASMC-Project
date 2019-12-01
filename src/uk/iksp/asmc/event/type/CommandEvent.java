@@ -1,56 +1,42 @@
 package uk.iksp.asmc.event.type;
 
+import uk.iksp.asmc.entity.command.AsmcCommand;
+import uk.iksp.asmc.event.basic.AsmcEvent;
 
-
-import uk.iksp.asmc.command.type.Command_cmd;
-import uk.iksp.asmc.entity.command.CommandEntity;
-
-public class CommandEvent extends BasicEvent{
+public class CommandEvent extends AsmcEvent{
 
 	
 	private final String eventName = "CommandEvent";
 	
-	private CommandEntity commandEntity=null;
-	
-	private Command_cmd commandType=null;
+	private AsmcCommand asmcCommand=null;
 
 	private boolean isCancel = false;
 	
-	private boolean isCommit = false;
 	
-	
-	
-	public CommandEvent(Command_cmd CommandType,CommandEntity commandEntity){
-		
-		this.commandType=CommandType;
-		this.commandEntity=commandEntity;
-		
+	public CommandEvent(AsmcCommand CommandType){
+		this.asmcCommand=CommandType;
 	}
 	
 	
-	//立即完成事件
-	public void commitEvent(){
-			
-		//如果此事件已经被前一个插件完成 则不执行任何操作
-		if(isCommit == true){
-			return;
-		}
-		
-		commandType.ExecuteOfType(commandEntity);
-		
-		this.isCommit = true;
-		
-	}
+//	//立即完成事件
+//	public void commitEvent(){
+//			
+//		//如果此事件已经被前一个插件完成 则不执行任何操作
+//		if(isCommit == true){
+//			return;
+//		}
+//		
+//		commandType.ExecuteOfType(commandEntity);
+//		
+//		this.isCommit = true;
+//		
+//	}
+//	
+//	
+//	public boolean isCommit(){
+//		return isCommit;
+//	}
 	
-	
-	public boolean isCommit(){
-		return isCommit;
-	}
-	
-	
-	public CommandEntity getCommandEntity() {
-		return commandEntity;
-	}
 
 	public boolean isCancel() {
 		return isCancel;
@@ -66,13 +52,31 @@ public class CommandEvent extends BasicEvent{
 		this.isCancel = isCancel;
 	}
 
-	public Command_cmd getCommandType() {
-		return commandType;
-	}
-
+	
 	
 	public String getEventName() {
 		return eventName;
 	}
+
+
+	@Override
+	public void commit() {
+		
+		//判断是否被取消
+		if(this.isCancel()){
+			return;
+		}
+		
+		//提交事件
+		this.getAsmcCommand().getCommandType().ExecuteOfType(this.asmcCommand);
+		
+	}
+
+
+	public AsmcCommand getAsmcCommand() {
+		return asmcCommand;
+	}
+
+	
 	
 }

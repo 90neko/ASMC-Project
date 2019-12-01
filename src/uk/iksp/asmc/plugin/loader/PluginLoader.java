@@ -1,6 +1,6 @@
 package uk.iksp.asmc.plugin.loader;
 
-import com.ksptooi.ASMC.Main.ASMC;
+import com.ksptooi.ASMC.Main.Asmc;
 import com.ksptooi.ASMC.Message.MessageManager;
 import uk.iksp.asmc.entity.plugins.AsmcPlugin;
 import uk.iksp.asmc.entity.plugins.LoadedAsmcPlugin;
@@ -9,7 +9,7 @@ import uk.iksp.asmc.plugins.type.ASMCPlugin;
 public class PluginLoader {
 
 	
-	private MessageManager msg = ASMC.getMessageManager();
+	private MessageManager msg = Asmc.getMessageManager();
 	
 	public PluginLoader(){
 		msg.sendSysMessage("初始化内部组件 - ASMC插件加载器");

@@ -3,26 +3,29 @@ package uk.iksp.asmc.entity.user;
 public class UserEntity {
 
 	
-	private String Account=null;
+
+	private int id = 0;
+	private String userName = null;
+	private String userPassword = null;
 	
-	private String Password=null;
-
-	public String getAccount() {
-		return Account;
+	public int getId() {
+		return id;
 	}
-
-	public void setAccount(String account) {
-		Account = account;
+	public void setId(int id) {
+		this.id = id;
 	}
-
-	public String getPassword() {
-		return Password;
+	public String getUserName() {
+		return userName;
 	}
-
-	public void setPassword(String password) {
-		Password = password;
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
-	
+	public String getUserPassword() {
+		return userPassword;
+	}
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
+	}
 	
 	
 }
