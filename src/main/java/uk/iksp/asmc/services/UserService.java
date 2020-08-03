@@ -3,10 +3,12 @@ package uk.iksp.asmc.services;
 import java.util.ArrayList;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import com.ksptooi.ASMC.Main.Asmc;
-import com.ksptooi.ASMC.Message.Logger;
-import uk.iksp.asmc.data.inteface.UserData;
-import uk.iksp.asmc.entity.user.UserEntity;
+
+import com.ksptooi.asmc.data.mapper.UserMapper;
+import com.ksptooi.asmc.entity.user.User;
+import com.ksptooi.asmc.main.Asmc;
+import com.ksptooi.asmc.message.Logger;
+
 import uk.iksp.asmc.event.type.ActiveUserChangeEvent;
 
 public class UserService {
@@ -15,7 +17,7 @@ public class UserService {
 	
 	SqlSessionFactory ssf = null;
 	
-	UserEntity activeUser = null;
+	User activeUser = null;
 	
 	public UserService(){
 		log.info("初始化内部组件 - 用户访问服务");
@@ -27,11 +29,11 @@ public class UserService {
 	/**
 	 * 获取用户
 	 */
-	public UserEntity getUser(String userName){
+	public User getUser(String userName){
 		
 		try(SqlSession ss=ssf.openSession(true)){
 			
-			UserData map = ss.getMapper(UserData.class);
+			UserMapper map = ss.getMapper(UserMapper.class);
 			
 			return map.queryUserByName(userName).get(0);
 		}
@@ -45,9 +47,9 @@ public class UserService {
 		
 		try(SqlSession ss=ssf.openSession(true)){
 			
-			UserData map = ss.getMapper(UserData.class);
+			UserMapper map = ss.getMapper(UserMapper.class);
 			
-			ArrayList<UserEntity> userList = map.queryUserByName(userName);
+			ArrayList<User> userList = map.queryUserByName(userName);
 			
 			if(userList.size()>0){
 				return true;
@@ -62,7 +64,7 @@ public class UserService {
 	/**
 	 * 切换当前活动用户
 	 */
-	public void changeActiveUser(UserEntity user){
+	public void changeActiveUser(User user){
 		
 		//调用事件
 		boolean isSuccess = Asmc.getEventCreate().startActiveUserChangeEvent(new ActiveUserChangeEvent(activeUser,user));
@@ -77,11 +79,11 @@ public class UserService {
 		
 	}
 
-	public UserEntity getActiveUser() {
+	public User getActiveUser() {
 		return activeUser;
 	}
 
-	public void setActiveUser(UserEntity activeUser) {
+	public void setActiveUser(User activeUser) {
 		this.activeUser = activeUser;
 	}
 	

@@ -4,8 +4,9 @@ import java.io.IOException;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import com.ksptooi.ASMC.Main.Asmc;
-import com.ksptooi.ASMC.Message.Logger;
+
+import com.ksptooi.asmc.main.Asmc;
+import com.ksptooi.asmc.message.Logger;
 
 public class MysqlServices {
 

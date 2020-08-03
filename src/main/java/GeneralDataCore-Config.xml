@@ -6,28 +6,28 @@
 
   <!-- 配置类型的别名 --> 
   <typeAliases>
-    <typeAlias alias="Command" type="uk.iksp.asmc.entity.command.CommandEntity" /> 
-    <typeAlias alias="User" type="uk.iksp.asmc.entity.user.UserEntity"/>
+    <typeAlias alias="Command" type="com.ksptooi.asmc.entity.command.Command" />
+    <typeAlias alias="User" type="com.ksptooi.asmc.entity.user.User"/>
   </typeAliases>
   
   
   <!-- 连接管理 --> 
-  <environments default="development"> 
+  <environments default="development">
     <environment id="development"> 
       <transactionManager type="JDBC" /> 
       <dataSource type="POOLED"> 
         <property name="driver" value="com.mysql.cj.jdbc.Driver" /> 
         <property name="url" value="jdbc:mysql://127.0.0.1:3306/asmc_mk25?useSSL=false&amp;serverTimezone=UTC" /> 
         <property name="username" value="mk25login" /> 
-        <property name="password" value="Qa11223344--" />         
+        <property name="password" value="Qa11223344&#45;&#45;" />
         <property name="poolMaximumActiveConnections" value="8"/>         
       </dataSource>
     </environment> 
-  </environments> 
+  </environments>
   
    <!-- 映射器文件地址 --> 
   <mappers>
-    <package name="uk.iksp.asmc.data.inteface"/>
+    <package name="com.ksptooi.asmc.data.mapper"/>
   </mappers>
   
 </configuration>

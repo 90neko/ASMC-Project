@@ -1,6 +1,6 @@
 package uk.iksp.asmc.event.type;
 
-import com.ksptooi.ASMC.Main.Asmc;
+import com.ksptooi.asmc.main.Asmc;
 
 import uk.iksp.asmc.entity.command.InputCommand;
 import uk.iksp.asmc.event.basic.AsmcEvent;

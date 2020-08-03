@@ -2,8 +2,9 @@ package uk.iksp.asmc.event.manager;
 
 import java.util.ArrayList;
 
-import com.ksptooi.ASMC.Main.Asmc;
-import com.ksptooi.ASMC.Message.Logger;
+import com.ksptooi.asmc.main.Asmc;
+import com.ksptooi.asmc.message.Logger;
+
 import uk.iksp.asmc.entity.command.InputCommand;
 import uk.iksp.asmc.event.bus.EventBus;
 import uk.iksp.asmc.event.type.ActiveUserChangeEvent;

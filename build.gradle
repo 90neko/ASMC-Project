@@ -49,7 +49,22 @@ dependencies {
 	// https://mvnrepository.com/artifact/org.springframework/spring-aop
 	compile group: 'org.springframework', name: 'spring-aop', version: '5.2.8.RELEASE'
 	
-	compile files('lib/GeneralDataCoreV7.19P.jar')
+	// https://mvnrepository.com/artifact/org.mybatis/mybatis-spring
+	compile group: 'org.mybatis', name: 'mybatis-spring', version: '2.0.5'
+
+    // https://mvnrepository.com/artifact/org.springframework/spring-jdbc
+    compile group: 'org.springframework', name: 'spring-jdbc', version: '5.2.8.RELEASE'
+
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-pool2
+	compile group: 'org.apache.commons', name: 'commons-pool2', version: '2.8.1'
+	
+	// https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2
+	compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
+	
+
+
+
+    compile files('lib/GeneralDataCoreV7.19P.jar')
 	compile files('lib/GeneralDataCoreV7.5E.jar')
 }
 

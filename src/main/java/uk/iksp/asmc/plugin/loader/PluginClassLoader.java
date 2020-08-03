@@ -36,7 +36,6 @@ public class PluginClassLoader {
 			
 			url = file.toURI().toURL();
 			classLoader = new URLClassLoader(new URL[]{url});
-	
 			
 		} catch (Exception e) {
 			e.printStackTrace();

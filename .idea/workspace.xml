@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f022f6c4-c458-499b-a76f-ae5c67eab3cd" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1fZxyqemSCDd2IyNAPptcX8ssBW" />
+  <component name="ProjectViewState">
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15234375" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+    <property name="show.unlinked.gradle.project.popup" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration name="mybatis.UT19" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" value="--tests &quot;com.ksptooi.asmc.mybatistest.mybatis.UT19&quot;" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value=":test" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>false</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Gradle.mybatis.UT19" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f022f6c4-c458-499b-a76f-ae5c67eab3cd" name="Default Changelist" comment="" />
+      <created>1596439672540</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1596439672540</updated>
+      <workItem from="1596439676146" duration="385000" />
+      <workItem from="1596440083960" duration="3279000" />
+      <workItem from="1596451175338" duration="5949000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="908" y="376" width="563" height="382" key="#Notifications" timestamp="1596440246429">
+      <screen x="65" y="0" width="1855" height="1080" />
+    </state>
+    <state x="908" y="376" width="563" height="382" key="#Notifications/65.0.1855.1080@65.0.1855.1080" timestamp="1596440246429" />
+    <state x="505" y="89" key="#Project_Structure" timestamp="1596452442160">
+      <screen x="65" y="0" width="1855" height="1080" />
+    </state>
+    <state x="505" y="89" key="#Project_Structure/65.0.1855.1080@65.0.1855.1080" timestamp="1596452442160" />
+    <state x="763" y="249" key="#com.intellij.ide.util.MemberChooser" timestamp="1596459767360">
+      <screen x="65" y="0" width="1855" height="1080" />
+    </state>
+    <state x="763" y="249" key="#com.intellij.ide.util.MemberChooser/65.0.1855.1080@65.0.1855.1080" timestamp="1596459767360" />
+    <state width="1537" height="199" key="GridCell.Tab.0.bottom" timestamp="1596454987134">
+      <screen x="65" y="0" width="1855" height="1080" />
+    </state>
+    <state width="1537" height="199" key="GridCell.Tab.0.bottom/65.0.1855.1080@65.0.1855.1080" timestamp="1596454987134" />
+    <state width="1537" height="199" key="GridCell.Tab.0.center" timestamp="1596454987134">
+      <screen x="65" y="0" width="1855" height="1080" />
+    </state>
+    <state width="1537" height="199" key="GridCell.Tab.0.center/65.0.1855.1080@65.0.1855.1080" timestamp="1596454987134" />
+    <state width="1537" height="199" key="GridCell.Tab.0.left" timestamp="1596454987134">
+      <screen x="65" y="0" width="1855" height="1080" />
+    </state>
+    <state width="1537" height="199" key="GridCell.Tab.0.left/65.0.1855.1080@65.0.1855.1080" timestamp="1596454987134" />
+    <state width="1537" height="199" key="GridCell.Tab.0.right" timestamp="1596454987134">
+      <screen x="65" y="0" width="1855" height="1080" />
+    </state>
+    <state width="1537" height="199" key="GridCell.Tab.0.right/65.0.1855.1080@65.0.1855.1080" timestamp="1596454987134" />
+    <state x="526" y="159" key="SettingsEditor" timestamp="1596453336502">
+      <screen x="65" y="0" width="1855" height="1080" />
+    </state>
+    <state x="526" y="159" key="SettingsEditor/65.0.1855.1080@65.0.1855.1080" timestamp="1596453336502" />
+    <state x="660" y="197" key="spring file set editor" timestamp="1596440173809">
+      <screen x="65" y="0" width="1855" height="1080" />
+    </state>
+    <state x="660" y="197" key="spring file set editor/65.0.1855.1080@65.0.1855.1080" timestamp="1596440173809" />
+  </component>
+</project>

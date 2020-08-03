@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?> 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+
+<mapper namespace="com.ksptooi.asmc.data.mapper.CommandMapper">
+
+
+	<resultMap id="CommandRM" type="com.ksptooi.asmc.entity.command.Command">
+		<id property="id" column="id"></id>
+		<result property="name" column="cm_Name"></result>
+		<result property="type" column="cm_Type"></result>
+		<result property="path" column="cm_Path"></result>
+		<result property="file" column="cm_File"></result>
+		<result property="title" column="cm_Title"></result>
+		<result property="cca" column="cm_CCA"></result>
+	</resultMap>
+
+
+	<insert id="insert">
+		insert into asmc_commands(cm_Name,cm_Type,cm_Path,cm_File,cm_Title,cm_CCA) values (#{name},#{type},#{path},#{file},#{title},#{cca})
+	</insert>
+
+	<update id="update">
+		update asmc_commands set cm_Name=#{name},cm_Type=#{type},cm_Path=#{path},cm_File=#{file},cm_Title=#{title},cm_CCA=#{cca}
+		where id = #{id}
+	</update>
+
+	<delete id="delete">
+		delete from asmc_commands where id=#{id}
+	</delete>
+
+	<select id="queryList" resultMap="CommandRM">
+		select * from asmc_commands
+
+		<where>
+
+			<if test="id != null">
+				id = #{id}
+			</if>
+
+			<if test="name != null">
+				cm_Name like "%" #{name} "%"
+			</if>
+
+			<if test="type != null">
+				cm_Type = #{type}
+			</if>
+
+			<if test="cca != null">
+				cm_CCA = #{cca}
+			</if>
+
+		</where>
+
+	</select>
+
+	<select id="query" resultMap="CommandRM">
+
+		select * from asmc_commands
+
+		<where>
+
+			<if test="id != null">
+				id = #{id}
+			</if>
+
+			<if test="name != null">
+				cm_Name = #{name}
+			</if>
+
+			<if test="type != null">
+				cm_Type = #{type}
+			</if>
+
+			<if test="cca != null">
+				cm_CCA = #{cca}
+			</if>
+
+		</where>
+
+	</select>
+
+
+</mapper>

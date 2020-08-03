@@ -3,16 +3,20 @@ package uk.iksp.asmc.services;
 import java.util.ArrayList;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import com.ksptooi.ASMC.Main.Asmc;
-import com.ksptooi.ASMC.Message.Logger;
+
+import com.ksptooi.asmc.data.mapper.CommandMapper;
+import com.ksptooi.asmc.entity.commandType.Command_cmd;
+import com.ksptooi.asmc.main.Asmc;
+import com.ksptooi.asmc.message.Logger;
+import com.ksptooi.asmc.service.commandHandler.CommandTypeScanner;
+
 import uk.iksp.asmc.command.exception.UnknowCommandTypeException;
-import uk.iksp.asmc.command.handler.CommandTools;
-import uk.iksp.asmc.command.type.Command_cmd;
-import uk.iksp.asmc.data.inteface.CommandData;
 import uk.iksp.asmc.entity.command.AsmcCommand;
 import uk.iksp.asmc.entity.command.CommandEntity;
 import uk.iksp.asmc.entity.command.InputCommand;
 
+
+@Deprecated
 public class CommandService {
 
 	private Logger log = Asmc.getLogger();
@@ -31,8 +35,8 @@ public class CommandService {
 		
 		try(SqlSession ss = ssf.openSession(true)){
 			
-			CommandData map = ss.getMapper(CommandData.class);
-			map.updateCommand(ce);
+			CommandMapper map = ss.getMapper(CommandMapper.class);
+
 			
 		}
 		
@@ -45,13 +49,10 @@ public class CommandService {
 		
 		try(SqlSession ss = ssf.openSession(true)){
 			
-			CommandData map = ss.getMapper(CommandData.class);
+			CommandMapper map = ss.getMapper(CommandMapper.class);
 			
-			ArrayList<CommandEntity> ceList = map.queryCommandByName(name);
 			
-			if(ceList.size()>0){
-				return true;
-			}
+			
 			
 			
 		}
@@ -66,9 +67,9 @@ public class CommandService {
 		
 		try(SqlSession ss = ssf.openSession(true)){
 			
-			CommandData map = ss.getMapper(CommandData.class);
+			CommandMapper map = ss.getMapper(CommandMapper.class);
 			
-			return map.queryCommandByName(name).get(0);
+			return null;
 				
 		}
 			
@@ -85,7 +86,7 @@ public class CommandService {
 		
 		CommandEntity commandEntity = this.getCommand(ic);
 
-		Command_cmd commandType = CommandTools.getType(commandEntity.getCm_Type());
+		Command_cmd commandType = CommandTypeScanner.getType(commandEntity.getCm_Type());
 		
 		AsmcCommand asmcCommand = commandEntity.getAsmcCommand(commandType);
 		
@@ -100,9 +101,9 @@ public class CommandService {
 		
 		try(SqlSession ss = ssf.openSession(true)){
 			
-			CommandData map = ss.getMapper(CommandData.class);
+			CommandMapper map = ss.getMapper(CommandMapper.class);
 			
-			return map.queryCommand();
+			return null;
 			
 		}
 		
@@ -118,9 +119,9 @@ public class CommandService {
 		
 		try(SqlSession ss = ssf.openSession(true)){
 			
-			CommandData map = ss.getMapper(CommandData.class);
+			CommandMapper map = ss.getMapper(CommandMapper.class);
 			
-			map.addCommand(ce);
+//			map.addCommand(ce);
 			
 		}
 			
@@ -137,9 +138,9 @@ public class CommandService {
 		
 		try(SqlSession ss = ssf.openSession(true)){
 			
-			CommandData map = ss.getMapper(CommandData.class);
+			CommandMapper map = ss.getMapper(CommandMapper.class);
 			
-			map.delCommand(name);
+			/* map.delCommand(name); */
 			
 		}
 			

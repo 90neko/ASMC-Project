@@ -1,7 +1,8 @@
 package uk.iksp.asmc.entity.command;
 
+import com.ksptooi.asmc.entity.commandType.Command_cmd;
+
 import uk.iksp.asmc.command.exception.UnknowCommandTypeException;
-import uk.iksp.asmc.command.type.Command_cmd;
 
 public class CommandEntity {
 

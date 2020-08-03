@@ -5,11 +5,11 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 
-import com.ksptooi.ASMC.Main.Asmc;
-import com.ksptooi.ASMC.Message.Logger;
+import com.ksptooi.asmc.entity.plugins.AsmcPlugin;
+import com.ksptooi.asmc.main.Asmc;
+import com.ksptooi.asmc.message.Logger;
 
 import sun.misc.JarFilter;
-import uk.iksp.asmc.entity.plugins.AsmcPlugin;
 import uk.iksp.v7.Factory.StreamFactory;
 import uk.iksp.v7.Session.InputStreamReaderSession;
 

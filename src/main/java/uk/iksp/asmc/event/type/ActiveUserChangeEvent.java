@@ -1,6 +1,7 @@
 package uk.iksp.asmc.event.type;
 
-import uk.iksp.asmc.entity.user.UserEntity;
+import com.ksptooi.asmc.entity.user.User;
+
 import uk.iksp.asmc.event.basic.AsmcEvent;
 
 public class ActiveUserChangeEvent extends AsmcEvent{
@@ -10,14 +11,14 @@ public class ActiveUserChangeEvent extends AsmcEvent{
 	private final String eventName = "ActiveUserChangeEvent";
 	
 
-	private UserEntity oldActiveUser=null;
+	private User oldActiveUser=null;
 	
-	private UserEntity changeToUser=null;
+	private User changeToUser=null;
 	
 	private boolean isCancel = false;
 
 	
-	public ActiveUserChangeEvent(UserEntity oldUser,UserEntity newUser) {
+	public ActiveUserChangeEvent(User oldUser,User newUser) {
 		
 		this.oldActiveUser=oldUser;
 		this.changeToUser=newUser;
@@ -36,27 +37,27 @@ public class ActiveUserChangeEvent extends AsmcEvent{
 		this.isCancel = isCancel;
 	}
 
-	public UserEntity getOldActiveUser() {
+	public User getOldActiveUser() {
 		return oldActiveUser;
 	}
 
 
 
-	public void setOldActiveUser(UserEntity oldActiveUser) {
+	public void setOldActiveUser(User oldActiveUser) {
 		this.oldActiveUser = oldActiveUser;
 	}
 
 
 
 
-	public UserEntity getChangeToUser() {
+	public User getChangeToUser() {
 		return changeToUser;
 	}
 
 
 
 
-	public void setChangeToUser(UserEntity changeToUser) {
+	public void setChangeToUser(User changeToUser) {
 		this.changeToUser = changeToUser;
 	}
 

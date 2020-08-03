@@ -3,11 +3,13 @@ package uk.iksp.asmc.plugins.manager;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
-import com.ksptooi.ASMC.Main.Asmc;
-import com.ksptooi.ASMC.Message.Logger;
-import uk.iksp.asmc.command.type.Command_cmd;
-import uk.iksp.asmc.entity.plugins.AsmcPlugin;
-import uk.iksp.asmc.entity.plugins.LoadedAsmcPlugin;
+
+import com.ksptooi.asmc.entity.commandType.Command_cmd;
+import com.ksptooi.asmc.entity.plugins.AsmcPlugin;
+import com.ksptooi.asmc.entity.plugins.LoadedAsmcPlugin;
+import com.ksptooi.asmc.main.Asmc;
+import com.ksptooi.asmc.message.Logger;
+
 import uk.iksp.asmc.plugin.loader.PluginClassLoader;
 import uk.iksp.asmc.plugin.loader.PluginLoader;
 import uk.iksp.asmc.plugin.loader.PluginSearch;
