@@ -7,7 +7,7 @@ import com.ksptooi.asmc.main.Asmc;
 import uk.iksp.asmc.command.exception.CommandFormatException;
 import uk.iksp.asmc.entity.command.InputCommand;
 
-public class CommandParser {
+public class CommandParser implements CommandParserService{
 
 	
 	public CommandParser(){
@@ -42,6 +42,7 @@ public class CommandParser {
 	 */
 	public InputCommand parseAsInputCommand(String command){
 		
+		
 		String name = null;
 		
 		String parameterString = null;
@@ -56,8 +57,6 @@ public class CommandParser {
 		
 		//解析参数
 		try{
-			
-			
 			
 			parameterString = command.trim().split(">")[1];
 			String[] parameter = parameterString.split(",");

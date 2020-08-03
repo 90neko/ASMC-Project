@@ -3,28 +3,34 @@ package com.ksptooi.asmc.data.mapper;
 import java.util.ArrayList;
 
 import com.ksptooi.asmc.entity.user.User;
+import org.apache.ibatis.annotations.Param;
 
 public interface UserMapper {
-	
-	
-	/**
-	 * 根据用户名查询用户
-	 */
-	public ArrayList<User> queryUserByName(String user);
-	
-	/**
-	 * 查询所有用户
-	 */
-	public ArrayList<User> queryUser();
-	
-	/**
-	 * 添加一个用户
-	 */
-	public void addUser(User user);
-	
-	/**
-	 * 删除用户
-	 */
-	public void delUser(String user);
+
+
+    /**
+     * 添加用户
+     */
+    public void insertUser(User user);
+
+    /**
+     * 删除用户
+     */
+    public void deleteUser(@Param("id") int id);
+
+    /**
+     * 修改用户
+     */
+    public void updateUser(User user);
+
+    /**
+     * 查询用户
+     */
+    public ArrayList<User> getUserList(User user);
+
+    /**
+     * 查询用户
+     */
+    public User getUser(User user);
 
 }

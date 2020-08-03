@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
 
+import com.ksptooi.asmc.common.Project;
 import com.ksptooi.asmc.entity.plugins.AsmcPlugin;
 import com.ksptooi.asmc.main.Asmc;
 import com.ksptooi.asmc.message.Logger;
@@ -46,7 +47,7 @@ public class PluginSearch{
 			folder.mkdirs();
 		
 			//取所有插件
-			File[] pluginList = Asmc.getMainPluginsfolder().listFiles(new JarFilter());
+			File[] pluginList = Project.pluginFolder.listFiles(new JarFilter());
 		
 		
 			//遍历获取插件信息

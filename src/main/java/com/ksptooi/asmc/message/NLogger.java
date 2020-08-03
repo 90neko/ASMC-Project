@@ -16,19 +16,25 @@ import com.ksptooi.asmc.entity.plugins.LoadedAsmcPlugin;
 public class NLogger implements Logger{
 	
 	
+	
+	
 	private String info = null;
 	private String success = null;
 	private String warn = null;
 	private String error = null;
 	
 	public NLogger() {
+		
+
 		this.info = "INFO";
 		this.success = "SUCCESS";
 		this.warn = "WARN";
 		this.error = "ERROR";
+		
 	}
 	
 	public NLogger(LoadedAsmcPlugin lap) {
+		
 		
 		this.info = lap.getName();
 		this.success = lap.getName();

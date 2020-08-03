@@ -2,25 +2,62 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
 
-<mapper namespace="com.ksptooi.asmc.data.mapper.UserMapper"> 
+<mapper namespace="com.ksptooi.asmc.data.mapper.UserMapper">
 
 
+    <resultMap id="userRM" type="com.ksptooi.asmc.entity.user.User">
+        <id property="id" column="id"/>
+        <result property="userName" column="userName"/>
+        <result property="userPassword" column="userPassword"/>
+    </resultMap>
 
-	<select id="queryUserByName" parameterType="String" resultType="User">
-		select * from asmc_user where userName=#{0}
-	</select>
-	
-	<select id="queryUser">
-		select * from asmc_user
-	</select>
-	
-	<select id="addUser" parameterType="User" >
-		insert into values(0,#{userName},#{userPassword})
-	</select>
-	
-	<select id="delUser" parameterType="String">
-		delete from asmc_user where userName=#{0}
-	</select>
-	
-  
+
+    <insert id="insertUser">
+        insert into asmc_user(userName,userPassword) values (#{userName},#{userPassword})
+    </insert>
+
+    <update id="updateUser">
+        update asmc_user set userName=#{userName},userPassword=#{userPassword}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteUser">
+        delete from asmc_user where id=#{id}
+    </delete>
+
+    <select id="getUserList" resultMap="userRM">
+        select * from asmc_user
+
+        <where>
+
+            <if test="id !=null">
+                id=#{id}
+            </if>
+
+            <if test="userName !=null">
+                userName=#{userName}
+            </if>
+
+        </where>
+
+    </select>
+
+    <select id="getUser" resultMap="userRM">
+
+        select * from asmc_user
+
+        <where>
+
+            <if test="id != null">
+                id = #{id}
+            </if>
+
+            <if test="userName != null">
+                userName = #{userName}
+            </if>
+
+        </where>
+
+    </select>
+
 </mapper>

@@ -3,37 +3,41 @@ package com.ksptooi.asmc.service.commandHandler;
 import java.io.BufferedReader;
 import java.io.IOException;
 
+import com.ksptooi.asmc.entity.command.Command;
 import com.ksptooi.asmc.main.Asmc;
 import com.ksptooi.asmc.message.Logger;
 import com.ksptooi.asmc.service.command.CommandDataService;
-
 import uk.iksp.asmc.command.exception.CommandFormatException;
 import uk.iksp.asmc.command.exception.UnknowCommandTypeException;
 import uk.iksp.asmc.entity.command.AsmcCommand;
 import uk.iksp.asmc.entity.command.InputCommand;
 import uk.iksp.asmc.event.type.CommandEvent;
-import uk.iksp.asmc.services.CommandService;
 
 public class CommandHandler implements CommandHandlerService{
 	
 	
-	CommandParser cformat = null;
+	
+	CommandDataService dataService = Asmc.getCommandDataService();
+	
+	CommandParserService parserService = Asmc.getCommandParserService();
+	
+	CommandTypeScannerService typeScannerSevice = Asmc.getCommandTypeScannerService();
+
+	
 	
 	Logger log = Asmc.getLogger();
 	
 	
 	public CommandHandler(){
 		log.info("初始化内部组件 - Asmc命令总线");
-		this.cformat = new CommandParser();
 	}
 	
 	
 	public void commandHandler(){
 			
+		
 		BufferedReader br=Asmc.getConsoleInput();
-		
-		CommandDataService service = Asmc.getCommandDataService();
-		
+	
 		String commandString = null;
 		
 		int failedCount = 0;
@@ -55,14 +59,14 @@ public class CommandHandler implements CommandHandlerService{
 				if(failedCount<1) {
 					
 					//开始预命令输入事件
-					Asmc.getEventCreate().startPreCommandInput();
+//					Asmc.getEventCreate().startPreCommandInput();
 					
 					commandString = br.readLine();
 				
 					//格式化命令
 					try {
 					
-						commandString = cformat.format(commandString);
+						commandString = parserService.format(commandString);
 					
 					} catch (CommandFormatException e1) {
 						continue;
@@ -73,43 +77,42 @@ public class CommandHandler implements CommandHandlerService{
 				
 				
 				//解析命令字符串
-				InputCommand ic = cformat.parseAsInputCommand(commandString);
+				InputCommand ic = parserService.parseAsInputCommand(commandString);
 				
-			
+				Command cmd = new Command();
+				cmd.setName(ic.getName());
+				
+				
 				//创建预命令事件
 				if( ! Asmc.getEventCreate().startPreCommandEvent(ic)) {
 					continue;
 				}
-			
-						
+				
+				
+				
+				cmd = dataService.query(cmd);
+				
+				
+								
 				//检查命令是否存在
-				if(!service.isExist(ic.getName())){				
+				if(cmd == null){				
 					//创建事件 - 未知命令
 					Asmc.getEventCreate().startUnknowCommandEvent(ic);	
 					continue;
 				}
 			
 			
-				//获取Asmc命令
-				AsmcCommand asmcCommand = null;
-			
-//				try {	
-					
-//					asmcCommand = service.getAsmcCommand(ic);
+				//获取可执行命令
+				Command executeType = typeScannerSevice.getExecuteType(cmd);
 				
-//				} catch (UnknowCommandTypeException e) {
-//					//创建事件 - 未知命令
-//					Asmc.getEventCreate().startUnknowCommandEvent(ic);	
-//					continue;
-//				}
+				if(executeType == null) {
+					log.error("可执行命令类型不存在!");
+				}
 				
 				
 				
-				//创建事件
-				CommandEvent event=new CommandEvent(asmcCommand);
-			
-				//执行事件
-				Asmc.getEventCreate().startCommandEvent(event);
+				
+				
 				
 				failedCount = 0;
 			

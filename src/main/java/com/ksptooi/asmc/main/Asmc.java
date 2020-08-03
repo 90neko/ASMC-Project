@@ -1,25 +1,34 @@
 package com.ksptooi.asmc.main;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import com.ksptooi.asmc.common.StartPerformanceCount;
+import com.ksptooi.asmc.common.Common;
+import com.ksptooi.asmc.common.Project;
 import com.ksptooi.asmc.entity.plugins.LoadedAsmcPlugin;
 import com.ksptooi.asmc.message.Logger;
 import com.ksptooi.asmc.message.NLogger;
 import com.ksptooi.asmc.service.command.CommandData;
 import com.ksptooi.asmc.service.command.CommandDataService;
 import com.ksptooi.asmc.service.commandHandler.CommandHandler;
+import com.ksptooi.asmc.service.commandHandler.CommandParser;
+import com.ksptooi.asmc.service.commandHandler.CommandParserService;
+import com.ksptooi.asmc.service.commandHandler.CommandTypeScanner;
+import com.ksptooi.asmc.service.commandHandler.CommandTypeScannerService;
+import com.ksptooi.asmc.service.event.EventBus;
+import com.ksptooi.asmc.service.event.EventBusService;
 import com.ksptooi.asmc.service.spring.SpringContainer;
 import com.ksptooi.asmc.service.spring.SpringContainerService;
-import com.ksptooi.asmc.util.Var;
-import com.ksptooi.asmc.util.ASMC_PerformanceCount;
+import com.ksptooi.asmc.service.user.UserDataService;
+import com.ksptooi.asmc.service.user.UserPermission;
+import com.ksptooi.asmc.service.user.UserPermissionService;
+import com.ksptooi.asmc.service.user.UserData;
+
 import uk.iksp.asmc.event.manager.EventCreate;
 import uk.iksp.asmc.event.manager.EventManager;
 import uk.iksp.asmc.plugins.manager.CorePluginManager;
-import uk.iksp.asmc.services.MysqlServices;
-import uk.iksp.asmc.services.UserService;
 import uk.iksp.v7.Factory.DataSessionFactory;
 import uk.iksp.v7.FactoryBuilder.GeneralDataFactoryBuilder;
 
@@ -28,16 +37,29 @@ public class Asmc {
 	
 	
 	
-	
 
 	
 	//容器服务
 	private static final SpringContainerService containerService = new SpringContainer();
 	
-	//命令检索服务
+	//命令数据检索服务
 	private static final CommandDataService commandDataService = new CommandData();
+
+	//用户数据检索服务
+	private static final UserDataService userDataService = new UserData();
 	
-	private final static File pluginFolder=new File("C:/asmc_core/plugins/");
+	//用户权限操作服务
+	private static final UserPermissionService userPermissionService = new UserPermission();
+	
+	//事件总线服务
+	private static final EventBusService eventBusService = new EventBus();
+	
+	//命令解析服务
+	private static final CommandParserService commandParserService = new CommandParser();
+	
+	//命令执行类型扫描服务
+	private static final CommandTypeScannerService commandTypeScannerService = new CommandTypeScanner();
+	
 	
 	private final static CommandHandler ch=new CommandHandler();
 
@@ -49,15 +71,9 @@ public class Asmc {
 	
 	private static GeneralDataFactoryBuilder generalDataFactoryBuilder=new GeneralDataFactoryBuilder();
 	
-	private static MysqlServices mysqlSerices = null;
-	
 	private static CorePluginManager corePluginManager = null;
 	
 	private static EventCreate eventCreate = null;
-	
-	private static UserService userService =null;
-	
-	public static final String asmc_Version = "V4.6-Y";
 	
 	public static void main(String rk[]) throws IOException, InterruptedException{
 		
@@ -65,14 +81,13 @@ public class Asmc {
 		
 		log.info("加载内部组件");
 		
-		ASMC_PerformanceCount APC=new ASMC_PerformanceCount();
+		StartPerformanceCount APC=new StartPerformanceCount();
 		
-		log.info("·Core 版本号:"+Asmc.asmc_Version);
+		log.info("·Core 版本号:"+ Project.version);
 		
 		//开始性能计数
 		APC.Timer();
 		
-		mysqlSerices = new MysqlServices();	
 		
 		//初始化插件
 		corePluginManager = new CorePluginManager();
@@ -81,26 +96,25 @@ public class Asmc {
 		
 		eventCreate = new EventCreate();
 		
-		userService = new UserService();
-		
 		//加载ASMC插件
-		Asmc.getCorePluginManager().loadAllPlugin();
+//		Asmc.getCorePluginManager().loadAllPlugin();
 		
 		
 		//切换用户	
-		userService.changeActiveUser(userService.getUser("TF801A"));
+		Asmc.userPermissionService.setActiveUser(userDataService.getUser("TF801A"));
+		
 		
 		log.warn("启动完成");
 		log.warn("ASMC启动耗时:"+APC.StopTimer());
 		
 		log.br();
 		log.info("MODEL- - - - - - - - - ASMC_Single_Terminal(AST)");
-		log.info("OP Program - - - - - - AST("+Asmc.asmc_Version+")");
+		log.info("OP Program - - - - - - AST("+Project.version+")");
 		
 		log.info("Status - - - - - - - - Terminal Stand By!");
 		log.info("Listen - - - - - - - - 0.0.0.0:25567");
 		log.info("Plugin - - - - - - - - Loaded ");
-		log.info("Date(UTC)- - - - - - - "+ Var.getUTCTimeStr());
+		log.info("Date(UTC)- - - - - - - "+ Common.getUTCTimeStr());
 		log.info("Status - - - - - - - - 终端准备完成.");
 		
 		ch.commandHandler();
@@ -110,14 +124,6 @@ public class Asmc {
 
 	
 	
-	
-
-
-	public static File getMainPluginsfolder() {
-		return pluginFolder;
-	}
-
-
 
 	public static EventManager getEventmanager() {
 		return eventManager;
@@ -136,18 +142,6 @@ public class Asmc {
 	public static void setDataSessionFactory(DataSessionFactory dataSessionFactory) {
 		Asmc.dataSessionFactory = dataSessionFactory;
 	}
-
-
-	public static MysqlServices getMysqlSerices() {
-		return mysqlSerices;
-	}
-
-
-
-	public static void setMysqlSerices(MysqlServices mysqlSerices) {
-		Asmc.mysqlSerices = mysqlSerices;
-	}
-
 
 	public static CorePluginManager getCorePluginManager() {
 		return corePluginManager;
@@ -180,18 +174,7 @@ public class Asmc {
 	public static void setEventCreate(EventCreate eventCreate) {
 		Asmc.eventCreate = eventCreate;
 	}
-
-
-
-	public static UserService getUserService() {
-		return userService;
-	}
-
-
-
-	public static void setUserService(UserService userService) {
-		Asmc.userService = userService;
-	}
+	
 	
 	
 	/**
@@ -238,14 +221,43 @@ public class Asmc {
 
 
 
-
-
-
-
 	public static CommandDataService getCommandDataService() {
 		return commandDataService;
 	}
-
-
 	
+	
+
+	public static UserDataService getUserDataService() {
+		return userDataService;
+	}
+	
+
+	public static UserPermissionService getUserPermissionService() {
+		return userPermissionService;
+	}
+
+
+
+	public static EventBusService getEventBusService() {
+		return eventBusService;
+	}
+
+
+
+
+
+	public static CommandParserService getCommandParserService() {
+		return commandParserService;
+	}
+
+
+
+
+
+	public static CommandTypeScannerService getCommandTypeScannerService() {
+		return commandTypeScannerService;
+	}
+
+
+
 }

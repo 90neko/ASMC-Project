@@ -1,5 +1,7 @@
 package com.ksptooi.asmc.entity.command;
 
+import com.ksptooi.asmc.entity.commandType.Command_cmd;
+
 public class Command {
 	
 	//命令id
@@ -22,6 +24,9 @@ public class Command {
 	
 	//命令权限信息
 	private String cca = null;
+	
+	//执行类型
+	private Command_cmd executeType = null;
 	
 	
 	public Integer getId() {
@@ -70,6 +75,12 @@ public class Command {
 	public String toString() {
 		return "Command [id=" + id + ", name=" + name + ", type=" + type + ", path=" + path + ", file=" + file
 				+ ", title=" + title + ", cca=" + cca + "]";
+	}
+	public Command_cmd getExecuteType() {
+		return executeType;
+	}
+	public void setExecuteType(Command_cmd executeType) {
+		this.executeType = executeType;
 	}
 	
 	

@@ -3,16 +3,23 @@ package com.ksptooi.asmc.service.commandHandler;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 
+import com.ksptooi.asmc.entity.command.Command;
 import com.ksptooi.asmc.entity.commandType.Command_cmd;
 import com.ksptooi.asmc.main.Asmc;
 
-public class CommandTypeScanner {
+public class CommandTypeScanner implements CommandTypeScannerService{
 
+	
+	public CommandTypeScanner() {
+		Asmc.getLogger().info("初始化内部组件 - 命令执行类型扫描器");
+	}
+	
+	
 	
 	//VF9 - 通过类名获取类实例
 	
 	//获取类型
-	public static Command_cmd getType(String TypeName){
+	public Command_cmd getType(String TypeName){
 		
 		try {
 
@@ -46,7 +53,7 @@ public class CommandTypeScanner {
 	
 	
 	//从插件获取类型
-	private static Command_cmd getTypeOfPlugin(String TypeName){
+	private Command_cmd getTypeOfPlugin(String TypeName){
 		
 		
 		HashMap<String, Command_cmd> pluginList=Asmc.getCorePluginManager().getRegCommandTypeMap();
@@ -54,6 +61,24 @@ public class CommandTypeScanner {
 			
 		return pluginList.get(TypeName);
 		
+	}
+
+
+	@Override
+	public Command getExecuteType(Command cmd) {
+		
+		Command command = cmd;
+		
+		
+		Command_cmd type = this.getType(command.getType());
+		
+		if(type == null) {
+			return null;
+		}
+		
+		command.setExecuteType(type);
+		
+		return command;
 	}
 	
 	

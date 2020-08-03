@@ -68,7 +68,7 @@ public class CommandEvent extends AsmcEvent{
 		}
 		
 		//提交事件
-		this.getAsmcCommand().getCommandType().ExecuteOfType(this.asmcCommand);
+//		this.getAsmcCommand().getCommandType().ExecuteOfType(this.asmcCommand);
 		
 	}
 

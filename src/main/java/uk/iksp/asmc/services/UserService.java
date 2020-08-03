@@ -11,6 +11,8 @@ import com.ksptooi.asmc.message.Logger;
 
 import uk.iksp.asmc.event.type.ActiveUserChangeEvent;
 
+
+@Deprecated
 public class UserService {
 
 	Logger log = Asmc.getLogger();
@@ -21,7 +23,7 @@ public class UserService {
 	
 	public UserService(){
 		log.info("初始化内部组件 - 用户访问服务");
-		this.ssf = Asmc.getMysqlSerices().getSqlSessionFactory();
+		this.ssf = null;
 	}
 	
 	
@@ -35,7 +37,7 @@ public class UserService {
 			
 			UserMapper map = ss.getMapper(UserMapper.class);
 			
-			return map.queryUserByName(userName).get(0);
+			return null;
 		}
 		
 	}
@@ -49,11 +51,8 @@ public class UserService {
 			
 			UserMapper map = ss.getMapper(UserMapper.class);
 			
-			ArrayList<User> userList = map.queryUserByName(userName);
 			
-			if(userList.size()>0){
-				return true;
-			}
+
 			
 			return false;
 			

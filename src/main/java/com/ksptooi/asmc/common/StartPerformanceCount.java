@@ -1,16 +1,16 @@
-package com.ksptooi.asmc.util;
+package com.ksptooi.asmc.common;
 
 import java.text.DecimalFormat;
 
 import com.ksptooi.asmc.main.Asmc;
 
-public class ASMC_PerformanceCount implements Runnable{
+public class StartPerformanceCount implements Runnable{
 
 	double time=0.0;
 	Thread TH=null;
 	
 	//SAC Timer初始化
-	public ASMC_PerformanceCount(){
+	public StartPerformanceCount(){
 		time=0.0;
 		TH=new Thread(this);	
 		

@@ -21,7 +21,7 @@ public class CommandService {
 
 	private Logger log = Asmc.getLogger();
 	
-	private SqlSessionFactory ssf= Asmc.getMysqlSerices().getSqlSessionFactory();
+	private SqlSessionFactory ssf= null;
 	
 	
 	public CommandService(){
@@ -86,13 +86,13 @@ public class CommandService {
 		
 		CommandEntity commandEntity = this.getCommand(ic);
 
-		Command_cmd commandType = CommandTypeScanner.getType(commandEntity.getCm_Type());
+//		Command_cmd commandType = CommandTypeScanner.getType(commandEntity.getCm_Type());
+//		
+//		AsmcCommand asmcCommand = commandEntity.getAsmcCommand(commandType);
 		
-		AsmcCommand asmcCommand = commandEntity.getAsmcCommand(commandType);
-		
-		asmcCommand.setInputCommand(ic);
-		
-		return asmcCommand;
+//		asmcCommand.setInputCommand(ic);
+//		
+		return null;
 	}
 	
 	

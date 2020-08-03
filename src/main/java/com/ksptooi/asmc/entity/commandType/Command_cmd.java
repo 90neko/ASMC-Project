@@ -1,11 +1,12 @@
 package com.ksptooi.asmc.entity.commandType;
 
-import uk.iksp.asmc.entity.command.CommandEntity;
+import com.ksptooi.asmc.entity.command.Command;
+
 
 public interface Command_cmd {
 
 	
-	public void ExecuteOfType(CommandEntity ce);
+	public void ExecuteOfType(Command cmd);
 	
 	//返回自身
 	public Command_cmd getThis();
