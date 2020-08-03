@@ -51,4 +51,31 @@ public class CommandData implements CommandDataService{
 		return this.cmdMapper.query(cmd);
 	}
 
+
+
+	@Override
+	public boolean isExist(Command cmd) {
+			
+		Command query = this.cmdMapper.query(cmd);
+		
+		
+		if(query != null) {
+			return true;
+		}	
+		
+		return false;
+	}
+
+
+
+	@Override
+	public boolean isExist(String name) {
+		
+		Command cmd = new Command();
+		
+		cmd.setName(name);
+			
+		return this.isExist(cmd);
+	}
+
 }

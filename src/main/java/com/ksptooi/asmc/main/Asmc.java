@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-
 import com.ksptooi.asmc.entity.plugins.LoadedAsmcPlugin;
 import com.ksptooi.asmc.message.Logger;
 import com.ksptooi.asmc.message.NLogger;
@@ -16,11 +15,9 @@ import com.ksptooi.asmc.service.spring.SpringContainer;
 import com.ksptooi.asmc.service.spring.SpringContainerService;
 import com.ksptooi.asmc.util.Var;
 import com.ksptooi.asmc.util.ASMC_PerformanceCount;
-
 import uk.iksp.asmc.event.manager.EventCreate;
 import uk.iksp.asmc.event.manager.EventManager;
 import uk.iksp.asmc.plugins.manager.CorePluginManager;
-import uk.iksp.asmc.services.CommandService;
 import uk.iksp.asmc.services.MysqlServices;
 import uk.iksp.asmc.services.UserService;
 import uk.iksp.v7.Factory.DataSessionFactory;
@@ -30,11 +27,15 @@ import uk.iksp.v7.FactoryBuilder.GeneralDataFactoryBuilder;
 public class Asmc {
 	
 	
-	//命令检索服务
-	private static final CommandDataService commandDataService = new CommandData();
+	
+	
+
 	
 	//容器服务
 	private static final SpringContainerService containerService = new SpringContainer();
+	
+	//命令检索服务
+	private static final CommandDataService commandDataService = new CommandData();
 	
 	private final static File pluginFolder=new File("C:/asmc_core/plugins/");
 	
@@ -51,8 +52,6 @@ public class Asmc {
 	private static MysqlServices mysqlSerices = null;
 	
 	private static CorePluginManager corePluginManager = null;
-	
-	private static CommandService commandService = null;
 	
 	private static EventCreate eventCreate = null;
 	
@@ -77,9 +76,6 @@ public class Asmc {
 		
 		//初始化插件
 		corePluginManager = new CorePluginManager();
-		
-		//初始化命令服务
-		commandService = new CommandService();
 		
 		eventManager = new EventManager();
 		
@@ -175,14 +171,6 @@ public class Asmc {
 		Asmc.generalDataFactoryBuilder = generalDataFactoryBuilder;
 	}
 
-
-
-	public static CommandService getCommandService() {
-		return commandService;
-	}
-
-
-
 	public static EventCreate getEventCreate() {
 		return eventCreate;
 	}
@@ -254,7 +242,7 @@ public class Asmc {
 
 
 
-	public static CommandDataService getCommanddataservice() {
+	public static CommandDataService getCommandDataService() {
 		return commandDataService;
 	}
 

@@ -34,5 +34,15 @@ public interface CommandDataService {
 	 */
 	public Command query(Command cmd);
 	
+	/**
+	 * 判断命令是否存在
+	 */
+	public boolean isExist(Command cmd); 
+	
+	/**
+	 * 判断命令是否存在
+	 */
+	public boolean isExist(String name); 
+	
 	
 }

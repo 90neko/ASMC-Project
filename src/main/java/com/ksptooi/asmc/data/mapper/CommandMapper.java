@@ -1,9 +1,8 @@
 package com.ksptooi.asmc.data.mapper;
 
 import java.util.ArrayList;
-import com.ksptooi.asmc.entity.command.Command;
 import org.apache.ibatis.annotations.Param;
-import uk.iksp.asmc.entity.command.CommandEntity;
+import com.ksptooi.asmc.entity.command.Command;
 
 public interface CommandMapper {
 

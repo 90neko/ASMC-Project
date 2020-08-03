@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import com.ksptooi.asmc.main.Asmc;
 import com.ksptooi.asmc.message.Logger;
+import com.ksptooi.asmc.service.command.CommandDataService;
 
 import uk.iksp.asmc.command.exception.CommandFormatException;
 import uk.iksp.asmc.command.exception.UnknowCommandTypeException;
@@ -31,7 +32,7 @@ public class CommandHandler implements CommandHandlerService{
 			
 		BufferedReader br=Asmc.getConsoleInput();
 		
-		CommandService service = Asmc.getCommandService();
+		CommandDataService service = Asmc.getCommandDataService();
 		
 		String commandString = null;
 		
@@ -82,7 +83,7 @@ public class CommandHandler implements CommandHandlerService{
 			
 						
 				//检查命令是否存在
-				if(!service.isExistsCommand(ic.getName())){				
+				if(!service.isExist(ic.getName())){				
 					//创建事件 - 未知命令
 					Asmc.getEventCreate().startUnknowCommandEvent(ic);	
 					continue;
@@ -92,15 +93,15 @@ public class CommandHandler implements CommandHandlerService{
 				//获取Asmc命令
 				AsmcCommand asmcCommand = null;
 			
-				try {	
+//				try {	
 					
-					asmcCommand = service.getAsmcCommand(ic);
+//					asmcCommand = service.getAsmcCommand(ic);
 				
-				} catch (UnknowCommandTypeException e) {
-					//创建事件 - 未知命令
-					Asmc.getEventCreate().startUnknowCommandEvent(ic);	
-					continue;
-				}
+//				} catch (UnknowCommandTypeException e) {
+//					//创建事件 - 未知命令
+//					Asmc.getEventCreate().startUnknowCommandEvent(ic);	
+//					continue;
+//				}
 				
 				
 				
