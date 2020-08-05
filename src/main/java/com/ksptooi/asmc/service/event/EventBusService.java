@@ -13,6 +13,11 @@ public interface EventBusService {
 	public void regListener(EventListener listener);
 	
 	/**
+	 * 向事件总线注册一个核心事件
+	 */
+	
+	
+	/**
 	 * 推送事件
 	 */
 	public void event(UserChangeEvent userChangeEvent);

@@ -8,7 +8,7 @@ import com.ksptooi.asmc.data.mapper.CommandMapper;
 import com.ksptooi.asmc.entity.commandType.Command_cmd;
 import com.ksptooi.asmc.main.Asmc;
 import com.ksptooi.asmc.message.Logger;
-import com.ksptooi.asmc.service.commandHandler.CommandTypeScanner;
+import com.ksptooi.asmc.service.command.CommandTypeScanner;
 
 import uk.iksp.asmc.command.exception.UnknowCommandTypeException;
 import uk.iksp.asmc.entity.command.AsmcCommand;

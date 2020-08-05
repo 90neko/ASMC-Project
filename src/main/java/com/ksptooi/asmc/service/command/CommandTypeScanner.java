@@ -1,4 +1,4 @@
-package com.ksptooi.asmc.service.commandHandler;
+package com.ksptooi.asmc.service.command;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -24,15 +24,19 @@ public class CommandTypeScanner implements CommandTypeScannerService{
 		try {
 
 			
-			Class<?> c=Class.forName("uk.iksp.asmc.command.type."+TypeName);
-
-			Method m1 = c.getDeclaredMethod("getThis");  
+			/*
+			 * 通过反射获取(已弃用)
+			 * 
+			 * Class<?> c=Class.forName("com.ksptooi.asmc.entity.commandType."+TypeName);
+			 * 
+			 * Method m1 = c.getDeclaredMethod("getThis");
+			 * 
+			 * Object obj = c.newInstance();
+			 * 
+			 * Command_cmd CT=(Command_cmd)m1.invoke(obj);
+			 */
 			
-			Object obj = c.newInstance();
-			
-			Command_cmd CT=(Command_cmd)m1.invoke(obj);
-			
-			return CT;
+			return this.getTypeOfRegister(TypeName);
 			
 		} catch (Exception e) {	
 			
@@ -45,10 +49,16 @@ public class CommandTypeScanner implements CommandTypeScannerService{
 				return PCT;
 			}
 			
-			Asmc.getLogger().warn("没有找到此CommandType:"+TypeName);
+			//Asmc.getLogger().warn("没有找到此CommandType:"+TypeName);
 			return null;
 		}
 		
+	}
+	
+	
+	//从已注册的命令类型获取
+	private Command_cmd getTypeOfRegister(String typeName) throws Exception {
+		return Asmc.getCommandTypeRegisterService().getCommandType(typeName);
 	}
 	
 	

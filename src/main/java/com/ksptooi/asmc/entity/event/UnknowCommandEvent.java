@@ -6,7 +6,16 @@ public class UnknowCommandEvent extends AbstractEvent{
 
 	
 	private InputCommand inputCommand = null;
-	private String Message = null;
+	
+	private String message = null;
+	
+	
+	public UnknowCommandEvent(InputCommand inputCommand) {
+		this.inputCommand = inputCommand;
+		this.message = "'"+inputCommand.getName()+"'不是有效的Asmc命令或脚本!";
+	}
+	
+	
 	
 	
 	@Override
@@ -23,20 +32,17 @@ public class UnknowCommandEvent extends AbstractEvent{
 	}
 	
 	
-	
-	
-	
 	public InputCommand getInputCommand() {
 		return inputCommand;
 	}
 	
 
 	public String getMessage() {
-		return Message;
+		return message;
 	}
 
 	public void setMessage(String message) {
-		Message = message;
+		this.message = message;
 	}
 	
 	

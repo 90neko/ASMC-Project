@@ -1,6 +1,6 @@
 package uk.iksp.asmc.event.type;
 
-import uk.iksp.asmc.entity.command.AsmcCommand;
+import com.ksptooi.asmc.entity.command.Command;
 import uk.iksp.asmc.event.basic.AsmcEvent;
 
 public class CommandEvent extends AsmcEvent{
@@ -8,13 +8,13 @@ public class CommandEvent extends AsmcEvent{
 	
 	private final String eventName = "CommandEvent";
 	
-	private AsmcCommand asmcCommand=null;
+	private Command command=null;
 
 	private boolean isCancel = false;
 	
 	
-	public CommandEvent(AsmcCommand CommandType){
-		this.asmcCommand=CommandType;
+	public CommandEvent(Command CommandType){
+		this.command=CommandType;
 	}
 	
 	
@@ -73,9 +73,14 @@ public class CommandEvent extends AsmcEvent{
 	}
 
 
-	public AsmcCommand getAsmcCommand() {
-		return asmcCommand;
+	public Command getCommand() {
+		return command;
 	}
+
+
+	
+
+	
 
 	
 	

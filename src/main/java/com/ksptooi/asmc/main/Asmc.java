@@ -7,16 +7,19 @@ import java.util.ArrayList;
 import com.ksptooi.asmc.common.StartPerformanceCount;
 import com.ksptooi.asmc.common.Common;
 import com.ksptooi.asmc.common.Project;
+import com.ksptooi.asmc.entity.commandType.Cmd_List;
 import com.ksptooi.asmc.entity.plugins.LoadedAsmcPlugin;
 import com.ksptooi.asmc.message.Logger;
 import com.ksptooi.asmc.message.NLogger;
 import com.ksptooi.asmc.service.command.CommandData;
 import com.ksptooi.asmc.service.command.CommandDataService;
+import com.ksptooi.asmc.service.command.CommandParser;
+import com.ksptooi.asmc.service.command.CommandParserService;
+import com.ksptooi.asmc.service.command.CommandTypeRegister;
+import com.ksptooi.asmc.service.command.CommandTypeRegisterService;
+import com.ksptooi.asmc.service.command.CommandTypeScanner;
+import com.ksptooi.asmc.service.command.CommandTypeScannerService;
 import com.ksptooi.asmc.service.commandHandler.CommandHandler;
-import com.ksptooi.asmc.service.commandHandler.CommandParser;
-import com.ksptooi.asmc.service.commandHandler.CommandParserService;
-import com.ksptooi.asmc.service.commandHandler.CommandTypeScanner;
-import com.ksptooi.asmc.service.commandHandler.CommandTypeScannerService;
 import com.ksptooi.asmc.service.event.EventBus;
 import com.ksptooi.asmc.service.event.EventBusService;
 import com.ksptooi.asmc.service.spring.SpringContainer;
@@ -37,10 +40,14 @@ public class Asmc {
 	
 	
 	
+	
 
 	
 	//容器服务
 	private static final SpringContainerService containerService = new SpringContainer();
+	
+	//事件总线服务
+	private static final EventBusService eventBusService = new EventBus();
 	
 	//命令数据检索服务
 	private static final CommandDataService commandDataService = new CommandData();
@@ -51,15 +58,14 @@ public class Asmc {
 	//用户权限操作服务
 	private static final UserPermissionService userPermissionService = new UserPermission();
 	
-	//事件总线服务
-	private static final EventBusService eventBusService = new EventBus();
-	
 	//命令解析服务
 	private static final CommandParserService commandParserService = new CommandParser();
 	
 	//命令执行类型扫描服务
 	private static final CommandTypeScannerService commandTypeScannerService = new CommandTypeScanner();
 	
+	//命令类型注册服务
+	private static final CommandTypeRegisterService commandTypeRegisterService = new CommandTypeRegister();
 	
 	private final static CommandHandler ch=new CommandHandler();
 
@@ -100,9 +106,13 @@ public class Asmc {
 //		Asmc.getCorePluginManager().loadAllPlugin();
 		
 		
+		//注册命令类型
+		commandTypeRegisterService.regCommandType("cmd_list", new Cmd_List());
+		
+		
+
 		//切换用户	
 		Asmc.userPermissionService.setActiveUser(userDataService.getUser("TF801A"));
-		
 		
 		log.warn("启动完成");
 		log.warn("ASMC启动耗时:"+APC.StopTimer());
@@ -116,6 +126,8 @@ public class Asmc {
 		log.info("Plugin - - - - - - - - Loaded ");
 		log.info("Date(UTC)- - - - - - - "+ Common.getUTCTimeStr());
 		log.info("Status - - - - - - - - 终端准备完成.");
+		
+
 		
 		ch.commandHandler();
 		
@@ -256,6 +268,14 @@ public class Asmc {
 
 	public static CommandTypeScannerService getCommandTypeScannerService() {
 		return commandTypeScannerService;
+	}
+
+
+
+
+
+	public static CommandTypeRegisterService getCommandTypeRegisterService() {
+		return commandTypeRegisterService;
 	}
 
 

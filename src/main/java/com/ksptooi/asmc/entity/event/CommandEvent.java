@@ -1,5 +1,7 @@
 package com.ksptooi.asmc.entity.event;
 
+import com.ksptooi.asmc.entity.command.Command;
+
 public class CommandEvent extends AbstractEvent{
 
 	@Override
@@ -12,31 +14,25 @@ public class CommandEvent extends AbstractEvent{
 		this.isCancel = isCancel;
 	}
 	
-	private String command = null;
-	private String[] parms = null;
+	
+	Command command = null;
 	
 	
-	public CommandEvent(String command,String[] parms) {
+	
+	public CommandEvent(Command command) {
 		this.command = command;
-		this.parms = parms;
 	}
 
-	
-	public String getCommand() {
+	public Command getCommand() {
 		return command;
 	}
 
-	public void setCommand(String command) {
+	public void setCommand(Command command) {
 		this.command = command;
 	}
 
-	public String[] getParms() {
-		return parms;
-	}
-
-	public void setParms(String[] parms) {
-		this.parms = parms;
-	}
+	
+	
 	
 	
 

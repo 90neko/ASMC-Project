@@ -1,4 +1,4 @@
-package com.ksptooi.asmc.service.commandHandler;
+package com.ksptooi.asmc.service.command;
 
 import uk.iksp.asmc.command.exception.CommandFormatException;
 import uk.iksp.asmc.entity.command.InputCommand;

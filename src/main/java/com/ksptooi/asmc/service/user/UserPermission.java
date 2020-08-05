@@ -1,7 +1,9 @@
 package com.ksptooi.asmc.service.user;
 
+import com.ksptooi.asmc.entity.event.UserChangeEvent;
 import com.ksptooi.asmc.entity.user.User;
 import com.ksptooi.asmc.main.Asmc;
+import com.ksptooi.asmc.service.event.EventBusService;
 
 import uk.iksp.asmc.event.type.ActiveUserChangeEvent;
 
@@ -10,18 +12,18 @@ public class UserPermission implements UserPermissionService{
 	
 	User ActiveUser = null;
 	
+	
+	EventBusService eventBusService = Asmc.getEventBusService();
+	
+	
 	@Override
 	public void setActiveUser(User user) {
 		
 		
-		//调用事件
-		boolean isSuccess = Asmc.getEventCreate().startActiveUserChangeEvent(new ActiveUserChangeEvent(ActiveUser,user));
+		UserChangeEvent changeEvent = new UserChangeEvent(new User(),user);
 		
 		
-		//如果事件被取消则不切换用户
-		if( ! isSuccess){
-			return;
-		}
+		eventBusService.event(changeEvent);
 		
 		
 		//切换用户

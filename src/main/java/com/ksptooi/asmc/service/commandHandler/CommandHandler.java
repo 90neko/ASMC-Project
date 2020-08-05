@@ -4,28 +4,32 @@ import java.io.BufferedReader;
 import java.io.IOException;
 
 import com.ksptooi.asmc.entity.command.Command;
+import com.ksptooi.asmc.entity.event.CommandEvent;
+import com.ksptooi.asmc.entity.event.UnknowCommandEvent;
 import com.ksptooi.asmc.main.Asmc;
 import com.ksptooi.asmc.message.Logger;
 import com.ksptooi.asmc.service.command.CommandDataService;
+import com.ksptooi.asmc.service.command.CommandParserService;
+import com.ksptooi.asmc.service.command.CommandTypeScannerService;
+import com.ksptooi.asmc.service.event.EventBusService;
 import uk.iksp.asmc.command.exception.CommandFormatException;
 import uk.iksp.asmc.command.exception.UnknowCommandTypeException;
 import uk.iksp.asmc.entity.command.AsmcCommand;
 import uk.iksp.asmc.entity.command.InputCommand;
-import uk.iksp.asmc.event.type.CommandEvent;
 
 public class CommandHandler implements CommandHandlerService{
 	
 	
 	
-	CommandDataService dataService = Asmc.getCommandDataService();
+	private CommandDataService dataService = Asmc.getCommandDataService();
 	
-	CommandParserService parserService = Asmc.getCommandParserService();
+	private CommandParserService parserService = Asmc.getCommandParserService();
 	
-	CommandTypeScannerService typeScannerSevice = Asmc.getCommandTypeScannerService();
+	private CommandTypeScannerService typeScannerSevice = Asmc.getCommandTypeScannerService();
 
+	private EventBusService eventBusService = Asmc.getEventBusService();
 	
-	
-	Logger log = Asmc.getLogger();
+	private Logger log = Asmc.getLogger();
 	
 	
 	public CommandHandler(){
@@ -35,6 +39,7 @@ public class CommandHandler implements CommandHandlerService{
 	
 	public void commandHandler(){
 			
+		
 		
 		BufferedReader br=Asmc.getConsoleInput();
 	
@@ -56,11 +61,10 @@ public class CommandHandler implements CommandHandlerService{
 				
 				System.out.println("");
 				
+				System.out.print("Terminal@"+Asmc.getUserPermissionService().getActiveUser().getUserName()+":");
+				
 				if(failedCount<1) {
-					
-					//开始预命令输入事件
-//					Asmc.getEventCreate().startPreCommandInput();
-					
+											
 					commandString = br.readLine();
 				
 					//格式化命令
@@ -79,25 +83,24 @@ public class CommandHandler implements CommandHandlerService{
 				//解析命令字符串
 				InputCommand ic = parserService.parseAsInputCommand(commandString);
 				
-				Command cmd = new Command();
+				
+				Command cmd = new Command();		
 				cmd.setName(ic.getName());
-				
-				
-				//创建预命令事件
-				if( ! Asmc.getEventCreate().startPreCommandEvent(ic)) {
-					continue;
-				}
 				
 				
 				
 				cmd = dataService.query(cmd);
 				
 				
+				
 								
 				//检查命令是否存在
 				if(cmd == null){				
 					//创建事件 - 未知命令
-					Asmc.getEventCreate().startUnknowCommandEvent(ic);	
+					
+					UnknowCommandEvent unknowCommand = new UnknowCommandEvent(ic);				
+					eventBusService.event(unknowCommand);				
+					
 					continue;
 				}
 			
@@ -107,10 +110,13 @@ public class CommandHandler implements CommandHandlerService{
 				
 				if(executeType == null) {
 					log.error("可执行命令类型不存在!");
+					continue;
 				}
 				
 				
-				
+				//创建事件
+				CommandEvent cmdEvent = new CommandEvent(executeType);
+				eventBusService.event(cmdEvent);
 				
 				
 				

@@ -14,7 +14,9 @@ public class EventBus implements EventBusService{
 		Asmc.getLogger().info("初始化内部组件 - EventBus事件总线服务");		
 	}
 	
-	private ArrayList<EventListener> core_listener = new ArrayList<EventListener>();
+	//默认的事件处理
+	private EventListener defaultEventHandler = new DefaultEventListener();
+	
 	
 	private ArrayList<EventListener> plugin_Listener = new ArrayList<EventListener>();
 	
@@ -47,9 +49,7 @@ public class EventBus implements EventBusService{
 			
 		}
 		
-		this.core_listener.forEach(E->{		
-			E.onEvent(event);
-		});
+		defaultEventHandler.onEvent(event);
 		
 	}
 
@@ -68,9 +68,7 @@ public class EventBus implements EventBusService{
 			
 		}
 		
-		this.core_listener.forEach(E->{		
-			E.onEvent(event);
-		});
+		defaultEventHandler.onEvent(event);
 		
 	}
 
@@ -82,9 +80,7 @@ public class EventBus implements EventBusService{
 			el.onEvent(event);					
 		}
 		
-		this.core_listener.forEach(E->{		
-			E.onEvent(event);
-		});
+		defaultEventHandler.onEvent(event);
 		
 	}
 
