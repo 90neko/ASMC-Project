@@ -51,7 +51,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../Local_Dev_Storage/Java_web/JM10" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15234375" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -98,6 +98,7 @@
       <workItem from="1596440083960" duration="3279000" />
       <workItem from="1596451175338" duration="7444000" />
       <workItem from="1596468412212" duration="1414000" />
+      <workItem from="1596715840795" duration="3158000" />
     </task>
     <servers />
   </component>
@@ -129,6 +130,10 @@
       <screen x="65" y="0" width="1855" height="1080" />
     </state>
     <state x="763" y="249" key="#com.intellij.ide.util.MemberChooser/65.0.1855.1080@65.0.1855.1080" timestamp="1596468899164" />
+    <state x="772" y="294" key="FileChooserDialogImpl" timestamp="1596720839772">
+      <screen x="65" y="0" width="1855" height="1080" />
+    </state>
+    <state x="772" y="294" key="FileChooserDialogImpl/65.0.1855.1080@65.0.1855.1080" timestamp="1596720839772" />
     <state width="1537" height="199" key="GridCell.Tab.0.bottom" timestamp="1596454987134">
       <screen x="65" y="0" width="1855" height="1080" />
     </state>

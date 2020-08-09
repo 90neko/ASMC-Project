@@ -1,6 +1,6 @@
 package com.ksptooi.asmc.entity.event;
 
-import uk.iksp.asmc.entity.command.InputCommand;
+import com.ksptooi.asmc.entity.command.InputCommand;
 
 public class UnknowCommandEvent extends AbstractEvent{
 

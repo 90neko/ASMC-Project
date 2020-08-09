@@ -2,7 +2,7 @@ package com.ksptooi.asmc.entity.plugins;
 
 import java.io.File;
 
-public class AsmcPlugin {
+public class ExternalPluginFile {
 
 	
 	private String name = null;

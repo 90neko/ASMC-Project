@@ -5,7 +5,6 @@ import com.ksptooi.asmc.entity.user.User;
 import com.ksptooi.asmc.main.Asmc;
 import com.ksptooi.asmc.service.event.EventBusService;
 
-import uk.iksp.asmc.event.type.ActiveUserChangeEvent;
 
 public class UserPermission implements UserPermissionService{
 

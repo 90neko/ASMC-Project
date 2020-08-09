@@ -1,10 +1,9 @@
 package uk.iksp.asmc.plugin.loader;
 
-import com.ksptooi.asmc.entity.plugins.AsmcPlugin;
-import com.ksptooi.asmc.entity.plugins.LoadedAsmcPlugin;
+import com.ksptooi.asmc.entity.plugins.ExternalPlugin;
+import com.ksptooi.asmc.entity.plugins.ExternalPluginFile;
+import com.ksptooi.asmc.entity.plugins.LoadedPlugin;
 import com.ksptooi.asmc.main.Asmc;
-
-import uk.iksp.asmc.plugins.type.ASMCPlugin;
 
 public class PluginLoader {
 
@@ -18,16 +17,16 @@ public class PluginLoader {
 	/**
 	 * 加载插件
 	 */
-	public LoadedAsmcPlugin loadPlugin(AsmcPlugin plugin){
+	public LoadedPlugin loadPlugin(ExternalPluginFile plugin){
 		
 		PluginClassLoader loader = null;
 		
-		LoadedAsmcPlugin lap = new LoadedAsmcPlugin();
+		LoadedPlugin lap = new LoadedPlugin();
 		
 		loader = new PluginClassLoader(plugin.getFile());
 		
 		
-		lap.setAsmcPlugin((ASMCPlugin)loader.loadClass(plugin.getMainClass()));
+		lap.setAsmcPlugin((ExternalPlugin)loader.loadClass(plugin.getMainClass()));
 		lap.setName(plugin.getName());
 		lap.setFile(plugin.getFile());
 		lap.setMainClass(plugin.getMainClass());

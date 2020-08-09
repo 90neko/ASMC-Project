@@ -5,15 +5,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.ksptooi.asmc.entity.commandType.Command_cmd;
-import com.ksptooi.asmc.entity.plugins.AsmcPlugin;
-import com.ksptooi.asmc.entity.plugins.LoadedAsmcPlugin;
+import com.ksptooi.asmc.entity.plugins.ExternalPlugin;
+import com.ksptooi.asmc.entity.plugins.ExternalPluginFile;
+import com.ksptooi.asmc.entity.plugins.LoadedPlugin;
 import com.ksptooi.asmc.main.Asmc;
 import com.ksptooi.asmc.message.Logger;
 
 import uk.iksp.asmc.plugin.loader.PluginClassLoader;
 import uk.iksp.asmc.plugin.loader.PluginLoader;
 import uk.iksp.asmc.plugin.loader.PluginSearch;
-import uk.iksp.asmc.plugins.type.ASMCPlugin;
 
 public class CorePluginManager{
 	
@@ -31,7 +31,7 @@ public class CorePluginManager{
 	
 	
 	//已注册的插件列表
-	ArrayList<LoadedAsmcPlugin> loadedPlugin = new ArrayList<LoadedAsmcPlugin>();
+	ArrayList<LoadedPlugin> loadedPlugin = new ArrayList<LoadedPlugin>();
 	
 	
 	//已注册的命令类型Map (命令类型名 || 命令类型实例)
@@ -62,15 +62,15 @@ public class CorePluginManager{
 		
 		
 		//搜索插件
-		ArrayList<AsmcPlugin> pluginList = this.pluginSearch.searchPlugins(pluginFolder);
+		ArrayList<ExternalPluginFile> pluginList = this.pluginSearch.searchPlugins(pluginFolder);
 		
 		//加载插件
-		for(AsmcPlugin plugin:pluginList){
+		for(ExternalPluginFile plugin:pluginList){
 			
 			
 			log.info("·ASMC插件加载器 - 加载:"+plugin.getName());
 			
-			LoadedAsmcPlugin lap = this.pluginLoader.loadPlugin(plugin);
+			LoadedPlugin lap = this.pluginLoader.loadPlugin(plugin);
 			
 			loadedPlugin.add(lap);
 			
@@ -80,7 +80,7 @@ public class CorePluginManager{
 		}	
 		
 		//执行插件的onEnable方法
-		for(LoadedAsmcPlugin lap:this.loadedPlugin){
+		for(LoadedPlugin lap:this.loadedPlugin){
 			lap.getAsmcPlugin().onEnable();
 		}
 		
@@ -91,11 +91,11 @@ public class CorePluginManager{
 	/**
 	 * 注册命令
 	 */
-	public void regCommandType(ASMCPlugin plugin,String commandName,String commandTypeEntityPath){
+	public void regCommandType(ExternalPlugin plugin,String commandName,String commandTypeEntityPath){
 		
 		Command_cmd CE=null;
 		
-		LoadedAsmcPlugin lap = this.getLoadedPlugin(plugin);
+		LoadedPlugin lap = this.getLoadedPlugin(plugin);
 		
 		//判断是否冲突
 		for(String str:regCommandNameList) {
@@ -126,7 +126,7 @@ public class CorePluginManager{
 	/**
 	 * 获取所有已加载插件
 	 */
-	public ArrayList<LoadedAsmcPlugin> getAllLoadedPlugin(){	
+	public ArrayList<LoadedPlugin> getAllLoadedPlugin(){	
 		return this.loadedPlugin;
 	}
 	
@@ -135,10 +135,10 @@ public class CorePluginManager{
 	/**
 	 * 获取已加载的插件 根据名称
 	 */
-	public LoadedAsmcPlugin getLoadedPlugin(String name){
+	public LoadedPlugin getLoadedPlugin(String name){
 		
 		
-		for(LoadedAsmcPlugin lap:loadedPlugin){
+		for(LoadedPlugin lap:loadedPlugin){
 			
 			if(lap.getName().equals(name)){
 				return lap;
@@ -153,7 +153,7 @@ public class CorePluginManager{
 	/**
 	 * 获取已加载的插件 根据插件主类
 	 */
-	public LoadedAsmcPlugin getLoadedPlugin(ASMCPlugin plugin){
+	public LoadedPlugin getLoadedPlugin(ExternalPlugin plugin){
 		return getLoadedPlugin(plugin.getPluginName());	
 	}
 	

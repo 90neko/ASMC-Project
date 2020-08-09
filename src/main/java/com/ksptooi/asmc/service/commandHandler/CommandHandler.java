@@ -2,8 +2,8 @@ package com.ksptooi.asmc.service.commandHandler;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-
 import com.ksptooi.asmc.entity.command.Command;
+import com.ksptooi.asmc.entity.command.InputCommand;
 import com.ksptooi.asmc.entity.event.CommandEvent;
 import com.ksptooi.asmc.entity.event.UnknowCommandEvent;
 import com.ksptooi.asmc.main.Asmc;
@@ -13,9 +13,6 @@ import com.ksptooi.asmc.service.command.CommandParserService;
 import com.ksptooi.asmc.service.command.CommandTypeScannerService;
 import com.ksptooi.asmc.service.event.EventBusService;
 import uk.iksp.asmc.command.exception.CommandFormatException;
-import uk.iksp.asmc.command.exception.UnknowCommandTypeException;
-import uk.iksp.asmc.entity.command.AsmcCommand;
-import uk.iksp.asmc.entity.command.InputCommand;
 
 public class CommandHandler implements CommandHandlerService{
 	
@@ -63,7 +60,7 @@ public class CommandHandler implements CommandHandlerService{
 				
 				System.out.print("Terminal@"+Asmc.getUserPermissionService().getActiveUser().getUserName()+":");
 				
-				if(failedCount<1) {
+				if(failedCount<1){
 											
 					commandString = br.readLine();
 				
@@ -87,8 +84,7 @@ public class CommandHandler implements CommandHandlerService{
 				Command cmd = new Command();		
 				cmd.setName(ic.getName());
 				
-				
-				
+					
 				cmd = dataService.query(cmd);
 				
 				
@@ -109,7 +105,7 @@ public class CommandHandler implements CommandHandlerService{
 				Command executeType = typeScannerSevice.getExecuteType(cmd);
 				
 				if(executeType == null) {
-					log.error("可执行命令类型不存在!");
+					log.error("已找到该命令,但其命令类型没有注册!");
 					continue;
 				}
 				
@@ -119,8 +115,7 @@ public class CommandHandler implements CommandHandlerService{
 				eventBusService.event(cmdEvent);
 				
 				
-				
-				failedCount = 0;
+				failedCount = 0;    
 			
 			}catch(IOException fnfe) {
 				log.error("执行命令时发生错误,目标文件已经不存在或不可执行.!");

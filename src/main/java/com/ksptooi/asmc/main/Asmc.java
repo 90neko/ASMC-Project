@@ -8,7 +8,7 @@ import com.ksptooi.asmc.common.StartPerformanceCount;
 import com.ksptooi.asmc.common.Common;
 import com.ksptooi.asmc.common.Project;
 import com.ksptooi.asmc.entity.commandType.Cmd_List;
-import com.ksptooi.asmc.entity.plugins.LoadedAsmcPlugin;
+import com.ksptooi.asmc.entity.plugins.LoadedPlugin;
 import com.ksptooi.asmc.message.Logger;
 import com.ksptooi.asmc.message.NLogger;
 import com.ksptooi.asmc.service.command.CommandData;
@@ -28,9 +28,6 @@ import com.ksptooi.asmc.service.user.UserDataService;
 import com.ksptooi.asmc.service.user.UserPermission;
 import com.ksptooi.asmc.service.user.UserPermissionService;
 import com.ksptooi.asmc.service.user.UserData;
-
-import uk.iksp.asmc.event.manager.EventCreate;
-import uk.iksp.asmc.event.manager.EventManager;
 import uk.iksp.asmc.plugins.manager.CorePluginManager;
 import uk.iksp.v7.Factory.DataSessionFactory;
 import uk.iksp.v7.FactoryBuilder.GeneralDataFactoryBuilder;
@@ -38,10 +35,6 @@ import uk.iksp.v7.FactoryBuilder.GeneralDataFactoryBuilder;
 
 public class Asmc {
 	
-	
-	
-	
-
 	
 	//容器服务
 	private static final SpringContainerService containerService = new SpringContainer();
@@ -71,15 +64,11 @@ public class Asmc {
 
 	private static final BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 	
-	private static EventManager eventManager=null;
-	
 	private static DataSessionFactory dataSessionFactory = new DataSessionFactory(4);
 	
 	private static GeneralDataFactoryBuilder generalDataFactoryBuilder=new GeneralDataFactoryBuilder();
 	
 	private static CorePluginManager corePluginManager = null;
-	
-	private static EventCreate eventCreate = null;
 	
 	public static void main(String rk[]) throws IOException, InterruptedException{
 		
@@ -98,9 +87,7 @@ public class Asmc {
 		//初始化插件
 		corePluginManager = new CorePluginManager();
 		
-		eventManager = new EventManager();
 		
-		eventCreate = new EventCreate();
 		
 		//加载ASMC插件
 //		Asmc.getCorePluginManager().loadAllPlugin();
@@ -137,10 +124,6 @@ public class Asmc {
 	
 	
 
-	public static EventManager getEventmanager() {
-		return eventManager;
-	}
-
 	
 	public static BufferedReader getConsoleInput() {
 		return br;
@@ -176,16 +159,6 @@ public class Asmc {
 	public static void setGeneralDataFactoryBuilder(GeneralDataFactoryBuilder generalDataFactoryBuilder) {
 		Asmc.generalDataFactoryBuilder = generalDataFactoryBuilder;
 	}
-
-	public static EventCreate getEventCreate() {
-		return eventCreate;
-	}
-
-
-
-	public static void setEventCreate(EventCreate eventCreate) {
-		Asmc.eventCreate = eventCreate;
-	}
 	
 	
 	
@@ -201,9 +174,9 @@ public class Asmc {
 		try {
 			
 			//取ALP
-			ArrayList<LoadedAsmcPlugin> alp = Asmc.getCorePluginManager().getAllLoadedPlugin();
+			ArrayList<LoadedPlugin> alp = Asmc.getCorePluginManager().getAllLoadedPlugin();
 				
-			for(LoadedAsmcPlugin lap:alp) {
+			for(LoadedPlugin lap:alp) {
 				
 				
 				if(className.equalsIgnoreCase(lap.getMainClass().toString())) {

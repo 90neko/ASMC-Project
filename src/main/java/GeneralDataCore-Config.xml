@@ -11,6 +11,7 @@
   </typeAliases>
   
   
+  
   <!-- 连接管理 --> 
   <environments default="development">
     <environment id="development"> 
@@ -19,7 +20,7 @@
         <property name="driver" value="com.mysql.cj.jdbc.Driver" /> 
         <property name="url" value="jdbc:mysql://127.0.0.1:3306/asmc_mk25?useSSL=false&amp;serverTimezone=UTC" /> 
         <property name="username" value="mk25login" /> 
-        <property name="password" value="Qa11223344&#45;&#45;" />
+        <property name="password" value="Qa11223344" />
         <property name="poolMaximumActiveConnections" value="8"/>         
       </dataSource>
     </environment> 

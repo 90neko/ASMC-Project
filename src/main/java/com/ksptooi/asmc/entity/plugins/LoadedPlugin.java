@@ -2,22 +2,20 @@ package com.ksptooi.asmc.entity.plugins;
 
 import java.util.ArrayList;
 
-import uk.iksp.asmc.plugins.type.ASMCPlugin;
-
-public class LoadedAsmcPlugin extends AsmcPlugin{
+public class LoadedPlugin extends ExternalPluginFile{
 
 	
 	
-	private ASMCPlugin asmcPlugin= null;
+	private ExternalPlugin asmcPlugin= null;
 	
 	private ArrayList<String> commands = new ArrayList<String>();
 	
 	
-	public ASMCPlugin getAsmcPlugin() {
+	public ExternalPlugin getAsmcPlugin() {
 		return asmcPlugin;
 	}
 
-	public void setAsmcPlugin(ASMCPlugin asmcPlugin) {
+	public void setAsmcPlugin(ExternalPlugin asmcPlugin) {
 		this.asmcPlugin = asmcPlugin;
 	}
 

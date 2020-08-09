@@ -6,7 +6,7 @@ import java.net.URL;
 import java.util.ArrayList;
 
 import com.ksptooi.asmc.common.Project;
-import com.ksptooi.asmc.entity.plugins.AsmcPlugin;
+import com.ksptooi.asmc.entity.plugins.ExternalPluginFile;
 import com.ksptooi.asmc.main.Asmc;
 import com.ksptooi.asmc.message.Logger;
 
@@ -33,13 +33,13 @@ public class PluginSearch{
 	/**
 	 * 搜索插件目录下的插件
 	 */
-	public ArrayList<AsmcPlugin> searchPlugins(File folder){
+	public ArrayList<ExternalPluginFile> searchPlugins(File folder){
 		
 		log.info("·ASMC插件搜索 - 正在获取插件");
 		
 		StreamFactory streamFactory = Asmc.getGeneralDataFactoryBuilder().buildStreamFactory();
 		
-		ArrayList<AsmcPlugin> asmcPluginList = new ArrayList<AsmcPlugin>();
+		ArrayList<ExternalPluginFile> asmcPluginList = new ArrayList<ExternalPluginFile>();
 		
 		try {
 		
@@ -53,7 +53,7 @@ public class PluginSearch{
 			//遍历获取插件信息
 			for(File f:pluginList){
 			
-				AsmcPlugin asmcPlugin = new AsmcPlugin();
+				ExternalPluginFile asmcPlugin = new ExternalPluginFile();
 				
 				
 				log.info("获取:"+f.getName());

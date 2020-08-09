@@ -1,4 +1,4 @@
-package uk.iksp.asmc.entity.command;
+package com.ksptooi.asmc.entity.command;
 
 import java.util.ArrayList;
 

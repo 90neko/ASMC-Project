@@ -1,6 +1,6 @@
-package uk.iksp.asmc.plugins.type;
+package com.ksptooi.asmc.entity.plugins;
 
-public abstract class ASMCPlugin{
+public abstract class ExternalPlugin{
 
 
 	private String PluginName="General ASMC Plugins";
@@ -12,11 +12,10 @@ public abstract class ASMCPlugin{
 	//插件加载时将会执行一次
 	public void onEnable(){
 		
-		
 	}
 	
 	
-	public abstract ASMCPlugin getThis();
+	public abstract ExternalPlugin getThis();
 	
 	
 	public String getPluginName() {

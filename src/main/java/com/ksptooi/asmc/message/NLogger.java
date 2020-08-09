@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import org.fusesource.jansi.AnsiConsole;
 import org.fusesource.jansi.Ansi.Color;
 
-import com.ksptooi.asmc.entity.plugins.LoadedAsmcPlugin;
+import com.ksptooi.asmc.entity.plugins.LoadedPlugin;
 
 
 public class NLogger implements Logger{
@@ -33,7 +33,7 @@ public class NLogger implements Logger{
 		
 	}
 	
-	public NLogger(LoadedAsmcPlugin lap) {
+	public NLogger(LoadedPlugin lap) {
 		
 		
 		this.info = lap.getName();

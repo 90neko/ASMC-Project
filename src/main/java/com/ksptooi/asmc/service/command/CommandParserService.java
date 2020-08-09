@@ -1,7 +1,8 @@
 package com.ksptooi.asmc.service.command;
 
+import com.ksptooi.asmc.entity.command.InputCommand;
+
 import uk.iksp.asmc.command.exception.CommandFormatException;
-import uk.iksp.asmc.entity.command.InputCommand;
 
 public interface CommandParserService {
 

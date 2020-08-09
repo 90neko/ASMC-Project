@@ -2,10 +2,10 @@ package com.ksptooi.asmc.service.command;
 
 import java.util.ArrayList;
 
+import com.ksptooi.asmc.entity.command.InputCommand;
 import com.ksptooi.asmc.main.Asmc;
 
 import uk.iksp.asmc.command.exception.CommandFormatException;
-import uk.iksp.asmc.entity.command.InputCommand;
 
 public class CommandParser implements CommandParserService{
 
