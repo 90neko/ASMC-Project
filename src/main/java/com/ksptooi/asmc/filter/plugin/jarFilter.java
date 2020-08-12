@@ -1,4 +1,4 @@
-package uk.iksp.asmc.plugins.filter;
+package com.ksptooi.asmc.filter.plugin;
 
 import java.io.File;
 import java.io.FilenameFilter;

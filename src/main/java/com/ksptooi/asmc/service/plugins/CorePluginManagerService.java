@@ -1,8 +1,10 @@
 package com.ksptooi.asmc.service.plugins;
 
 import java.nio.file.Path;
+import java.util.ArrayList;
 
 import com.ksptooi.asmc.entity.plugins.ExternalPlugin;
+import com.ksptooi.asmc.entity.plugins.LoadedPlugin;
 
 public interface CorePluginManagerService {
 	
@@ -20,10 +22,15 @@ public interface CorePluginManagerService {
 	public void regPluginCommand(ExternalPlugin plugin,String commandTypeName,String commandTypePath);
 	
 	
+	/**
+	 * 获取已注册的插件列表
+	 */
+	public ArrayList<LoadedPlugin> getAllLoadedPlugin();
+	
+	/**
+	 * 获取已注册插件
+	 */
+	public LoadedPlugin getPlugin(String pluginName);
 	
 	
-	
-	
-	
-
 }

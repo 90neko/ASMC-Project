@@ -14,7 +14,7 @@ public class CommandData implements CommandDataService{
 	
 	public CommandData() {
 		
-		Asmc.getLogger().info("初始化内部组件 - CommandDataService");
+		Asmc.getLogger().info("初始化内部组件 - CommandDataService[CDS]");
 		
 		this.cmdMapper = Asmc.getContainerService().getBean(CommandMapper.class);
 		
@@ -76,6 +76,19 @@ public class CommandData implements CommandDataService{
 		cmd.setName(name);
 			
 		return this.isExist(cmd);
+	}
+
+
+
+	@Override
+	public Command getCommand(String cmdName) {
+
+		Command cmd = new Command();
+		
+		cmd.setName(cmdName);
+		
+		return this.query(cmd);
+		
 	}
 
 }

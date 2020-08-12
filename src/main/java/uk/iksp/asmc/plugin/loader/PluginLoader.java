@@ -1,5 +1,6 @@
 package uk.iksp.asmc.plugin.loader;
 
+import com.ksptooi.asmc.common.PluginClassLoader;
 import com.ksptooi.asmc.entity.plugins.ExternalPlugin;
 import com.ksptooi.asmc.entity.plugins.ExternalPluginFile;
 import com.ksptooi.asmc.entity.plugins.LoadedPlugin;
@@ -16,8 +17,10 @@ public class PluginLoader {
 	
 	/**
 	 * 加载插件
+	 * @throws Exception 
+	 * @throws ClassNotFoundException 
 	 */
-	public LoadedPlugin loadPlugin(ExternalPluginFile plugin){
+	public LoadedPlugin loadPlugin(ExternalPluginFile plugin) throws ClassNotFoundException, Exception{
 		
 		PluginClassLoader loader = null;
 		

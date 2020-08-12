@@ -12,8 +12,10 @@ public class UserDataServiceUnit {
 	
 	
 	@Test
-	public void UnitTest() {
+	public void UnitTest() throws ClassNotFoundException {
 		
+		
+		Class.forName("com.ksptooi.asmc.main.Asmc");
 		
 		UserDataService uds = new UserData();
 		

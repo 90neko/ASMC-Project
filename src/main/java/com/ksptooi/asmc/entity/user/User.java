@@ -1,5 +1,7 @@
 package com.ksptooi.asmc.entity.user;
 
+import com.ksptooi.asmc.common.Common;
+
 public class User {
 
 	
@@ -31,6 +33,20 @@ public class User {
 	public void setUserPassword(String userPassword) {
 		this.userPassword = userPassword;
 	}
+	
+	public boolean isCorrect(String password) {
+		
+		String selfPwd = this.getUserPassword();
+		String inputPwd = Common.md5(this.getUserName()+"|"+password);
+		
+		if(selfPwd.equals(inputPwd)) {
+			return true;
+		}
+		
+		return false;	
+	}
+	
+	
 
 	@Override
 	public String toString() {

@@ -28,6 +28,9 @@ public class Command {
 	//执行类型
 	private Command_cmd executeType = null;
 	
+	//输入类型
+	private InputCommand inputCommand= null;
+	
 	
 	public Integer getId() {
 		return id;
@@ -81,6 +84,12 @@ public class Command {
 	}
 	public void setExecuteType(Command_cmd executeType) {
 		this.executeType = executeType;
+	}
+	public InputCommand getInputCommand() {
+		return inputCommand;
+	}
+	public void setInputCommand(InputCommand inputCommand) {
+		this.inputCommand = inputCommand;
 	}
 	
 	

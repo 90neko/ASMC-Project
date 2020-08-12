@@ -13,12 +13,18 @@ import com.ksptooi.asmc.message.Logger;
  */
 public class DefaultEventListener implements EventListener{
 
+	public DefaultEventListener() {
+		Asmc.getLogger().info("初始化内部组件 - DefaultEventListener");	
+	}
+	
+	
 	
 	Logger logger = Asmc.getLogger();
 	
 	
 	@Override
 	public void onEvent(UserChangeEvent event) {
+		logger.br();
 		logger.success("Permissions has been updated");
 		logger.success("new Active User for:"+event.getNewUser().getUserName());
 	}
@@ -27,10 +33,18 @@ public class DefaultEventListener implements EventListener{
 	@Override
 	public void onEvent(CommandEvent event) {
 		
-		Command cmd = event.getCommand();	
-		logger.info("Vector:"+cmd.getType());
-		logger.info("Command Vector build complete");
+		Command cmd = event.getCommand();
+		
+		if(event.getCommand().getType().equals("cmd_link")) {			
+			logger.success("Vector:"+cmd.getType());
+//			logger.info("Command Vector build complete");
+			
+		}
+		
+		
 		cmd.getExecuteType().ExecuteOfType(cmd);
+		
+
 		
 	}
 	

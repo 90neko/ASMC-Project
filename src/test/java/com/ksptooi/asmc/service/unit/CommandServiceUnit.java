@@ -14,16 +14,20 @@ import com.ksptooi.asmc.service.spring.SpringContainerService;
 public class CommandServiceUnit {
 
 	
+	
+	
+	
 
     @Test
-    public void UnitTest() throws IOException, InterruptedException{
+    public void UnitTest() throws IOException, InterruptedException, ClassNotFoundException{
 
     	
+    	Asmc.main(null);
     	/**
     	 * 测试CommandDataService 模块功能
     	 */
     	
-    	CommandDataService cds = new CommandData();
+    	CommandDataService cds = Asmc.getCommandDataService();
     	
     	boolean exist = cds.isExist("ff5");
     	

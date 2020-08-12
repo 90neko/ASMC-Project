@@ -1,12 +1,12 @@
 package com.ksptooi.asmc.main;
 
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import com.ksptooi.asmc.common.StartPerformanceCount;
-import com.ksptooi.asmc.common.Common;
+import java.util.Date;
 import com.ksptooi.asmc.common.Project;
+import com.ksptooi.asmc.common.StartPerformanceCount;
 import com.ksptooi.asmc.entity.commandType.Cmd_List;
 import com.ksptooi.asmc.entity.plugins.LoadedPlugin;
 import com.ksptooi.asmc.message.Logger;
@@ -20,15 +20,20 @@ import com.ksptooi.asmc.service.command.CommandTypeRegisterService;
 import com.ksptooi.asmc.service.command.CommandTypeScanner;
 import com.ksptooi.asmc.service.command.CommandTypeScannerService;
 import com.ksptooi.asmc.service.commandHandler.CommandHandler;
+import com.ksptooi.asmc.service.commandHandler.CommandHandlerService;
 import com.ksptooi.asmc.service.event.EventBus;
 import com.ksptooi.asmc.service.event.EventBusService;
+import com.ksptooi.asmc.service.plugins.CorePluginLoader;
+import com.ksptooi.asmc.service.plugins.CorePluginLoaderService;
+import com.ksptooi.asmc.service.plugins.CorePluginManager;
+import com.ksptooi.asmc.service.plugins.CorePluginManagerService;
 import com.ksptooi.asmc.service.spring.SpringContainer;
 import com.ksptooi.asmc.service.spring.SpringContainerService;
+import com.ksptooi.asmc.service.user.UserData;
 import com.ksptooi.asmc.service.user.UserDataService;
 import com.ksptooi.asmc.service.user.UserPermission;
 import com.ksptooi.asmc.service.user.UserPermissionService;
-import com.ksptooi.asmc.service.user.UserData;
-import uk.iksp.asmc.plugins.manager.CorePluginManager;
+
 import uk.iksp.v7.Factory.DataSessionFactory;
 import uk.iksp.v7.FactoryBuilder.GeneralDataFactoryBuilder;
 
@@ -60,7 +65,19 @@ public class Asmc {
 	//命令类型注册服务
 	private static final CommandTypeRegisterService commandTypeRegisterService = new CommandTypeRegister();
 	
-	private final static CommandHandler ch=new CommandHandler();
+	//命令执行服务
+	private static final CommandHandlerService commandHandlerService = new CommandHandler();
+	
+	//插件加载服务
+	private static final CorePluginLoaderService corePluginLoaderService = new CorePluginLoader();
+	
+	//插件管理服务
+	private static final CorePluginManagerService corePluginManagerService = new CorePluginManager();
+	
+	//日期格式化 SDF
+	private static final SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
+	
+	
 
 	private static final BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
 	
@@ -68,9 +85,9 @@ public class Asmc {
 	
 	private static GeneralDataFactoryBuilder generalDataFactoryBuilder=new GeneralDataFactoryBuilder();
 	
-	private static CorePluginManager corePluginManager = null;
 	
-	public static void main(String rk[]) throws IOException, InterruptedException{
+	
+	public static void main(String rk[]){
 		
 		Logger log=Asmc.getLogger();
 		
@@ -85,7 +102,10 @@ public class Asmc {
 		
 		
 		//初始化插件
-		corePluginManager = new CorePluginManager();
+//		corePluginManager = new CorePluginManager();
+		
+		
+		corePluginManagerService.loadPluginForPath(Project.pluginFolder.toPath());	
 		
 		
 		
@@ -101,22 +121,19 @@ public class Asmc {
 		//切换用户	
 		Asmc.userPermissionService.setActiveUser(userDataService.getUser("TF801A"));
 		
-		log.warn("启动完成");
-		log.warn("ASMC启动耗时:"+APC.StopTimer());
+		log.br();
+		log.success("init complete");
+		log.success("at:"+APC.StopTimer()+" s");
 		
 		log.br();
-		log.info("MODEL- - - - - - - - - ASMC_Single_Terminal(AST)");
-		log.info("OP Program - - - - - - AST("+Project.version+")");
+		log.info("MODEL- - - - - - - - - ASMC_MultiPoint_Temernal(AMT)");
+		log.info("OP Version - - - - - - AMT("+Project.version+")");
+		log.info("Listen - - - - - - - - "+Project.listenerAddress);
+		log.info("Date - - - - - - - - - "+ getDataFormat().format(new Date()));
+		log.info("Status - - - - - - - - Running");
 		
-		log.info("Status - - - - - - - - Terminal Stand By!");
-		log.info("Listen - - - - - - - - 0.0.0.0:25567");
-		log.info("Plugin - - - - - - - - Loaded ");
-		log.info("Date(UTC)- - - - - - - "+ Common.getUTCTimeStr());
-		log.info("Status - - - - - - - - 终端准备完成.");
 		
-
-		
-		ch.commandHandler();
+		commandHandlerService.commandHandler();
 		
 	}
 
@@ -138,16 +155,7 @@ public class Asmc {
 		Asmc.dataSessionFactory = dataSessionFactory;
 	}
 
-	public static CorePluginManager getCorePluginManager() {
-		return corePluginManager;
-	}
-
-
-
-	public static void setCorePluginManager(CorePluginManager corePluginManager) {
-		Asmc.corePluginManager = corePluginManager;
-	}
-
+	
 
 
 	public static GeneralDataFactoryBuilder getGeneralDataFactoryBuilder() {
@@ -174,7 +182,7 @@ public class Asmc {
 		try {
 			
 			//取ALP
-			ArrayList<LoadedPlugin> alp = Asmc.getCorePluginManager().getAllLoadedPlugin();
+			ArrayList<LoadedPlugin> alp = Asmc.getCorePluginManagerService().getAllLoadedPlugin();
 				
 			for(LoadedPlugin lap:alp) {
 				
@@ -249,6 +257,33 @@ public class Asmc {
 
 	public static CommandTypeRegisterService getCommandTypeRegisterService() {
 		return commandTypeRegisterService;
+	}
+
+
+
+
+
+
+	public static CorePluginLoaderService getCorePluginLoaderService() {
+		return corePluginLoaderService;
+	}
+
+
+
+
+
+
+	public static CorePluginManagerService getCorePluginManagerService() {
+		return corePluginManagerService;
+	}
+
+
+
+
+
+
+	public static SimpleDateFormat getDataFormat() {
+		return dataFormat;
 	}
 
 

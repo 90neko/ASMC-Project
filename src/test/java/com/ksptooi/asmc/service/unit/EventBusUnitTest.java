@@ -14,8 +14,9 @@ public class EventBusUnitTest {
 	
 	
 	@Test
-	public void EventTest() {
+	public void EventTest() throws ClassNotFoundException {
 		
+		Class.forName("com.ksptooi.asmc.main.Asmc");
 		
 		EventBusService eveBus = Asmc.getEventBusService();
 		

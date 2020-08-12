@@ -12,7 +12,7 @@ public class UserData implements UserDataService{
 
     public UserData() {
 
-        Asmc.getLogger().info("初始化内部组件 - UserDataService");
+        Asmc.getLogger().info("初始化内部组件 - UserDataService[UDS]");
         this.mapper = Asmc.getContainerService().getBean(UserMapper.class);
     }
 

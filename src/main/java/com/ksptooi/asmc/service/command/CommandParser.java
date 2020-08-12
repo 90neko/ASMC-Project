@@ -11,7 +11,7 @@ public class CommandParser implements CommandParserService{
 
 	
 	public CommandParser(){
-		Asmc.getLogger().info("初始化内部组件 - Asmc命令解析器");
+		Asmc.getLogger().info("初始化内部组件 - CommandParserService[CPAS]");
 	}
 
 	

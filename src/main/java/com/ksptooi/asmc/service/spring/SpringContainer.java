@@ -15,7 +15,7 @@ public class SpringContainer implements SpringContainerService{
 	
 	public SpringContainer() {
 		
-		Asmc.getLogger().info("初始化内部组件 - Spring容器管理");
+		Asmc.getLogger().info("初始化内部组件 - SpringContainerService[SCSM]");
 		this.container = new ClassPathXmlApplicationContext(Project.springConfig);
 		
 	}

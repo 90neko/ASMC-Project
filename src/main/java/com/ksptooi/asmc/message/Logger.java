@@ -11,6 +11,7 @@ public interface Logger {
 	public void warn(String str);
 	public void error(String str);
 	
+	public void green(String str);
 	
 	public void sendMessage(String Message);
 	public void successMessage(String message);

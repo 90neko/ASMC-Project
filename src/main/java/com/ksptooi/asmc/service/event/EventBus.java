@@ -11,7 +11,7 @@ public class EventBus implements EventBusService{
 
 	
 	public EventBus() {	
-		Asmc.getLogger().info("初始化内部组件 - EventBus事件总线服务");		
+		Asmc.getLogger().info("初始化内部组件 - EventBusService[EventBus]");		
 	}
 	
 	//默认的事件处理
@@ -26,6 +26,10 @@ public class EventBus implements EventBusService{
 	 */
 	@Override
 	public void regListener(EventListener listener) {
+		
+		
+		Asmc.getLogger().info("EventBus - 注册事件监听器:"+listener.getClass().toString());
+		
 		this.plugin_Listener.add(listener);
 	}
 

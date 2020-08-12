@@ -89,7 +89,7 @@ jar {
     manifest {
         attributes(
                 "Manifest-Version": 1.0,
-                "Main-Class": "com.ksptooi.ASMC.Main.Asmc")
+                "Main-Class": "com.ksptooi.asmc.main.Asmc")
     }
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     into('assets') {

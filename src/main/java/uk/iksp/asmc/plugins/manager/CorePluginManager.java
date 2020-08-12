@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.ksptooi.asmc.common.PluginClassLoader;
 import com.ksptooi.asmc.entity.commandType.Command_cmd;
 import com.ksptooi.asmc.entity.plugins.ExternalPlugin;
 import com.ksptooi.asmc.entity.plugins.ExternalPluginFile;
@@ -11,7 +12,6 @@ import com.ksptooi.asmc.entity.plugins.LoadedPlugin;
 import com.ksptooi.asmc.main.Asmc;
 import com.ksptooi.asmc.message.Logger;
 
-import uk.iksp.asmc.plugin.loader.PluginClassLoader;
 import uk.iksp.asmc.plugin.loader.PluginLoader;
 import uk.iksp.asmc.plugin.loader.PluginSearch;
 
@@ -56,8 +56,10 @@ public class CorePluginManager{
 	
 	/**
 	 * 加载所有ASMC插件
+	 * @throws Exception 
+	 * @throws ClassNotFoundException 
 	 */
-	public void loadAllPlugin(){
+	public void loadAllPlugin() throws ClassNotFoundException, Exception{
 		
 		
 		
@@ -90,8 +92,10 @@ public class CorePluginManager{
 	
 	/**
 	 * 注册命令
+	 * @throws Exception 
+	 * @throws ClassNotFoundException 
 	 */
-	public void regCommandType(ExternalPlugin plugin,String commandName,String commandTypeEntityPath){
+	public void regCommandType(ExternalPlugin plugin,String commandName,String commandTypeEntityPath) throws ClassNotFoundException, Exception{
 		
 		Command_cmd CE=null;
 		

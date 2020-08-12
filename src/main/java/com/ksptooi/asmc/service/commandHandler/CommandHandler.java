@@ -30,7 +30,7 @@ public class CommandHandler implements CommandHandlerService{
 	
 	
 	public CommandHandler(){
-		log.info("初始化内部组件 - Asmc命令总线");
+		log.info("初始化内部组件 - CommandHandlerService[CHS]");
 	}
 	
 	
@@ -81,25 +81,21 @@ public class CommandHandler implements CommandHandlerService{
 				InputCommand ic = parserService.parseAsInputCommand(commandString);
 				
 				
-				Command cmd = new Command();		
-				cmd.setName(ic.getName());
-				
-					
-				cmd = dataService.query(cmd);
 				
 				
-				
-								
+				Command cmd = null;		
+							
 				//检查命令是否存在
-				if(cmd == null){				
-					//创建事件 - 未知命令
-					
+				if((cmd = dataService.getCommand(ic.getName())) == null){				
+					//创建事件 - 未知命令			
 					UnknowCommandEvent unknowCommand = new UnknowCommandEvent(ic);				
-					eventBusService.event(unknowCommand);				
-					
+					eventBusService.event(unknowCommand);								
 					continue;
 				}
 			
+				cmd.setInputCommand(ic);
+				
+				
 			
 				//获取可执行命令
 				Command executeType = typeScannerSevice.getExecuteType(cmd);
@@ -120,7 +116,7 @@ public class CommandHandler implements CommandHandlerService{
 			}catch(IOException fnfe) {
 				log.error("执行命令时发生错误,目标文件已经不存在或不可执行.!");
 			}catch (Exception e){
-//				e.printStackTrace();
+				e.printStackTrace();
 				log.warn("命令执行失败.");
 				failedCount ++;
 			}

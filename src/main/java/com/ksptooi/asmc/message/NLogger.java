@@ -27,7 +27,7 @@ public class NLogger implements Logger{
 		
 
 		this.info = "INFO";
-		this.success = "SUCCESS";
+		this.success = "SUCS";
 		this.warn = "WARN";
 		this.error = "ERROR";
 		
@@ -85,6 +85,17 @@ public class NLogger implements Logger{
 		System.out.println(ansi().fg(Color.GREEN).a("["+this.success+"]:"+str).reset());
 		AnsiConsole.systemUninstall();
 	}
+	
+	/**
+	 * 成功
+	 */
+	public void green(String str) {
+		AnsiConsole.systemInstall();
+		System.out.print(ansi().fg(Color.GREEN).a(str).reset());
+		AnsiConsole.systemUninstall();
+	}
+	
+	
 	
 	/**
 	 * 警告

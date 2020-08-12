@@ -9,6 +9,11 @@ import com.ksptooi.asmc.service.event.EventBusService;
 public class UserPermission implements UserPermissionService{
 
 	
+	public UserPermission() {
+		Asmc.getLogger().info("初始化内部组件 - UserPermissionService");
+	}
+	
+	
 	User ActiveUser = null;
 	
 	

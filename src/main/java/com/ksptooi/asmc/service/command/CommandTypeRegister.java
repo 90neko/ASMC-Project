@@ -9,11 +9,13 @@ import com.ksptooi.asmc.message.Logger;
 public class CommandTypeRegister implements CommandTypeRegisterService{
 
 	private HashMap<String,Command_cmd> registerCommandType = new HashMap<String,Command_cmd>();
+
+	
 	
 	private Logger logger = Asmc.getLogger();
 	
 	public CommandTypeRegister() {
-		logger.info("初始化内部组件 - 命令注册器");
+		logger.info("初始化内部组件 - CommandTypeRegisterService[CTRS]");
 	}
 	
 	
@@ -22,7 +24,7 @@ public class CommandTypeRegister implements CommandTypeRegisterService{
 	public boolean regCommandType(String typeName, Command_cmd commandType) {
 		
 		if(registerCommandType.get(typeName) != null) {
-			logger.info("注册命令类型:"+typeName+"时失败! 命令类型名重复.");	
+			logger.error("注册命令类型:"+typeName+"时失败! 命令类型名重复.");	
 			return false;
 		}
 		
@@ -45,8 +47,7 @@ public class CommandTypeRegister implements CommandTypeRegisterService{
 		if(command_cmd == null) {
 			throw new RuntimeException();
 		}
-		
-		
+			
 		
 		return command_cmd;
 	}

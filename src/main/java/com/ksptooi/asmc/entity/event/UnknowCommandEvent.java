@@ -12,7 +12,7 @@ public class UnknowCommandEvent extends AbstractEvent{
 	
 	public UnknowCommandEvent(InputCommand inputCommand) {
 		this.inputCommand = inputCommand;
-		this.message = "'"+inputCommand.getName()+"'不是有效的Asmc命令或脚本!";
+		this.message = "'"+inputCommand.getName()+"'不是有效的AMTC命令或脚本!";
 	}
 	
 	

@@ -35,19 +35,19 @@
 		<where>
 
 			<if test="id != null">
-				id = #{id}
+				and id = #{id}
 			</if>
 
 			<if test="name != null">
-				cm_Name like "%" #{name} "%"
+				and cm_Name like "%" #{name} "%"
 			</if>
 
 			<if test="type != null">
-				cm_Type = #{type}
+				and cm_Type = #{type}
 			</if>
 
 			<if test="cca != null">
-				cm_CCA = #{cca}
+				and cm_CCA = #{cca}
 			</if>
 
 		</where>
@@ -61,19 +61,19 @@
 		<where>
 
 			<if test="id != null">
-				id = #{id}
+				and id = #{id}
 			</if>
 
 			<if test="name != null">
-				cm_Name = #{name}
+				and cm_Name = #{name}
 			</if>
 
 			<if test="type != null">
-				cm_Type = #{type}
+				and cm_Type = #{type}
 			</if>
 
 			<if test="cca != null">
-				cm_CCA = #{cca}
+				and cm_CCA = #{cca}
 			</if>
 
 		</where>

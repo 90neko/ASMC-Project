@@ -34,6 +34,12 @@ public interface CommandDataService {
 	 */
 	public Command query(Command cmd);
 	
+	
+	/**
+	 * 查询命令(命令名)
+	 */
+	public Command getCommand(String cmdName);
+	
 	/**
 	 * 判断命令是否存在
 	 */
