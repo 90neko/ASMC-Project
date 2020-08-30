@@ -24,15 +24,15 @@
 
     <!--解析外部属性文件-->
     <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
-        <property name="location" value="file:C://asmc_core/database.propeties"/>
+        <property name="location" value="file:C:/asmc_core/asmc.conf"/>
     </bean>
 
 
     <bean id="sources" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
-        <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/asmc_Dev?useSSL=false&amp;serverTimezone=UTC"/>
-        <property name="username" value="mk25login"/>
-        <property name="password" value="Qa11223344--"/>
+        <property name="driverClassName" value="${drive}"/>
+        <property name="url" value="${url}"/>
+        <property name="username" value="${user}"/>
+        <property name="password" value="${pwd}"/>
         <property name="maxTotal" value="100"/>
         <property name="minIdle" value="6"/>
     </bean>
