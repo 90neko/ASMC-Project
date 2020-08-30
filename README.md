@@ -1,2 +1,0 @@
-# ASMC-Project
-ASMC Project
