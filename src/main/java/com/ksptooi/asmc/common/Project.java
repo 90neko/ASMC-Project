@@ -5,7 +5,7 @@ import java.io.File;
 public class Project {
 
 	
-	public static final String version = "5.7-P";
+	public static final String version = "5.8-P";
 	
 	public static final String springConfig = "Spring_Application.xml";
 	
