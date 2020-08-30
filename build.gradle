@@ -6,10 +6,25 @@
  * User Manual available at https://docs.gradle.org/6.5.1/userguide/java_library_plugin.html
  */
 
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.github.jengelman.gradle.plugins:shadow:6.0.0"
+    }
+}
+
 plugins {
     // Apply the java-library plugin to add support for Java Library
     id 'java-library'
+
 }
+
+import com.github.jengelman.gradle.plugins.shadow.transformers.ServiceFileTransformer
+apply plugin: "com.github.johnrengelman.shadow"
 
 repositories {
     // Use jcenter for resolving dependencies.
@@ -20,6 +35,8 @@ repositories {
 dependencies {
     // This dependency is exported to consumers, that is to say found on their compile classpath.
     api 'org.apache.commons:commons-math3:3.6.1'
+
+
 
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
     implementation 'com.google.guava:guava:29.0-jre'
@@ -74,9 +91,23 @@ dependencies {
 
 processResources {
     from('src/main/java') {
-        include '**/*'
+        //include '**/*'
+        include '**/*.xml'
+        include '**/*.xsd'
     }
 }
+
+
+
+//shadowJar {
+
+//    transform(ServiceFileTransformer) {
+//        path = "META-INF"
+//        include "spring.*"
+//    }
+
+//}
+
 
 //processResources {
 //    from('src/main/java') {

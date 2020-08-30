@@ -5,6 +5,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import com.ksptooi.asmc.common.Project;
 import com.ksptooi.asmc.main.Asmc;
+import org.springframework.context.support.GenericXmlApplicationContext;
 
 public class SpringContainer implements SpringContainerService{
 
@@ -16,6 +17,7 @@ public class SpringContainer implements SpringContainerService{
 	public SpringContainer() {
 		
 		Asmc.getLogger().info("初始化内部组件 - SpringContainerService[SCSM]");
+
 		this.container = new ClassPathXmlApplicationContext(Project.springConfig);
 		
 	}

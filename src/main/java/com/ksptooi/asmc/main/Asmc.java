@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+
 import com.ksptooi.asmc.common.Project;
 import com.ksptooi.asmc.common.StartPerformanceCount;
 import com.ksptooi.asmc.entity.commandType.Cmd_List;
@@ -36,6 +36,15 @@ import com.ksptooi.asmc.service.user.UserPermissionService;
 
 
 public class Asmc {
+
+
+
+	private static StartPerformanceCount performanceCount=new StartPerformanceCount();
+
+	static {
+		//开始性能计数
+		performanceCount.start();
+	}
 
 	//容器
 	private static final SpringContainerService containerService = new SpringContainer();
@@ -80,13 +89,11 @@ public class Asmc {
 		Logger log=Asmc.getLogger();
 		
 		log.info("加载内部组件");
-		
-		StartPerformanceCount APC=new StartPerformanceCount();
+
 		
 		log.info("·Core 版本号:"+ Project.version);
 		
-		//开始性能计数
-		APC.Timer();
+
 		
 		
 		//初始化插件
@@ -110,7 +117,7 @@ public class Asmc {
 		
 		log.br();
 		log.success("init complete");
-		log.success("at:"+APC.StopTimer()+" s");
+		log.success("at:"+performanceCount.stop()+" s");
 
 		/*测试*/
 /*		log.br();
@@ -119,6 +126,7 @@ public class Asmc {
 		log.info("Listen - - - - - - - - "+Project.listenerAddress);
 		log.info("Date - - - - - - - - - "+ getDataFormat().format(new Date()));
 		log.info("Status - - - - - - - - Running");*/
+		log.info("监听地址:"+Project.listenerAddress);
 
 		commandHandlerService.commandHandler();
 		
@@ -168,10 +176,7 @@ public class Asmc {
 
 		return new NLogger();
 	}
-
-
-
-
+	
 
 
 

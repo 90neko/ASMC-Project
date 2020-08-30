@@ -46,6 +46,17 @@
               <path>
                 <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
                 <item name="ASMC_CORE" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ASMC_CORE" type="f1a62948:ProjectNode" />
+                <item name="Tasks" type="e4a08cd1:TasksNode" />
+                <item name="build" type="c8890929:TasksNode$1" />
+              </path>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="ASMC_CORE" type="f1a62948:ProjectNode" />
                 <item name="Dependencies" type="6de06a37:ExternalSystemViewDefaultContributor$MyDependenciesNode" />
               </path>
             </expand>
@@ -77,20 +88,21 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/main/java" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.15234375" />
     <property name="project.structure.side.proportion" value="0.35063437" />
-    <property name="settings.editor.selected.configurable" value="File.Encoding" />
+    <property name="settings.editor.selected.configurable" value="http.proxy" />
     <property name="show.unlinked.gradle.project.popup" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Local_Dev_Storage\ASMC_GroupWork\ASMC_CORE\src\main\java" />
+      <recent name="D:\Local_Dev_Storage\ASMC_GroupWork\ASMC_CORE\src\main\resources\xsd" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Local_Dev_Storage\ASMC_GroupWork\ASMC_CORE\src\main\java" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\Local_Dev_Storage\ASMC_GroupWork\ASMC_CORE\src\main\resources\xsd" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Asmc">
@@ -165,18 +177,39 @@
       <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
       <method v="2" />
     </configuration>
+    <configuration name="ASMC_CORE [jar]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
+      <ExternalSystemSettings>
+        <option name="executionName" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="externalSystemIdString" value="GRADLE" />
+        <option name="scriptParameters" />
+        <option name="taskDescriptions">
+          <list />
+        </option>
+        <option name="taskNames">
+          <list>
+            <option value="jar" />
+          </list>
+        </option>
+        <option name="vmOptions" />
+      </ExternalSystemSettings>
+      <GradleScriptDebugEnabled>true</GradleScriptDebugEnabled>
+      <method v="2" />
+    </configuration>
     <list>
       <item itemvalue="Application.Asmc" />
       <item itemvalue="Gradle.ASMC_CORE [build]" />
       <item itemvalue="Gradle.ASMC_CORE [clean]" />
       <item itemvalue="Gradle.ASMC_CORE [init]" />
+      <item itemvalue="Gradle.ASMC_CORE [jar]" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Gradle.ASMC_CORE [build]" />
+        <item itemvalue="Gradle.ASMC_CORE [jar]" />
         <item itemvalue="Application.Asmc" />
         <item itemvalue="Gradle.ASMC_CORE [init]" />
         <item itemvalue="Gradle.ASMC_CORE [clean]" />
-        <item itemvalue="Gradle.ASMC_CORE [build]" />
       </list>
     </recent_temporary>
   </component>
@@ -203,6 +236,9 @@
       <workItem from="1598782908100" duration="211000" />
       <workItem from="1598783166331" duration="1034000" />
       <workItem from="1598784750913" duration="23000" />
+      <workItem from="1598784943373" duration="1005000" />
+      <workItem from="1598792184827" duration="7857000" />
+      <workItem from="1598801100482" duration="24000" />
     </task>
     <servers />
   </component>
@@ -250,26 +286,26 @@
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
     <state width="458" height="466" key="DebuggerActiveHint/62.0.1858.1080@62.0.1858.1080" timestamp="1598630318481" />
-    <state x="805" y="466" key="FileChooserDialogImpl" timestamp="1598782657117">
+    <state x="805" y="466" key="FileChooserDialogImpl" timestamp="1598786480362">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
-    <state x="805" y="466" key="FileChooserDialogImpl/62.0.1858.1080@62.0.1858.1080" timestamp="1598782657117" />
-    <state width="1815" height="295" key="GridCell.Tab.0.bottom" timestamp="1598783997131">
+    <state x="805" y="466" key="FileChooserDialogImpl/62.0.1858.1080@62.0.1858.1080" timestamp="1598786480362" />
+    <state width="1815" height="241" key="GridCell.Tab.0.bottom" timestamp="1598800051395">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
-    <state width="1815" height="295" key="GridCell.Tab.0.bottom/62.0.1858.1080@62.0.1858.1080" timestamp="1598783997131" />
-    <state width="1815" height="295" key="GridCell.Tab.0.center" timestamp="1598783997131">
+    <state width="1815" height="241" key="GridCell.Tab.0.bottom/62.0.1858.1080@62.0.1858.1080" timestamp="1598800051395" />
+    <state width="1815" height="241" key="GridCell.Tab.0.center" timestamp="1598800051395">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
-    <state width="1815" height="295" key="GridCell.Tab.0.center/62.0.1858.1080@62.0.1858.1080" timestamp="1598783997131" />
-    <state width="1815" height="295" key="GridCell.Tab.0.left" timestamp="1598783997131">
+    <state width="1815" height="241" key="GridCell.Tab.0.center/62.0.1858.1080@62.0.1858.1080" timestamp="1598800051395" />
+    <state width="1815" height="241" key="GridCell.Tab.0.left" timestamp="1598800051395">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
-    <state width="1815" height="295" key="GridCell.Tab.0.left/62.0.1858.1080@62.0.1858.1080" timestamp="1598783997131" />
-    <state width="1815" height="295" key="GridCell.Tab.0.right" timestamp="1598783997131">
+    <state width="1815" height="241" key="GridCell.Tab.0.left/62.0.1858.1080@62.0.1858.1080" timestamp="1598800051395" />
+    <state width="1815" height="241" key="GridCell.Tab.0.right" timestamp="1598800051395">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
-    <state width="1815" height="295" key="GridCell.Tab.0.right/62.0.1858.1080@62.0.1858.1080" timestamp="1598783997131" />
+    <state width="1815" height="241" key="GridCell.Tab.0.right/62.0.1858.1080@62.0.1858.1080" timestamp="1598800051395" />
     <state width="1815" height="364" key="GridCell.Tab.1.bottom" timestamp="1598771153644">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
@@ -306,10 +342,10 @@
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
     <state x="593" y="277" width="682" height="592" key="NewModule_or_Project.wizard/62.0.1858.1080@62.0.1858.1080" timestamp="1598778002465" />
-    <state x="492" y="184" key="SettingsEditor" timestamp="1598782350866">
+    <state x="492" y="184" key="SettingsEditor" timestamp="1598795715399">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
-    <state x="492" y="184" key="SettingsEditor/62.0.1858.1080@62.0.1858.1080" timestamp="1598782350866" />
+    <state x="492" y="184" key="SettingsEditor/62.0.1858.1080@62.0.1858.1080" timestamp="1598795715399" />
     <state x="545" y="268" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1598771037901">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
@@ -322,18 +358,18 @@
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
     <state x="373" y="150" key="new project wizard/62.0.1858.1080@62.0.1858.1080" timestamp="1598626771595" />
-    <state x="647" y="250" key="run.anything.popup" timestamp="1598629006711">
+    <state x="647" y="250" key="run.anything.popup" timestamp="1598798561318">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
-    <state x="647" y="250" key="run.anything.popup/62.0.1858.1080@62.0.1858.1080" timestamp="1598629006711" />
-    <state x="669" y="373" width="672" height="678" key="search.everywhere.popup" timestamp="1598628999546">
+    <state x="647" y="250" key="run.anything.popup/62.0.1858.1080@62.0.1858.1080" timestamp="1598798561318" />
+    <state x="669" y="373" width="672" height="678" key="search.everywhere.popup" timestamp="1598800007650">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
-    <state x="669" y="373" width="672" height="678" key="search.everywhere.popup/62.0.1858.1080@62.0.1858.1080" timestamp="1598628999546" />
-    <state x="665" y="222" key="spring file set editor" timestamp="1598629809163">
+    <state x="669" y="373" width="672" height="678" key="search.everywhere.popup/62.0.1858.1080@62.0.1858.1080" timestamp="1598800007650" />
+    <state x="665" y="222" key="spring file set editor" timestamp="1598792221286">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>
-    <state x="665" y="222" key="spring file set editor/62.0.1858.1080@62.0.1858.1080" timestamp="1598629809163" />
+    <state x="665" y="222" key="spring file set editor/62.0.1858.1080@62.0.1858.1080" timestamp="1598792221286" />
     <state x="713" y="451" key="vcs.readOnlyHandler.ReadOnlyStatusDialog" timestamp="1598780523899">
       <screen x="62" y="0" width="1858" height="1080" />
     </state>

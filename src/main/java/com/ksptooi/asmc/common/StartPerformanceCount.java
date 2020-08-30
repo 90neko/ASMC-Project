@@ -18,7 +18,7 @@ public class StartPerformanceCount implements Runnable{
 		
 	}
 	
-	public void Timer(){
+	public void start(){
 		
 		Thread TH=new Thread(this);
 		TH.start();
@@ -26,7 +26,7 @@ public class StartPerformanceCount implements Runnable{
 	}
 	
 	@SuppressWarnings("deprecation")
-	public String StopTimer(){
+	public String stop(){
 
 		double time=this.time;
 		
