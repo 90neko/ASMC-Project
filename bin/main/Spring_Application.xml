@@ -4,18 +4,33 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xmlns:context="http://www.springframework.org/schema/context"
        xmlns:aop="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="
        http://www.springframework.org/schema/beans
-       classpath:spring-beans.xsd
+       http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context
-       classpath:spring-context.xsd
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd
        ">
 
+    <context:annotation-config/>
+
+<!--    <tx:annotation-driven transaction-manager="txManager"/>
+
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="sources"/>
+    </bean>-->
+
+    <!--解析外部属性文件-->
+    <bean class="org.springframework.context.support.PropertySourcesPlaceholderConfigurer">
+        <property name="location" value="file:C://asmc_core/database.propeties"/>
+    </bean>
 
 
-    <bean id="sources" class="org.apache.commons.dbcp2.BasicDataSource">
+    <bean id="sources" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
         <property name="driverClassName" value="com.mysql.cj.jdbc.Driver"/>
-        <property name="url" value="jdbc:mysql://127.0.0.1:3306/asmc_mk25?useSSL=false&amp;serverTimezone=UTC"/>
+        <property name="url" value="jdbc:mysql://127.0.0.1:3306/asmc_Dev?useSSL=false&amp;serverTimezone=UTC"/>
         <property name="username" value="mk25login"/>
         <property name="password" value="Qa11223344--"/>
         <property name="maxTotal" value="100"/>
@@ -24,21 +39,20 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 
-    	<property name="configLocation" value="classpath:GeneralDataCore-Config.xml"></property>
-
         <property name="dataSource" ref="sources"/>
+        <!--<property name="configLocation" value="classpath:GeneralDataCore-Config.xml"></property>-->
         <!--<property name="mapperLocations" value="classpath:uk/iksp/asmc/data/inteface/*.xml"/>-->
-
     </bean>
 
-    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+<!--    <bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
         <constructor-arg ref="sqlSessionFactory" index="0" />
-    </bean>
+    </bean>-->
 
     <bean id="scannerConfigurer" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!-- name="basePackage":(起始)包名, 从这个包开始扫描-->
         <property name="basePackage" value="com.ksptooi.asmc.data.mapper"/>
     </bean>
+
+
 
 
 </beans>

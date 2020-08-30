@@ -5,15 +5,15 @@
 
 
   <!-- 配置类型的别名 --> 
-  <typeAliases>
+<!--  <typeAliases>
     <typeAlias alias="Command" type="com.ksptooi.asmc.entity.command.Command" />
     <typeAlias alias="User" type="com.ksptooi.asmc.entity.user.User"/>
-  </typeAliases>
+  </typeAliases>-->
   
   
   
   <!-- 连接管理 --> 
-  <environments default="development">
+<!--  <environments default="development">
     <environment id="development"> 
       <transactionManager type="JDBC" /> 
       <dataSource type="POOLED"> 
@@ -24,11 +24,11 @@
         <property name="poolMaximumActiveConnections" value="8"/>         
       </dataSource>
     </environment> 
-  </environments>
+  </environments>-->
   
    <!-- 映射器文件地址 --> 
-  <mappers>
+<!--  <mappers>
     <package name="com.ksptooi.asmc.data.mapper"/>
-  </mappers>
+  </mappers>-->
   
 </configuration>

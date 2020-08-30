@@ -4,40 +4,32 @@ import java.io.File;
 import java.io.InputStream;
 import java.net.URL;
 import java.util.ArrayList;
-
 import com.ksptooi.asmc.common.PluginClassLoader;
 import com.ksptooi.asmc.entity.plugins.ExternalPlugin;
 import com.ksptooi.asmc.entity.plugins.ExternalPluginFile;
 import com.ksptooi.asmc.entity.plugins.LoadedPlugin;
+import com.ksptooi.asmc.filter.plugin.jarFilter;
 import com.ksptooi.asmc.main.Asmc;
 import com.ksptooi.asmc.message.Logger;
-
-import sun.misc.JarFilter;
-import uk.iksp.v7.Factory.StreamFactory;
-import uk.iksp.v7.Session.InputStreamReaderSession;
+import com.ksptooi.generaldatacore.dataInteface.InputStreamConnection;
+import com.ksptooi.generaldatacore.entity.data.DataSet;
 
 public class CorePluginLoader implements CorePluginLoaderService{
 
 	
 	private Logger log = Asmc.getLogger();
-	
-	
+
 	
 	public CorePluginLoader() {
-		
 		log.info("初始化内部组件 - CorePluginLoaderService[CPLS]");
 	}
-	
-	
+
 	
 	@Override
 	public ArrayList<ExternalPluginFile> searchPlugins(File folder) {
 
-		
 		log.info("·CorePluginLoader - 正在搜寻..");
-		
-		StreamFactory streamFactory = Asmc.getGeneralDataFactoryBuilder().buildStreamFactory();
-		
+
 		ArrayList<ExternalPluginFile> asmcPluginList = new ArrayList<ExternalPluginFile>();
 		
 		try {
@@ -46,7 +38,7 @@ public class CorePluginLoader implements CorePluginLoaderService{
 			folder.mkdirs();
 		
 			//取所有插件
-			File[] pluginList = folder.listFiles(new JarFilter());
+			File[] pluginList = folder.listFiles(new jarFilter());
 			
 //			File[] pluginList = Project.pluginFolder.listFiles(new JarFilter());
 			
@@ -63,20 +55,17 @@ public class CorePluginLoader implements CorePluginLoaderService{
 				URL url=new URL("jar:file:/"+f.getPath()+"!/ASMC_Plugin.gd");
 				
 				//获取插件文件流
-				InputStream is=url.openStream(); 
-				
-				
-				try(InputStreamReaderSession isrs = streamFactory.openInputStreamReaderSession(is)){
-										
-					asmcPlugin.setMainClass(isrs.get("Plugin_Main"));
-					asmcPlugin.setName(isrs.get("Plugin_Name"));
-					asmcPlugin.setFile(f);
-					
-				}
-				
+				InputStream is=url.openStream();
+
+				DataSet dataSet = new InputStreamConnection(is,"UTF-8").getDataSet().setAutomatic(false);
+
+				//将文件中的信息加入插件实体
+				asmcPlugin.setMainClass(dataSet.val("Plugin_Main"));
+				asmcPlugin.setName(dataSet.val("Plugin_Name"));
+				asmcPlugin.setFile(f);
+
 				
 				asmcPluginList.add(asmcPlugin);
-			
 			}
 			
 		

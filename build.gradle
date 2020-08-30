@@ -60,12 +60,15 @@ dependencies {
 	
 	// https://mvnrepository.com/artifact/org.apache.commons/commons-dbcp2
 	compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.7.0'
-	
 
 
+	// https://mvnrepository.com/artifact/mysql/mysql-connector-java
+	compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.21'
 
-    compile files('lib/GeneralDataCoreV7.19P.jar')
-	compile files('lib/GeneralDataCoreV7.5E.jar')
+
+    compile files('lib/GeneralDataCoreV7.7-P.jar')
+    //compile files('lib/GeneralDataCoreV7.19P.jar')
+	//compile files('lib/GeneralDataCoreV7.5E.jar')
 }
 
 
@@ -75,14 +78,21 @@ processResources {
     }
 }
 
+//processResources {
+//    from('src/main/java') {
+//        include '**/*.xml'
+//    }
+//}
+
+
 task download(type: Copy) {
     from configurations.runtime
     into 'lib'
 }
 
-tasks.withType(JavaCompile) {  
-    options.encoding = "UTF-8"  
-}  
+tasks.withType(JavaCompile) {
+    options.encoding = "utf-8"
+}
 
 
 jar {

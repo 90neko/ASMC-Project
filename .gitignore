@@ -3,3 +3,5 @@
 
 # Ignore Gradle build output directory
 build
+/.apt_generated/
+/.apt_generated_tests/

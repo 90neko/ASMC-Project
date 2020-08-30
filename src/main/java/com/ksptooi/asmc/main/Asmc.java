@@ -34,58 +34,46 @@ import com.ksptooi.asmc.service.user.UserDataService;
 import com.ksptooi.asmc.service.user.UserPermission;
 import com.ksptooi.asmc.service.user.UserPermissionService;
 
-import uk.iksp.v7.Factory.DataSessionFactory;
-import uk.iksp.v7.FactoryBuilder.GeneralDataFactoryBuilder;
-
 
 public class Asmc {
-	
-	
-	//容器服务
+
+	//容器
 	private static final SpringContainerService containerService = new SpringContainer();
 	
-	//事件总线服务
+	//事件总线
 	private static final EventBusService eventBusService = new EventBus();
 	
-	//命令数据检索服务
+	//命令数据检索
 	private static final CommandDataService commandDataService = new CommandData();
 
-	//用户数据检索服务
+	//用户数据检索
 	private static final UserDataService userDataService = new UserData();
 	
-	//用户权限操作服务
+	//用户权限操作
 	private static final UserPermissionService userPermissionService = new UserPermission();
 	
-	//命令解析服务
+	//命令解析
 	private static final CommandParserService commandParserService = new CommandParser();
 	
-	//命令执行类型扫描服务
+	//命令执行类型扫描
 	private static final CommandTypeScannerService commandTypeScannerService = new CommandTypeScanner();
 	
-	//命令类型注册服务
+	//命令类型注册
 	private static final CommandTypeRegisterService commandTypeRegisterService = new CommandTypeRegister();
 	
-	//命令执行服务
+	//命令执行
 	private static final CommandHandlerService commandHandlerService = new CommandHandler();
 	
-	//插件加载服务
+	//插件加载
 	private static final CorePluginLoaderService corePluginLoaderService = new CorePluginLoader();
 	
-	//插件管理服务
+	//插件管理
 	private static final CorePluginManagerService corePluginManagerService = new CorePluginManager();
 	
 	//日期格式化 SDF
 	private static final SimpleDateFormat dataFormat = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss a");
-	
-	
 
 	private static final BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-	
-	private static DataSessionFactory dataSessionFactory = new DataSessionFactory(4);
-	
-	private static GeneralDataFactoryBuilder generalDataFactoryBuilder=new GeneralDataFactoryBuilder();
-	
-	
 	
 	public static void main(String rk[]){
 		
@@ -108,7 +96,6 @@ public class Asmc {
 		corePluginManagerService.loadPluginForPath(Project.pluginFolder.toPath());	
 		
 		
-		
 		//加载ASMC插件
 //		Asmc.getCorePluginManager().loadAllPlugin();
 		
@@ -124,51 +111,31 @@ public class Asmc {
 		log.br();
 		log.success("init complete");
 		log.success("at:"+APC.StopTimer()+" s");
-		
-		log.br();
+
+		/*测试*/
+/*		log.br();
 		log.info("MODEL- - - - - - - - - ASMC_MultiPoint_Temernal(AMT)");
 		log.info("OP Version - - - - - - AMT("+Project.version+")");
 		log.info("Listen - - - - - - - - "+Project.listenerAddress);
 		log.info("Date - - - - - - - - - "+ getDataFormat().format(new Date()));
-		log.info("Status - - - - - - - - Running");
-		
-		
+		log.info("Status - - - - - - - - Running");*/
+
 		commandHandlerService.commandHandler();
 		
 	}
 
 
-	
-	
+
 
 	
 	public static BufferedReader getConsoleInput() {
 		return br;
 	}
 	
-	public static DataSessionFactory getDataSessionFactory() {
-		return dataSessionFactory;
-	}
-
-
-	public static void setDataSessionFactory(DataSessionFactory dataSessionFactory) {
-		Asmc.dataSessionFactory = dataSessionFactory;
-	}
-
-	
-
-
-	public static GeneralDataFactoryBuilder getGeneralDataFactoryBuilder() {
-		return generalDataFactoryBuilder;
-	}
 
 
 
-	public static void setGeneralDataFactoryBuilder(GeneralDataFactoryBuilder generalDataFactoryBuilder) {
-		Asmc.generalDataFactoryBuilder = generalDataFactoryBuilder;
-	}
-	
-	
+
 	
 	/**
 	 * 获取日志记录器

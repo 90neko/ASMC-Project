@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="Gradle: org.apache.commons:commons-dbcp2:2.7.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../Local_ApplicationContainer/gradle-6.5.1/caches/modules-2/files-2.1/org.apache.commons/commons-dbcp2/2.7.0/ac3c5077659b4b9140e8fa63e855e0437fe94357/commons-dbcp2-2.7.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/../../../Local_ApplicationContainer/gradle-6.5.1/caches/modules-2/files-2.1/org.apache.commons/commons-dbcp2/2.7.0/40e49625e8ccfb008f99cd4bc9babcf43756bac3/commons-dbcp2-2.7.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

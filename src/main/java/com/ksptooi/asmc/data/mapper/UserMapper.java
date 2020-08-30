@@ -3,7 +3,9 @@ package com.ksptooi.asmc.data.mapper;
 import java.util.ArrayList;
 
 import com.ksptooi.asmc.entity.user.User;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+
 
 public interface UserMapper {
 

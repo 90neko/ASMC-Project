@@ -15,7 +15,6 @@ public class CommandData implements CommandDataService{
 	public CommandData() {
 		
 		Asmc.getLogger().info("初始化内部组件 - CommandDataService[CDS]");
-		
 		this.cmdMapper = Asmc.getContainerService().getBean(CommandMapper.class);
 		
 	}

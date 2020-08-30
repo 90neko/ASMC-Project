@@ -4,7 +4,9 @@ import org.springframework.context.ApplicationContext;
 
 public interface SpringContainerService {
 
-	
+
+
+
 	
 	/**
 	 * 获取Spring容器
